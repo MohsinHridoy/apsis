@@ -1,4 +1,11 @@
+
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+
+import 'package:untitled/screens/customersalehistory/customer_sale_history.dart';
+
 
 
 class AddNewCustomer extends StatefulWidget {
@@ -9,6 +16,20 @@ class AddNewCustomer extends StatefulWidget {
 }
 
 class _AddNewCustomerState extends State<AddNewCustomer> {
+  File? _image;
+
+  Future<void> _pickImage() async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile? pickedImage = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedImage != null) {
+      setState(() {
+        _image = File(pickedImage.path);
+      });
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -40,97 +61,91 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
               ),
             ),
             Positioned(
-              left: 124,
-              top: 62,
-              child: Text(
-                'Add new customer',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Color(0xFFFEFEFE),
-                  fontSize: 20,
-                  fontFamily: 'Mulish',
-                  fontWeight: FontWeight.w700,
-                  height: 0,
-                ),
-              ),
-            ),
-            Positioned(
-              left: 20,
-              top: 62,
+              // left: 124,
+              top: 42,
               child: Container(
-                width: 24,
-                height: 24,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 24,
-                      height: 24,
-                      child: Stack(children: [
+                // width: MediaQuery.of(context).size.width,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
 
-                          ]),
-                    ),
-                  ],
+                    children: [
+                      Icon(
+                        Icons.arrow_back_ios_new_outlined,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 78.0),
+                        child: Text(
+                            'Add new customer',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Color(0xFFFEFEFE),
+                              fontSize: 20,
+                              fontFamily: 'Mulish',
+                              fontWeight: FontWeight.w700,
+                              height: 0,
+                            ),
+                          ),
+                      ),
+
+                    ],
+                  ),
                 ),
               ),
             ),
+
             Positioned(
               left: 20,
+              right: 20,
               top: 625,
-              child: Container(
-                width: 388,
-                height: 56,
-                child: Stack(
-                  children: [
-                    Positioned(
-                      left: 0,
-                      top: 0,
-                      child: Container(
-                        width: 388,
-                        height: 56,
-                        decoration: ShapeDecoration(
-                          color: Color(0xFF3868CE),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(999),
-                          ),
-                          shadows: [
-                            BoxShadow(
-                              color: Color(0x59293072),
-                              blurRadius: 22,
-                              offset: Offset(2, 7),
-                              spreadRadius: -2,
-                            )
-                          ],
-                        ),
+              child: GestureDetector(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CustomerSaleHistory(),
+                    ),
+                  );
+                },
+                child:Container(
+                  width: 388,
+                  height: 56,
+                  decoration: ShapeDecoration(
+                    color: Color(0xFF3868CE),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(999),
+                    ),
+                    shadows: [
+                      BoxShadow(
+                        color: Color(0x59293072),
+                        blurRadius: 22,
+                        offset: Offset(2, 7),
+                        spreadRadius: -2,
+                      )
+                    ],
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Add new customer',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontFamily: 'Mulish',
+                        fontWeight: FontWeight.w700,
+                        height: 0,
                       ),
                     ),
-                    Positioned(
-                      left: 68.47,
-                      top: 18,
-                      child: SizedBox(
-                        width: 252.81,
-                        child: Text(
-                          'Add new customer',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontFamily: 'Mulish',
-                            fontWeight: FontWeight.w700,
-                            height: 0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
             Positioned(
               left: 20,
               top: 133,
+              right: 20,
               child: Container(
                 width: 388,
                 height: 332,
@@ -151,6 +166,7 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
                     Positioned(
                       left: 16,
                       top: 23,
+                      right: 16,
                       child: Container(
                         width: 354,
                         height: 60,
@@ -165,6 +181,8 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
                     ),
                     Positioned(
                       left: 16,
+                      right: 16,
+
                       top: 99,
                       child: Container(
                         width: 354,
@@ -180,6 +198,7 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
                     ),
                     Positioned(
                       left: 16,
+                      right: 16,
                       top: 175,
                       child: Container(
                         width: 354,
@@ -195,6 +214,7 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
                     ),
                     Positioned(
                       left: 16,
+                      right: 16,
                       top: 251,
                       child: Container(
                         width: 354,
@@ -312,208 +332,79 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
                         ),
                       ),
                     ),
-                    Positioned(
-                      left: 327,
-                      top: 41,
-                      child: Container(
-                        width: 24,
-                        height: 24,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 24,
-                              height: 24,
-                              child: Stack(children: [
 
-                                  ]),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
             ),
             Positioned(
               left: 20,
+              right: 20,
               top: 481,
               child: Container(
                 width: 388,
-                height: 96,
+                height: 106,
                 child: Stack(
                   children: [
+
                     Positioned(
-                      left: 0,
-                      top: 0,
-                      child: Container(
-                        width: 388,
-                        height: 96,
-                        decoration: ShapeDecoration(
-                          color: Color(0xFFF6F6F6),
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(width: 1, color: Color(0xFF88CADA)),
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      left: 158,
+                      left: 8,
                       top: 25,
-                      child: Container(
-                        width: 73,
-                        height: 47,
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              left: 25,
-                              top: 0,
-                              child: Container(
-                                width: 24,
-                                height: 24,
-                                child: Stack(
-                                  children: [
-                                    Positioned(
-                                      left: 0,
-                                      top: 0,
-                                      child: Container(
-                                        width: 24,
-                                        height: 24,
-                                        decoration: BoxDecoration(color: Color(0xFFD9D9D9)),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              left: 0,
-                              top: 29,
-                              child: Text(
-                                'Take photo',
-                                style: TextStyle(
-                                  color: Color(0xFF7A7A7A),
-                                  fontSize: 14,
-                                  fontFamily: 'Mulish',
-                                  fontWeight: FontWeight.w500,
-                                  height: 0,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Positioned(
-              left: 0,
-              top: 0,
-              child: Container(
-                width: 428,
-                height: 44,
-                clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(),
-                child: Stack(
-                  children: [
-                    Positioned(
-                      left: 0,
-                      top: 0,
-                      child: Container(width: 428, height: 30),
-                    ),
-                    Positioned(
-                      left: 345,
-                      top: 16,
-                      child: Container(
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 20,
-                              height: 14,
-                              child: Stack(children: [
+                      right: 8,
+                      child:DottedBorder(
+                        color:  Color(0xFF728ABE),
+                        // Border color
+                        strokeWidth: 2,
+                        // Border width
+                        borderType: BorderType.RRect,
+                        // Rounded rectangle border
+                        // radius: Radius.circular(999),
+                        // Border radius
+                        // padding: EdgeInsets.all(5), // Padding around the border
+                        child: GestureDetector(
+                          onTap: (){
+                            _pickImage();
 
-                                  ]),
-                            ),
-                            const SizedBox(width: 4),
-                            Container(
-                              width: 16,
-                              height: 14,
-                              child: Stack(children: [
-
-                                  ]),
-                            ),
-                            const SizedBox(width: 4),
-                            Container(
-                              width: 25,
-                              height: 12,
-                              child: Stack(
+                          },
+                          child: Container(
+                            width: 396, // Container width
+                            height: 66, // Container height
+                            // decoration: BoxDecoration(
+                            //   color: Color(0xFFFDE3E5),
+                            //   // borderRadius: BorderRadius.circular(999), // Border radius
+                            // ), // Background color
+                            child:_image == null?Container(
+                              child: Column(
                                 children: [
-                                  Positioned(
-                                    left: 2,
-                                    top: 2,
-                                    child: Container(
-                                      width: 19,
-                                      height: 8,
-                                      decoration: ShapeDecoration(
-                                        color: Colors.white,
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1)),
+                                  SizedBox(height: 15,),
+                                  Icon(Icons.camera_alt),
+                                  Text(
+                                        'Reset',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Color(0xFF7A7A7A),
+                                          fontSize: 16,
+                                          fontFamily: 'Mulish',
+                                          fontWeight: FontWeight.w700,
+                                          height: 0,
+                                        ),
                                       ),
-                                    ),
-                                  ),
                                 ],
                               ),
+                            )                : Container(
+                              width: 200,
+                              height: 200,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: FileImage(_image!),
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      left: 351,
-                      top: 8,
-                      child: Container(width: 6, height: 6),
-                    ),
-                    Positioned(
-                      left: 21,
-                      top: 12,
-                      child: Container(
-                        width: 54,
-                        height: 21,
-                        padding: const EdgeInsets.only(top: 3, left: 11, right: 10, bottom: 3),
-                        clipBehavior: Clip.antiAlias,
-                        decoration: ShapeDecoration(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+
                           ),
                         ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 33,
-                              height: 15,
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      ) ,
                     ),
                   ],
                 ),
