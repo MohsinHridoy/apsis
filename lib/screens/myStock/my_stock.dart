@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/model/stck_detls_lst.dart';
 
 class MyStock extends StatefulWidget {
   const MyStock({super.key});
@@ -9,299 +8,134 @@ class MyStock extends StatefulWidget {
 }
 
 class _MyStockState extends State<MyStock> {
-  bool isEditing = false;
-  TextEditingController textEditingController = TextEditingController();
-  String labelText = "Click the icon to edit";
-
-  @override
-  void dispose() {
-    textEditingController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-    LinearGradient gradient = LinearGradient(
-      colors: [Colors.blue, Colors.black12],
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
-    );
-    return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Colors.blue,
-          title: Text("আমার স্টক"),
-          centerTitle: true,
-          leading: Icon(Icons.arrow_back_ios)),
+    return  Scaffold(
       body: Container(
-        height: screenHeight,
-        width: screenWidth,
-        decoration: BoxDecoration(
-          gradient: gradient,
-        ),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Container(
-                padding: EdgeInsets.all(6.0),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(
-                    color: Colors.black,
-                  ),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: isEditing
-                    ? TextField(
-                        controller: textEditingController,
-                        decoration: InputDecoration(
-                          labelText: "Enter text",
-                        ),
-                      )
-                    : Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              labelText,
-                              style: TextStyle(fontSize: 18),
-                            ),
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.edit),
-                            onPressed: () {
-                              setState(() {
-                                isEditing = true;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-              ),
-            ),
-            ContainerWithScreenSize(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class BlueGradientContainer extends StatefulWidget {
-  @override
-  State<BlueGradientContainer> createState() => _BlueGradientContainerState();
-}
-
-class _BlueGradientContainerState extends State<BlueGradientContainer> {
-  final List<StckDtls> items = [
-    StckDtls("Item 1", "Subtitle 1"),
-    StckDtls("Item 2", "Subtitle 2"),
-    StckDtls("Item 3", "Subtitle 3"),
-    StckDtls("Item 1", "Subtitle 1"),
-    StckDtls("Item 2", "Subtitle 2"),
-    StckDtls("Item 3", "Subtitle 3"),
-    // Add more data items as needed
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Colors.blueAccent,
-          title: Text("stock",style: TextStyle(color: Colors.white),),
-          leading: Icon(Icons.arrow_back_ios,color: Colors.white,)),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Colors.blueAccent, Colors.white],
+        width: 428,
+        height: 926,
+        clipBehavior: Clip.antiAlias,
+        decoration: ShapeDecoration(
+          color: Color(0xFFF6F6F6),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+        child: Stack(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 18.0, right: 18.0),
+            Positioned(
+              left: 0,
+              top: 0,
               child: Container(
-                width: 400.0,
-                height: 50.0,
+                width: 428,
+                height: 279,
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius:
-                      BorderRadius.circular(10.0), // Set the border radius
+                  gradient: LinearGradient(
+                    begin: Alignment(0.06, -1.00),
+                    end: Alignment(-0.06, 1),
+                    colors: [Color(0xFF3563C2), Color(0xFFA4D9D0)],
+                  ),
                 ),
-                child: Center(
+              ),
+            ),
+            Positioned(
+              // left: 124,
+              top: 42,
+              child: Container(
+                // width: MediaQuery.of(context).size.width,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                     children: [
+                      Icon(
+                        Icons.arrow_back_ios_new_outlined,
+                        color: Colors.white,
+                        size: 20,
+                      ),
                       Padding(
-                        padding: EdgeInsets.only(left: 14.0),
+                        padding: const EdgeInsets.only(left: 78.0),
                         child: Text(
-                          'ওসুদ খুজুন',
+                          'Add new customer',
+                          textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 20.0,
+                            color: Color(0xFFFEFEFE),
+                            fontSize: 20,
+                            fontFamily: 'Mulish',
+                            fontWeight: FontWeight.w700,
+                            height: 0,
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(right: 14.0),
-                        child: Icon(
-                          Icons.search,
-                          color: Colors.grey,
-                          size: 30.0,
-                        ),
-                      ),
+
                     ],
                   ),
                 ),
               ),
             ),
-            SizedBox(
-              height: 25,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 18.0, right: 18.0),
+
+            Positioned(
+              left: 20,
+              top: 133,
+              right: 20,
               child: Container(
-                height: MediaQuery.of(context).size.height / 1.3,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
+                width: MediaQuery.of(context).size.width,
+                height: 800,
+                decoration: ShapeDecoration(
+                  color: Color(0xFFFEFEFE),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                 ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: MediaQuery.of(context).size.height,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius:
-                              BorderRadius.vertical(top: Radius.circular(5)),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 7.0,right: 7.0),
+                  child: GridView.builder(
+                    shrinkWrap: true,
+
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,  // Number of columns
+                      crossAxisSpacing: 7.0,  // Spacing between columns
+                      mainAxisSpacing: 7.0,   // Spacing between rows
+                      childAspectRatio: 0.75,
+
+                    ),
+                    itemCount: 11,
+                    itemBuilder: (BuildContext context, int index) {
+                      // Return a widget for each item in yourDataList
+                      return Container(
+                        width: 107,
+                        height: 11,
+                        decoration: ShapeDecoration(
+                          color: Color(0xFFF4FAFF),
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(width: 1.09, color: Color(0xFF88CADA)),
+                            borderRadius: BorderRadius.circular(3),
+                          ),
                         ),
-                        child: ListView.builder(
-                          itemCount: items.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                              padding: EdgeInsets.all(16.0),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Container(
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              "${items[index].title}",
-                                              style: TextStyle(fontSize: 18),
-                                            ),
-                                            Text(
-                                              "${items[index].subtitle}",
-                                              style: TextStyle(fontSize: 14),
-                                            ),
-                                            Text(
-                                              "${items[index].subtitle}",
-                                              style: TextStyle(fontSize: 14),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Text(
-                                        "(In Stock 2)",
-                                        style: TextStyle(
-                                            color: Colors.greenAccent),
-                                      ),
-                                      Container(
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              "${items[index].subtitle}",
-                                              style: TextStyle(
-                                                  color: Colors.greenAccent,
-                                                  fontSize: 14),
-                                            ),
-                                            Text(
-                                              "${items[index].subtitle}",
-                                              style: TextStyle(fontSize: 14),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Text(
-                                    "- - - - - - - - - - - - - - - - - -- -- - - - - - - - - - - - - - - -",
-                                  )
-                                ],
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 93,
+                              height: 70,
+                              decoration: ShapeDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage("https://via.placeholder.com/93x83"),
+                                  fit: BoxFit.fill,
+                                ),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
                               ),
-                            );
-                          },
+                            ),
+                            text("Potato Cracker",Color(0xFF282828),12),
+                            text("Potato Cracker",Color(0xFF2E7229),12),
+                            text("Potato Cracker",Color(0xFF3868CE),12)
+
+                          ],
                         ),
-                      ),
-                    ),
-                    Container(
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width /
-                          16, // One-third of the width
-
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        // borderRadius:
-                        //     BorderRadius.vertical(top: Radius.circular(5)),
-                      ),
-                      child: ListView.builder(
-                        itemCount: 24, // Number of items
-                        itemBuilder: (BuildContext context, int index) {
-                          final letters = [
-                            '#',
-                            'b',
-                            'c',
-                            'd',
-                            'a',
-                            'b',
-                            'c',
-                            'd',
-                            'a',
-                            'b',
-                            'c',
-                            'd',
-                            '#',
-                            'b',
-                            'c',
-                            'd',
-                            'a',
-                            'b',
-                            'c',
-                            'd',
-                            'a',
-                            'b',
-                            'c',
-                            'd',
-                          ];
-                          final replacements = [
-                            'x',
-                            'y',
-                            'z',
-                            'w'
-                          ]; // Replace a, b, c, d with x, y, z, w if needed
-                          return
-                            Text(letters[index],style: TextStyle(fontSize: 19,color: Colors.grey),);  // Use replacements[index] instead of letters[index] if needed
-
-                        },
-                      ),
-                    ),
-                  ],
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
+
           ],
         ),
       ),
@@ -309,146 +143,17 @@ class _BlueGradientContainerState extends State<BlueGradientContainer> {
   }
 }
 
-class ContainerWithScreenSize extends StatelessWidget {
-  final List<StckDtls> items = [
-    StckDtls("Item 1", "Subtitle 1"),
-    StckDtls("Item 2", "Subtitle 2"),
-    StckDtls("Item 3", "Subtitle 3"),
-    // Add more data items as needed
-  ];
 
-  @override
-  Widget build(BuildContext context) {
-    // Get the screen width and height
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height - 205;
-    LinearGradient gradient = LinearGradient(
-      colors: [Colors.blue, Colors.black12],
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
-    );
-    return Container(
-        width: screenWidth,
-        height: screenHeight,
-        decoration: BoxDecoration(
-          gradient: gradient,
-        ),
-        child: Column(
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width * 0.91,
-              height: MediaQuery.of(context).size.height * 0.7,
-              color: Colors.white,
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 3,
-                    child: Container(
-                      height: MediaQuery.of(context).size.height * 0.6,
-                      child: ListView.builder(
-                        itemCount: items.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            padding: EdgeInsets.all(16.0),
-                            child: Column(
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            "${items[index].title}",
-                                            style: TextStyle(fontSize: 18),
-                                          ),
-                                          Text(
-                                            "${items[index].subtitle}",
-                                            style: TextStyle(fontSize: 14),
-                                          ),
-                                          Text(
-                                            "${items[index].subtitle}",
-                                            style: TextStyle(fontSize: 14),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Text(
-                                      "(In Stock 2)",
-                                      style:
-                                          TextStyle(color: Colors.greenAccent),
-                                    ),
-                                    Container(
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            "${items[index].subtitle}",
-                                            style: TextStyle(
-                                                color: Colors.greenAccent,
-                                                fontSize: 14),
-                                          ),
-                                          Text(
-                                            "${items[index].subtitle}",
-                                            style: TextStyle(fontSize: 14),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Text(
-                                  "- - - - - - - - - - - - - - - - - - - - - - - - - - - -",
-                                )
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      alignment: Alignment.centerRight,
-                      height: MediaQuery.of(context).size.height * 0.6,
-                      width: 5,
-                      child: ListView.builder(
-                        itemCount: 12, // Number of items
-                        itemBuilder: (BuildContext context, int index) {
-                          final letters = [
-                            '#',
-                            'b',
-                            'c',
-                            'd',
-                            'a',
-                            'b',
-                            'c',
-                            'd',
-                            'a',
-                            'b',
-                            'c',
-                            'd',
-                          ];
-                          final replacements = [
-                            'x',
-                            'y',
-                            'z',
-                            'w'
-                          ]; // Replace a, b, c, d with x, y, z, w if needed
-                          return ListTile(
-                            title: Text(letters[
-                                index]), // Use replacements[index] instead of letters[index] if needed
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ));
-  }
+Widget text(String txt,Color color,double size)
+{
+  return Text(
+    txt,
+    style: TextStyle(
+      color: color,
+      fontSize: size,
+      fontFamily: 'Mulish',
+      fontWeight: FontWeight.w500,
+      height: 0,
+    ),
+  );
 }
