@@ -123,17 +123,114 @@ class _ClickableBlurContainerState extends State<ClickableBlurContainer> {
 
 
 
+class test extends StatefulWidget {
+  const test({super.key});
+
+  @override
+  State<test> createState() => _testState();
+}
+
+class _testState extends State<test> {
+  int? selectedContainerIndex;
+  int currentIndex = 0;
+  void onTabTapped(int index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
+  @override
+  Widget build(BuildContext context) {
+    return  Scaffold(
+      bottomNavigationBar: CustomBottomNavigationBar(currentIndex: 4,onTap:onTabTapped,),
+    );
+  }
+}
 
 
 
 
+class CustomBottomNavigationBar extends StatefulWidget {
+  final int currentIndex;
+  final Function(int) onTap;
 
+  CustomBottomNavigationBar({required this.currentIndex, required this.onTap});
 
+  @override
+  _CustomBottomNavigationBarState createState() =>
+      _CustomBottomNavigationBarState();
+}
 
+class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+          width: 428,
+          height: 70,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Color(0x19000000),
+                blurRadius: 40,
+                offset: Offset(0, 1),
+                spreadRadius: 0,
+              ),
+            ],
+          ),
+        ),
+        Container(
+          width: 76,
+          height: 77,
+          decoration: ShapeDecoration(
+            color: Color(0xFF3868CE),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(99),
+                topRight: Radius.circular(99),
+              ),
+            ),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _buildNavItem(0, Icons.home, 'Home'),
+              _buildNavItem(1, Icons.person, 'Profile'),
+              _buildNavItem(2, Icons.settings, 'Settings'),
+              _buildNavItem(3, Icons.access_alarm, 'ssss'),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
 
+  Widget _buildNavItem(int index, IconData icon, String label) {
+    final isSelected = index == widget.currentIndex;
 
-
-
+    return GestureDetector(
+      onTap: () {
+        widget.onTap(index);
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
+            color: isSelected ? Colors.white : Colors.grey,
+          ),
+          Text(
+            label,
+            style: TextStyle(
+              color: isSelected ? Colors.white : Colors.grey,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 
 

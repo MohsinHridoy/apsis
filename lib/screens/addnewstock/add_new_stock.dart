@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:untitled/screens/customersalehistory/customer_sale_history.dart';
+import 'package:untitled/widgets/widgets.dart';
 
 
 class AddNewStock extends StatefulWidget {
@@ -26,7 +28,7 @@ class _AddNewStockState extends State<AddNewStock> {
   }
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: Container(
         width: 428,
         height: 926,
@@ -62,28 +64,39 @@ class _AddNewStockState extends State<AddNewStock> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
-
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    // Center the children horizontally
                     children: [
-                      Icon(
-                        Icons.arrow_back_ios_new_outlined,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 78.0),
-                        child: Text(
-                          'Add new customer',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Color(0xFFFEFEFE),
-                            fontSize: 20,
-                            fontFamily: 'Mulish',
-                            fontWeight: FontWeight.w700,
-                            height: 0,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          width: 24,
+                          height: 24,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage('assets/icons/left_arrow.png'),
+                              // Replace 'your_image.png' with the actual path to your asset image
+                              fit: BoxFit.cover, // Adjust the fit as needed
+                            ),
+                            // You can also add other decoration properties here, such as borderRadius, border, color, etc.
                           ),
                         ),
                       ),
-
+                      SizedBox(width: 98),
+                      // Add a SizedBox for some space between icon and text
+                      Text(
+                        'Abdul Miah',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Color(0xFFFEFEFE),
+                          fontSize: 20,
+                          fontFamily: 'Mulish',
+                          fontWeight: FontWeight.w700,
+                          height: 0,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -93,17 +106,17 @@ class _AddNewStockState extends State<AddNewStock> {
             Positioned(
               left: 20,
               right: 20,
-              top: 625,
+              top: _image == null ? 625 : 755,
               child: GestureDetector(
-                onTap: (){
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => CustomerSaleHistory(),
-                  //   ),
-                  // );
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CustomerSaleHistory(),
+                    ),
+                  );
                 },
-                child:Container(
+                child: Container(
                   width: 388,
                   height: 56,
                   decoration: ShapeDecoration(
@@ -137,233 +150,140 @@ class _AddNewStockState extends State<AddNewStock> {
               ),
             ),
             Positioned(
-              left: 20,
-              top: 133,
-              right: 20,
-              child: Container(
-                width: 388,
-                height: 332,
-                child: Stack(
-                  children: [
-                    Positioned(
-                      left: 0,
-                      top: 0,
-                      child: Container(
-                        width: 388,
-                        height: 332,
-                        decoration: ShapeDecoration(
-                          color: Color(0xFFFEFEFE),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                        ),
-                      ),
+              left: 14,
+              top: 100,
+              right: 14,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child: Container(
+                  width: 396,
+                  height: 400,
+                  decoration: ShapeDecoration(
+                    color: Color(0xFFFEFEFE),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    Positioned(
-                      left: 16,
-                      top: 23,
-                      right: 16,
-                      child: Container(
-                        width: 354,
-                        height: 60,
-                        decoration: ShapeDecoration(
-                          color: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(width: 1, color: Color(0xFF88CADA)),
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                        ),
+                  ),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 8.0, right: 8.0, top: 15.0),
+                        child: cashContainer1("*", "Product name", false),
                       ),
-                    ),
-                    Positioned(
-                      right: 20,
-                      child: Text(
-                        'Product code: AASADC',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                          color: Color(0xFF282828),
-                          fontSize: 16,
-                          fontFamily: 'Mulish',
-                          fontWeight: FontWeight.w700,
-                          height: 0,
-                        ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: cashContainer1("*", 'Purchase Price.', false),
                       ),
-                    ),
-                    Positioned(
-                      left: 29,
-                      top: 41,
-                      child: Text.rich(
-                        TextSpan(
-                          children: [
-                            TextSpan(
-                              text: '*',
-                              style: TextStyle(
-                                color: Color(0xFFEE6161),
-                                fontSize: 16,
-                                fontFamily: 'Mulish',
-                                fontWeight: FontWeight.w500,
-                                height: 0,
-                              ),
-                            ),
-                            TextSpan(
-                              text: 'Customer name',
-                              style: TextStyle(
-                                color: Color(0xFF939598),
-                                fontSize: 16,
-                                fontFamily: 'Mulish',
-                                fontWeight: FontWeight.w500,
-                                height: 0,
-                              ),
-                            ),
-                          ],
-                        ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: cashContainer1("*", "Selling Price", false),
                       ),
-                    ),
-                    Positioned(
-                      left: 29,
-                      top: 117,
-                      child: Text.rich(
-                        TextSpan(
-                          children: [
-                            TextSpan(
-                              text: '*',
-                              style: TextStyle(
-                                color: Color(0xFFEE6161),
-                                fontSize: 16,
-                                fontFamily: 'Mulish',
-                                fontWeight: FontWeight.w500,
-                                height: 0,
-                              ),
-                            ),
-                            TextSpan(
-                              text: 'Phone No.',
-                              style: TextStyle(
-                                color: Color(0xFF939598),
-                                fontSize: 16,
-                                fontFamily: 'Mulish',
-                                fontWeight: FontWeight.w500,
-                                height: 0,
-                              ),
-                            ),
-                          ],
-                        ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: cashContainer1("*", "Packajing Price", false),
                       ),
-                    ),
-                    Positioned(
-                      left: 29,
-                      top: 193,
-                      child: Text(
-                        'Address',
-                        style: TextStyle(
-                          color: Color(0xFF939598),
-                          fontSize: 16,
-                          fontFamily: 'Mulish',
-                          fontWeight: FontWeight.w500,
-                          height: 0,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      left: 29,
-                      top: 269,
-                      child: Text.rich(
-                        TextSpan(
-                          children: [
-                            TextSpan(
-                              text: '*',
-                              style: TextStyle(
-                                color: Color(0xFFEE6161),
-                                fontSize: 16,
-                                fontFamily: 'Mulish',
-                                fontWeight: FontWeight.w500,
-                                height: 0,
-                              ),
-                            ),
-                            TextSpan(
-                              text: 'Credit amount',
-                              style: TextStyle(
-                                color: Color(0xFF939598),
-                                fontSize: 16,
-                                fontFamily: 'Mulish',
-                                fontWeight: FontWeight.w500,
-                                height: 0,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: cashContainer1("*", "Packajing Type", false),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
             Positioned(
               left: 20,
               right: 20,
-              top: 481,
+              top: 530,
               child: Container(
                 width: 388,
-                height: 106,
-                child: Stack(
+                child: Column(
                   children: [
-
-                    Positioned(
-                      left: 8,
-                      top: 25,
-                      right: 8,
-                      child:DottedBorder(
-                        color:  Color(0xFF728ABE),
-                        // Border color
-                        strokeWidth: 2,
-                        // Border width
-                        borderType: BorderType.RRect,
-                        // Rounded rectangle border
-                        // radius: Radius.circular(999),
-                        // Border radius
-                        // padding: EdgeInsets.all(5), // Padding around the border
-                        child: GestureDetector(
+                    DottedBorder(
+                      color: Color(0xFF728ABE),
+                      // Border color
+                      strokeWidth: 2,
+                      // Border width
+                      borderType: BorderType.RRect,
+                      // Rounded rectangle border
+                      // radius: Radius.circular(999),
+                      // Border radius
+                      // padding: EdgeInsets.all(5), // Padding around the border
+                      child: GestureDetector(
+                        onTap: () {
+                        },
+                        child: _image == null
+                            ? GestureDetector(
                           onTap: (){
                             _pickImage();
 
                           },
                           child: Container(
-                            width: 396, // Container width
-                            height: 66, // Container height
+                            width: 396,
+                            // Container width
+                            height: 66,
+                            // Container height
                             // decoration: BoxDecoration(
                             //   color: Color(0xFFFDE3E5),
                             //   // borderRadius: BorderRadius.circular(999), // Border radius
                             // ), // Background color
-                            child:_image == null?Container(
-                              child: Column(
-                                children: [
-                                  SizedBox(height: 15,),
-                                  Icon(Icons.camera_alt),
-                                  Text(
-                                    'Reset',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color(0xFF7A7A7A),
-                                      fontSize: 16,
-                                      fontFamily: 'Mulish',
-                                      fontWeight: FontWeight.w700,
-                                      height: 0,
-                                    ),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Icon(Icons.camera_alt),
+                                Text(
+                                  'Take Photo',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Color(0xFF7A7A7A),
+                                    fontSize: 16,
+                                    fontFamily: 'Mulish',
+                                    fontWeight: FontWeight.w700,
+                                    height: 0,
                                   ),
-                                ],
-                              ),
-                            )                : Container(
-                              width: 200,
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                            : Stack(
+                          children: [
+                            Container(
+                              width: 396,
                               height: 200,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: FileImage(_image!),
-                                  fit: BoxFit.fill,
+                                  // Assuming _image is your image
+                                  fit: BoxFit.fitHeight,
                                 ),
                               ),
                             ),
-
-                          ),
+                            Positioned(
+                              top:
+                              10, // Adjust the top position as needed
+                              right:
+                              10, // Adjust the right position as needed
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _image = null;
+                                  });// Add your logic to remove the image here
+                                },
+                                child: Icon(
+                                  Icons.close,
+                                  // You can change the icon to your preference
+                                  color: Colors
+                                      .red, // You can change the color to your preference
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ) ,
+                      ),
                     ),
                   ],
                 ),

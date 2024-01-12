@@ -37,35 +37,65 @@ class _SaleHistoryState extends State<SaleHistory> {
                 height: 374,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    begin: Alignment(0.06, -1.00),
-                    end: Alignment(-0.06, 1),
-                    colors: [Color(0xFF3563C2), Color(0xFFA4D9D0)],
+                    begin: Alignment(0.00, -1.00),
+                    end: Alignment(0, 1),
+                    colors: [Color(0xFF2F73FE), Color(0x00D0DFEB)],
                   ),
                 ),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                  Container(
-                  height: 56.0, // Adjust the height as needed
-                  color: Color(0xFF4371D0), // Background color of the app bar
-                  // elevation: 4.0, // Shadow under the app bar
-                  child: Center(
-                    child: Text(
-                      'Sale History',
-                      style: TextStyle(
-                        color: Colors.white, // Text color
-                        fontSize: 20.0, // Text size
-                        fontWeight: FontWeight.bold, // Text weight
+                    SizedBox(height: 20,),
+                    Container(
+                      // width: MediaQuery.of(context).size.width,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          // Center the children horizontally
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                width: 24,
+                                height: 24,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage('assets/icons/left_arrow.png'),
+                                    // Replace 'your_image.png' with the actual path to your asset image
+                                    fit: BoxFit.cover, // Adjust the fit as needed
+                                  ),
+                                  // You can also add other decoration properties here, such as borderRadius, border, color, etc.
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 98),
+                            // Add a SizedBox for some space between icon and text
+                            Text(
+                              'Sale History',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xFFFEFEFE),
+                                fontSize: 20,
+                                fontFamily: 'Mulish',
+                                fontWeight: FontWeight.w700,
+                                height: 0,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ),
                     SizedBox(height: 20,),
-                    SizedBox(height: 10,),
-                    sleHstryCntnr1('Date range',Icon(Icons.abc), 'All time'),
-                    SizedBox(height: 10,),
-                    sleHstryCntnr1('Select product',Icon(Icons.abc), 'All time'),
-                    SizedBox(height: 10,),
-                    sleHstryCntnr1('All time total sold',Icon(Icons.abc), 'All time'),
+                    SizedBox(height: 6,),
+                    sleHstryCntnr1('Date range',"assets/icons/calender.png", 'All time'),
+                    SizedBox(height: 6,),
+                    sleHstryCntnr3('Select product',"assets/icons/bag.png", 'All time'),
+                    SizedBox(height: 6,),
+                    sleHstryCntnr2('All time total sold',Icon(Icons.abc), '৳ 16,547.00'),
 
 
 
@@ -81,7 +111,6 @@ class _SaleHistoryState extends State<SaleHistory> {
             bottom: 0,
             child: Container(
               decoration: ShapeDecoration(
-                color: Color(0xFFF6F6F6),
                 shape: RoundedRectangleBorder(
                   // borderRadius: BorderRadius.circular(15),
                 ),
@@ -196,7 +225,125 @@ Widget text(String txt,Color color,double size)
     ),
   );
 }
-Widget sleHstryCntnr1(String txt1,Icon icon,String txt2,){
+Widget sleHstryCntnr1(String txt1,String image,String txt2,){
+  return   Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Container(
+      width: 388,
+      height: 56,
+      decoration: ShapeDecoration(
+        color: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+      ),
+      child: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              width: 38,
+              height: 34,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(image),
+                    // image: AssetImage('assets/icons/calender.png'),
+                    // Replace 'your_image.png' with the actual path to your asset image
+                    fit: BoxFit.cover, // Adjust the fit as needed
+                  )),
+            ),
+          ),
+          Text(
+            txt1,
+            style: TextStyle(
+              color: Color(0xFF282828),
+              fontSize: 14,
+              fontFamily: 'Mulish',
+              fontWeight: FontWeight.w400,
+              height: 0,
+            ),
+          ),
+          SizedBox(width:150 ,),
+          Text(
+            txt2,
+            textAlign: TextAlign.right,
+            style: TextStyle(
+              color: Color(0xFF7A7A7A),
+              fontSize: 14,
+              fontFamily: 'Mulish',
+              fontWeight: FontWeight.w400,
+              height: 0,
+            ),
+          ),
+          Visibility(
+            visible: true,
+              child: Icon(Icons.arrow_drop_down)
+          )
+
+        ],
+      ),
+    ),
+  );
+}
+Widget sleHstryCntnr3(String txt1,String image,String txt2,){
+  return   Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Container(
+      width: 388,
+      height: 56,
+      decoration: ShapeDecoration(
+        color: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+      ),
+      child: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              width: 38,
+              height: 34,
+              decoration: BoxDecoration(
+                color: Color(0x332E7229),
+                  image: DecorationImage(
+                    image: AssetImage(image),
+                    // image: AssetImage('assets/icons/calender.png'),
+                    // Replace 'your_image.png' with the actual path to your asset image
+                    fit: BoxFit.cover, // Adjust the fit as needed
+                  )),
+            ),
+          ),
+          Text(
+            txt1,
+            style: TextStyle(
+              color: Color(0xFF282828),
+              fontSize: 14,
+              fontFamily: 'Mulish',
+              fontWeight: FontWeight.w400,
+              height: 0,
+            ),
+          ),
+          SizedBox(width:150 ,),
+          Text(
+            txt2,
+            textAlign: TextAlign.right,
+            style: TextStyle(
+              color: Color(0xFF7A7A7A),
+              fontSize: 14,
+              fontFamily: 'Mulish',
+              fontWeight: FontWeight.w400,
+              height: 0,
+            ),
+          ),
+          Visibility(
+            visible: true,
+              child: Icon(Icons.arrow_drop_down)
+          )
+
+        ],
+      ),
+    ),
+  );
+}
+
+Widget sleHstryCntnr2(String txt1,Icon icon,String txt2,){
   return   Padding(
     padding: const EdgeInsets.all(8.0),
     child: Container(
@@ -230,22 +377,19 @@ Widget sleHstryCntnr1(String txt1,Icon icon,String txt2,){
               height: 0,
             ),
           ),
-          SizedBox(width:150 ,),
+          SizedBox(width:100 ,),
           Text(
             txt2,
             textAlign: TextAlign.right,
             style: TextStyle(
-              color: Color(0xFF7A7A7A),
+              color:  Color(0xFF3868CE),
               fontSize: 14,
               fontFamily: 'Mulish',
               fontWeight: FontWeight.w400,
               height: 0,
             ),
           ),
-          Visibility(
-            visible: true,
-              child: Icon(Icons.arrow_drop_down)
-          )
+
 
         ],
       ),

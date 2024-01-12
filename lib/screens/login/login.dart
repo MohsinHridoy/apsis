@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:untitled/screens/register/register.dart';
 
+import '../../widgets/widgets.dart';
+
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -36,27 +38,12 @@ class _LoginState extends State<Login> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(left:8.0,top: 3.0),
-                                child: Container(
-                                  width: 11,
-                                  height: 11,
-                                  decoration: ShapeDecoration(
-                                    color: Color(0xFFD9D9D9),
-                                    shape: OvalBorder(),
-                                  ),
-                                ),
+                                child: dot(),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(left:4.0),
-                                child: Text(
-                                  'apsis solutions',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontFamily: 'Mulish',
-                                    fontWeight: FontWeight.w400,
-                                    height: 0,
-                                  ),
-                                ),
+
+                                child: text1("apsis solutions",20),
                               ),
                             ],
                           ),
@@ -68,37 +55,7 @@ class _LoginState extends State<Login> {
                         child: Padding(
                           padding: const EdgeInsets.only(left: 42.0,top:3),
                           child: Row(
-                            children: [
-
-                              Text.rich(
-                                TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: 'A',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 144.57,
-                                        fontFamily: 'Monomaniac One',
-                                        fontWeight: FontWeight.bold,
-                                        height: 0,
-                                        letterSpacing: -50.40,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: 'A',
-                                      style: TextStyle(
-                                        color: Color(0xFF88CADA),
-                                        fontSize:144.57,
-                                        // fontFamily: 'Monomaniac One',
-                                        fontWeight: FontWeight.bold,
-                                        height: 0,
-                                        letterSpacing: -50.40,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                            children: [richText('A', 'A')],
                           ),
                         ),
                       ),
@@ -202,19 +159,8 @@ class _LoginState extends State<Login> {
                                 ),
                               ),
                               Expanded(
-                                child: TextField(
-                                  style:TextStyle(color: Colors.white),
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
 
-                                    hintText: 'Enter your text',
-                                    hintStyle: TextStyle(color: Colors.white),
-                                    // border: InputBorder.none, // Removes the underline border
-                                    // filled: true,
-                                    fillColor: Color(0xFF3868CE), // Background color
-                                    contentPadding: EdgeInsets.all(16.0), // Padding inside the input field
-                                  ),
-                                ),
+                                child: textField('Enter your text',),
                               ),
                             ],
                           ),
@@ -295,17 +241,7 @@ class _LoginState extends State<Login> {
                           ),
 
                           child: Center(
-                            child: Text(
-                              'Log in',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontFamily: 'Mulish',
-                                fontWeight: FontWeight.w700,
-                                height: 0,
-                              ),
-                            ),
+                            child: text('Log in',16),
                           ),
                         ),
                       )
@@ -322,38 +258,3 @@ class _LoginState extends State<Login> {
 }
 
 
-class PasswordTextField extends StatefulWidget {
-  @override
-  _PasswordTextFieldState createState() => _PasswordTextFieldState();
-}
-
-class _PasswordTextFieldState extends State<PasswordTextField> {
-  bool _obscureText = false; // Initially, password is obscured
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(16.0),
-      child: TextField(
-        obscureText: _obscureText,
-        style: TextStyle(color: Colors.white),
-        obscuringCharacter: "*",
-        // Obscure text when true
-        decoration: InputDecoration(
-          hintText: 'Password', // Hint text
-          hintStyle: TextStyle(color: Colors.white),
-          border: InputBorder.none,
-          // Remove the underline border
-
-          // fillColor: Colors.grey[200], // Background color
-          contentPadding: EdgeInsets.all(8.0), // Padding inside the input field
-        ),
-        onTap: () {
-          setState(() {
-            _obscureText = !_obscureText;
-          });
-        },
-      ),
-    );
-  }
-}

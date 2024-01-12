@@ -1,12 +1,13 @@
 
 
-class MyStock {
+class MyStockData11 {
   final String title;
-  final String subtitle;
-  final String quantity;
+  final String productId;
+  final int quantity;
   final String stknmbr;
-  final String unitprice;
+  final int unitprice;
+  final String  image;
 
 
-  MyStock(this.title, this.subtitle,this.quantity,this.stknmbr,this.unitprice);
+  MyStockData11({required this.title, required this.productId,required this.quantity,required this.stknmbr,required this.unitprice,required this.image});
 }

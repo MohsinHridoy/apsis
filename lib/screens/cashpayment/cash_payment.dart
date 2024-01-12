@@ -1,218 +1,293 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled/model/peoductList/productlist.dart';
 import 'package:untitled/model/stck_detls_lst.dart';
+import 'package:untitled/screens/customerlist/customer_list.dart';
+import 'package:untitled/widgets/widgets.dart';
 
 class CashPayment extends StatefulWidget {
-  const CashPayment({super.key});
+  final List<ProductList>? items;
+
+  CashPayment({this.items, Key? key}) : super(key: key);
 
   @override
   State<CashPayment> createState() => _CashPaymentState();
 }
 
 class _CashPaymentState extends State<CashPayment> {
+  late List<ProductList> products;
+  double heightOfSingleItem =
+      80.0; // Change the value based on your item height
+  double verticalSpacingBetweenItems = 8.0;
+
+  // var creditAmount = 0; // New variable to hold the calculated credit amount
+  double creditAmount = 0.0; // Use double instead of int
+  double creditAmount2 = 0.0;
+
+  var sum = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.items != null) {
+      products = List.from(widget.items!);
+      updateSum();
+      print(products.length);
+      print("+++++++++++++++++++++++++++++++++++++++++");
+      print(sum);
+    }
+  }
+
+  void updateSum() {
+    setState(() {
+      sum = products.fold(
+          0, (prev, product) => prev + (product.quantity * product.unitprice));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  AppBar(
-        elevation: 0,
-        centerTitle: true,// No elevation (no shadow)
-        backgroundColor: Color(0xFF3A67C4), // Background color
-        // backgroundColor: Color(0xFF3563C2), // Background color
-        title:  Text(
-          'Cash Payment',
-          style: TextStyle(
-            color: Color(0xFFFEFEFE),
-            // Text color
-            fontSize: 20,
-            fontFamily: 'Mulish',
-            fontWeight: FontWeight.w700,
-            height: 0,
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment(0.00, -1.00),
+            end: Alignment(0, 1),
+            colors: [Color(0xFF2F73FE), Color(0x00D0DFEB)],
           ),
         ),
-
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Icon(
-            Icons.arrow_back_ios, // Back button icon
-            color: Colors.white, // Icon color
-          ),
-        ),
-      ),
-      body:  Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: SingleChildScrollView(
-            child: Stack(
-              children: [
-                Container(
-                  height: 1200,
-                ),
-                Positioned(
-                  left: 0,
-                  top: 0,
-                  child: Container(
-                    width: 428,
-                    height: 279,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment(0.06, -1.00),
-                        end: Alignment(-0.06, 1),
-                        colors: [Color(0xFF3563C2), Color(0xFFA4D9D0)],
-                      ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 35,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  // width: MediaQuery.of(context).size.width,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      // mainAxisAlignment: MainAxisAlignment.center,
+                      // Center the children horizontally
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            width: 24,
+                            height: 24,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image:
+                                    AssetImage('assets/icons/left_arrow.png'),
+                                // Replace 'your_image.png' with the actual path to your asset image
+                                fit: BoxFit.cover, // Adjust the fit as needed
+                              ),
+                              // You can also add other decoration properties here, such as borderRadius, border, color, etc.
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 118),
+                        // Add a SizedBox for some space between icon and text
+                        Text(
+                          'Payment',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Color(0xFFFEFEFE),
+                            fontSize: 20,
+                            fontFamily: 'Mulish',
+                            fontWeight: FontWeight.w700,
+                            height: 0,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                Positioned(
-                  left: 14,
-                  top: 62,
-                  right: 16,
-                  child: Container(
-                    width: 388,
-                    height: 299,
-                    decoration: ShapeDecoration(
-                      color: Color(0xFFFEFEFE),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
-                      ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 15.0, right: 15.0, top: 8.0, bottom: 8.0),
+                child: Container(
+                  width: 396,
+                  height: 304,
+                  decoration: ShapeDecoration(
+                    color: Color(0xFFFEFEFE),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20.0),
-                          child: SizedBox(
-                            width: 354,
-                            child: Text(
-                              'Memo ID: 415SADC',
-                              textAlign: TextAlign.right,
+                  ),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0, right: 20),
+                        child: SizedBox(
+                          width: 354,
+                          child: Text(
+                            'Memo ID: 415SADC',
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                              color: Color(0xFF282828),
+                              fontSize: 16,
+                              fontFamily: 'Mulish',
+                              fontWeight: FontWeight.w700,
+                              height: 0,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 8.0, right: 8.0, top: 15.0),
+                        child: cashContainer1(context,"*", "Customer name", true),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: cashContainer1(context,"*", "Phone no", false),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: cashContainer1(context,"*", "Address", false),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 15.0, right: 15.0, top: 8.0, bottom: 8.0),
+                child: ContainerWithScreenSize(
+                    items: widget.items!,
+                    sum: sum,
+                    creditAmount: creditAmount,
+                    creditAmount2: creditAmount2),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            print("click");
+                          },
+                          child: Container(
+                            width: 396,
+                            height: 56,
+                            decoration: ShapeDecoration(
+                              color: Color(0xFF3868CE),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                              shadows: [
+                                BoxShadow(
+                                  color: Color(0x59293072),
+                                  blurRadius: 22,
+                                  offset: Offset(2, 7),
+                                  spreadRadius: -2,
+                                )
+                              ],
+                            ),
+                            child: Center(
+                              child: Text(
+                                'Take payment & Print',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontFamily: 'Mulish',
+                                  fontWeight: FontWeight.w700,
+                                  height: 0,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: DottedBorder(
+                          color: Color(0xFF3868CE),
+                          // Border color
+                          strokeWidth: 1,
+                          // Border width
+                          borderType: BorderType.RRect,
+                          // Rounded rectangle border
+                          radius: Radius.circular(999),
+                          // Border radius
+                          // padding: EdgeInsets.all(5), // Padding around the border
+                          child: Container(
+                            width: 396, // Container width
+                            height: 56, // Container height
+                            decoration: BoxDecoration(
+                              color: Color(0xFFF6F6F6),
+                              borderRadius:
+                                  BorderRadius.circular(999), // Border radius
+                            ), // Background color
+                            child: Center(
+                                child: Text(
+                              'Edit',
+                              textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: Color(0xFF282828),
+                                color: Color(0xFF3868CE),
                                 fontSize: 16,
                                 fontFamily: 'Mulish',
                                 fontWeight: FontWeight.w700,
                                 height: 0,
                               ),
-                            ),
+                            )),
                           ),
                         ),
-                        cashContainer1("*", "Customer name", true),
-                        cashContainer1("*", "Customer name", true),
-                        cashContainer1("*", "Customer name", false),
-                      ],
-                    ),
+                      )
+                    ],
                   ),
                 ),
-                Positioned(
-                  top: 390,
-                  left: 30,
-                  right: 30,
-                  // bottom: 190,
-                  child: ContainerWithScreenSize(),
-                ),
-
-                Positioned(
-                  top: 900,
-                  right: 20,
-                  left: 20,
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: GestureDetector(
-                            onTap: () {
-                              print("click");
-                            },
-                            child: Container(
-                              width: 396,
-                              height: 56,
-                              decoration: ShapeDecoration(
-                                color: Color(0xFF3868CE),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                  BorderRadius.circular(999),
-                                ),
-                                shadows: [
-                                  BoxShadow(
-                                    color: Color(0x59293072),
-                                    blurRadius: 22,
-                                    offset: Offset(2, 7),
-                                    spreadRadius: -2,
-                                  )
-                                ],
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Take payment & Print',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontFamily: 'Mulish',
-                                    fontWeight: FontWeight.w700,
-                                    height: 0,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: DottedBorder(
-                            color: Color(0xFF3868CE),
-                            // Border color
-                            strokeWidth: 2,
-                            // Border width
-                            borderType: BorderType.RRect,
-                            // Rounded rectangle border
-                            radius: Radius.circular(999),
-                            // Border radius
-                            // padding: EdgeInsets.all(5), // Padding around the border
-                            child: Container(
-                              width: 396, // Container width
-                              height: 56, // Container height
-                              decoration: BoxDecoration(
-                                color: Color(0xFFF6F6F6),
-                                borderRadius: BorderRadius.circular(
-                                    999), // Border radius
-                              ), // Background color
-                              child: Center(
-                                  child: Text(
-                                    'Edit',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color(0xFF3868CE),
-                                      fontSize: 16,
-                                      fontFamily: 'Mulish',
-                                      fontWeight: FontWeight.w700,
-                                      height: 0,
-                                    ),
-                                  )),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-
-              ],
-            ),
+              ),
+            ],
           ),
         ),
-   
+      ),
     );
   }
 }
 
+class ContainerWithScreenSize extends StatefulWidget {
+  // final List<StckDtls> items = [
+  //   StckDtls("Item 1", "Subtitle 1"),
+  //   StckDtls("Item 2", "Subtitle 2"),
+  //   StckDtls("Item 3", "Subtitle 3"),
+  //   // Add more data items as needed
+  // ];
+  final List<ProductList> items;
+  int sum;
+  double creditAmount;
+  double creditAmount2;
 
-class ContainerWithScreenSize extends StatelessWidget {
-  final List<StckDtls> items = [
-    StckDtls("Item 1", "Subtitle 1"),
-    StckDtls("Item 2", "Subtitle 2"),
-    StckDtls("Item 3", "Subtitle 3"),
-    // Add more data items as needed
-  ];
+  ContainerWithScreenSize(
+      {required this.items,
+      required this.sum,
+      required this.creditAmount,
+      required this.creditAmount2});
+
+  @override
+  State<ContainerWithScreenSize> createState() =>
+      _ContainerWithScreenSizeState();
+}
+
+class _ContainerWithScreenSizeState extends State<ContainerWithScreenSize> {
+  double heightOfSingleItem =
+      65.0; // Change the value based on your item height
+  double verticalSpacingBetweenItems = 8.0;
+  double? creditAmount3;
+  double? creditAmount4;
 
   @override
   Widget build(BuildContext context) {
@@ -225,7 +300,8 @@ class ContainerWithScreenSize extends StatelessWidget {
     //   end: Alignment.bottomCenter,
     // );
     return Container(
-      // width: 388,
+
+        // width: 388,
         decoration: ShapeDecoration(
           color: Colors.white,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
@@ -233,7 +309,6 @@ class ContainerWithScreenSize extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              width: 388,
               height: 50,
               decoration: ShapeDecoration(
                 color: Color(0xFF3868CE),
@@ -283,13 +358,16 @@ class ContainerWithScreenSize extends StatelessWidget {
               ),
             ),
             Container(
-              height: 360,
+              height: widget.items.length *
+                  (heightOfSingleItem + verticalSpacingBetweenItems),
+              color: Colors.white,
               child: ListView.builder(
-                itemCount: 6,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: widget.items.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
-                    padding:
-                    EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0,top: 5),
+                    padding: EdgeInsets.only(
+                        left: 8.0, right: 8.0, bottom: 8.0, top: 5),
                     // decoration: BoxDecoration(
                     //   border: Border.all(color: Colors.grey),
                     //   borderRadius: BorderRadius.circular(8.0),
@@ -297,10 +375,11 @@ class ContainerWithScreenSize extends StatelessWidget {
                     child: Column(
                       children: [
                         Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          // crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
+                              width: 97,
                               child: Column(
                                 children: [
                                   // Text(
@@ -311,98 +390,50 @@ class ContainerWithScreenSize extends StatelessWidget {
                                   //   "${items[index].subtitle}",
                                   //   style: TextStyle(fontSize: 14),
                                   // ),
-                                  stkItm1('Cola', Color(0xFF282828), 16),
-                                  stkItm1('250ml', Color(0xFF7A7A7A), 14),
+                                  stkItm1(widget.items[index].title,
+                                      Color(0xFF282828), 16),
+                                  stkItm1(
+                                      widget.items[index].stknmbr.toString(),
+                                      Color(0xFF7A7A7A),
+                                      14),
                                   // stkItm1(
                                   //     '(In Stk: 100)', Color(0xFF2E7229), 12),
                                 ],
                               ),
                             ),
-                            Row(
-                              children: [
-                                // Container(
-                                //   width: 31,
-                                //   height: 42,
-                                //   decoration: ShapeDecoration(
-                                //     color: Color(0xFF3868CE),
-                                //     shape: RoundedRectangleBorder(
-                                //       side: BorderSide(
-                                //           width: 1, color: Color(0xFF3868CE)),
-                                //       borderRadius: BorderRadius.circular(10),
-                                //     ),
-                                //   ),
-                                //   // Background color for '-' icon
-                                //   child: Center(
-                                //     child: Text(
-                                //       '-',
-                                //       style: TextStyle(
-                                //         color: Colors.white,
-                                //         fontSize: 16,
-                                //         fontFamily: 'Mulish',
-                                //         fontWeight: FontWeight.w700,
-                                //         height: 0,
-                                //       ),
-                                //     ),
-                                //   ),
-                                // ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    '1',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color(0xFF282828),
-                                      fontSize: 16,
-                                      fontFamily: 'Mulish',
-                                      fontWeight: FontWeight.w500,
-                                      height: 0,
+                            Container(
+                              width: 31,
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(1.0),
+                                    child: Text(
+                                      widget.items[index].quantity.toString(),
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Color(0xFF282828),
+                                        fontSize: 16,
+                                        fontFamily: 'Mulish',
+                                        fontWeight: FontWeight.w500,
+                                        height: 0,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                // Container(
-                                //   width: 31,
-                                //   height: 42,
-                                //   decoration: ShapeDecoration(
-                                //     color: Color(0xFF3868CE),
-                                //     shape: RoundedRectangleBorder(
-                                //       side: BorderSide(
-                                //           width: 1, color: Color(0xFF3868CE)),
-                                //       borderRadius: BorderRadius.circular(10),
-                                //     ),
-                                //   ),
-                                //   // Background color for '-' icon
-                                //   child: Center(
-                                //     child: Text(
-                                //       '+',
-                                //       style: TextStyle(
-                                //         color: Colors.white,
-                                //         fontSize: 16,
-                                //         fontFamily: 'Mulish',
-                                //         fontWeight: FontWeight.w700,
-                                //         height: 0,
-                                //       ),
-                                //     ),
-                                //   ),
-                                // ),
-                              ],
+                                ],
+                              ),
                             ),
-                            // Container(
-                            //   width: 90,
-                            //   height: 45,
-                            //   child: Text(
-                            //     "${items[index].subtitle}",
-                            //     style: TextStyle(fontSize: 14),
-                            //   ),
-                            // ),
-                            Text(
-                              '৳30.0',
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                color: Color(0xFF282828),
-                                fontSize: 16,
-                                fontFamily: 'Mulish',
-                                fontWeight: FontWeight.w500,
-                                height: 0,
+                            Container(
+                              width: 60,
+                              child: Text(
+                                '৳${(widget.items[index].quantity * widget.items[index].unitprice).toString()}',
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                  color: Color(0xFF282828),
+                                  fontSize: 16,
+                                  fontFamily: 'Mulish',
+                                  fontWeight: FontWeight.w500,
+                                  height: 0,
+                                ),
                               ),
                             )
                           ],
@@ -410,6 +441,9 @@ class ContainerWithScreenSize extends StatelessWidget {
                         SizedBox(
                           height: 15,
                         ),
+                        Divider(
+                          height: 1,
+                        )
                         // horizontalLine()
                       ],
                     ),
@@ -422,7 +456,8 @@ class ContainerWithScreenSize extends StatelessWidget {
               height: 37,
               decoration: ShapeDecoration(
                 color: Color(0xFF3868CE),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5)),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -440,7 +475,7 @@ class ContainerWithScreenSize extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '৳ 1,570.0',
+                      "${widget.sum}",
                       textAlign: TextAlign.right,
                       style: TextStyle(
                         color: Color(0xFFFEFEFE),
@@ -453,22 +488,156 @@ class ContainerWithScreenSize extends StatelessWidget {
                   ],
                 ),
               ),
-            )
+            ),
+            Container(
+              width: 369,
+              height: 67,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Cash',
+                      style: TextStyle(
+                        color: Color(0xFF282828),
+                        fontSize: 16,
+                        fontFamily: 'Mulish',
+                        fontWeight: FontWeight.w700,
+                        height: 0,
+                      ),
+                    ),
+                    Container(
+                      width: 152,
+                      height: 60,
+                      decoration: ShapeDecoration(
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(width: 1, color: Color(0xFF88CADA)),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              '৳',
+                              textAlign: TextAlign.right,
+                              style: TextStyle(
+                                color: Color(0xFF282828),
+                                fontSize: 16,
+                                fontFamily: 'Mulish',
+                                fontWeight: FontWeight.w700,
+                                height: 0,
+                              ),
+                            ),
+                            Container(
+                              width: 132,
+                              height: 67,
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: Expanded(
+                                  child: TextFormField(
+                                    keyboardType: TextInputType.number,
+                                    textAlign: TextAlign.right,
+                                    // Align the text to the right
+                                    decoration: InputDecoration(
+                                      border: InputBorder
+                                          .none, // Remove the underline
+                                    ),
+
+                                    style: TextStyle(
+                                      color: Color(0xFF282828),
+                                      fontSize: 16,
+                                      fontFamily: 'Mulish',
+                                      fontWeight: FontWeight.w700,
+                                      height: 0,
+                                    ),
+                                    onChanged: (value) {
+                                      double enteredValue =
+                                          double.tryParse(value) ?? 0.0;
+
+                                      setState(() {
+                                        creditAmount4 = creditAmount3 =
+                                            widget.sum - enteredValue;
+                                        print(widget.sum);
+                                        print(creditAmount3);
+                                      });
+
+                                      // Assuming the entered value is the credit amount
+                                      //creditAmount2 = sum - creditAmount;
+                                      // print(creditAmount);
+                                      // Perform any additional logic with the creditAmount if needed
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              width: 369,
+              height: 67,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "credit", // Display the calculated credit amount
+                      style: TextStyle(
+                        color: Color(0xFF282828),
+                        fontSize: 16,
+                        fontFamily: 'Mulish',
+                        fontWeight: FontWeight.w700,
+                        height: 0,
+                      ),
+                    ),
+                    Container(
+                      width: 152,
+                      height: 67,
+                      child: Text(
+                        (creditAmount3 != null && creditAmount3! > 0)
+                            ? creditAmount3.toString()
+                            : '0',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          color: Color(0xFF282828),
+                          fontSize: 16,
+                          fontFamily: 'Mulish',
+                          fontWeight: FontWeight.w700,
+                          height: 0,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ));
   }
 }
 
-
 Widget stkItm1(String text, Color color, double fontSize) {
-  return Text(
-    text,
-    style: TextStyle(
-      color: color,
-      fontSize: fontSize,
-      fontFamily: 'Mulish',
-      fontWeight: FontWeight.w500,
-      height: 0,
+  return Container(
+    width: 97,
+    child: Text(
+      text,
+      style: TextStyle(
+        color: color,
+        fontSize: fontSize,
+        fontFamily: 'Mulish',
+        fontWeight: FontWeight.w500,
+        height: 0,
+      ),
     ),
   );
 }
@@ -487,7 +656,8 @@ Widget horizontalLine() {
     ),
   );
 }
-Widget cashContainer1(String strText,String hints,bool w ) {
+
+Widget cashContainer1(BuildContext context,String strText, String hints, bool w) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Container(
@@ -504,7 +674,7 @@ Widget cashContainer1(String strText,String hints,bool w ) {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            padding: EdgeInsets.only(left: 8.0),
             child: Visibility(
               visible: w,
               child: Text(
@@ -521,27 +691,47 @@ Widget cashContainer1(String strText,String hints,bool w ) {
           ),
           Expanded(
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
+              padding: EdgeInsets.symmetric(horizontal: 2.0),
               child: TextFormField(
                 style: TextStyle(
-                  color:  Color(0xFF939598),
+                  color: Color(0xFF939598),
                   fontSize: 16,
                   fontFamily: 'Mulish',
                   fontWeight: FontWeight.w500,
                   height: 0,
+                  // overflow: ,
                 ),
                 decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Customer name',
-                  hintStyle: TextStyle(color: Color(0xFF939598) )
-                ),
+                    border: InputBorder.none,
+                    hintText: hints,
+                    hintStyle: TextStyle(color: Color(0xFF939598))),
               ),
             ),
           ),
-          Visibility(visible:w,child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Icon(Icons.ac_unit,color:  Color(0xFF939598),),
-          ),)
+          Visibility(
+            visible: w,
+            child: GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CustomerList(),
+                  ),
+                );
+              },
+              child: Container(
+                height: 34,
+                width: 34,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset(
+                    "assets/icons/profile.png",
+                    color: Color(0xFF939598),
+                  ),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     ),

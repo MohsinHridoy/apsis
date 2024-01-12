@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 
 class Calculator extends StatefulWidget {
@@ -8,128 +10,217 @@ class Calculator extends StatefulWidget {
 }
 
 class _CalculatorState extends State<Calculator> {
-  // String _output = '';
-  // String _currentNumber = '';
-  // String _operator = '';
-  // double? _num1, _num2;
-  //
-  // void _buttonPressed(String buttonText) {
-  //   if (buttonText == 'AC') {
-  //     _clear();
-  //   } else if (buttonText == '+' || buttonText == '-' || buttonText == 'x' || buttonText == '/') {
-  //     _num1 = double.parse(_currentNumber);
-  //     _operator = buttonText;
-  //     _clear();
-  //   } else if (buttonText == '=') {
-  //     _num2 = double.parse(_currentNumber);
-  //     _calculate();
-  //   } else {
-  //     _currentNumber += buttonText;
-  //   }
-  //
-  //   setState(() {
-  //     _output = _currentNumber;
-  //   });
-  // }
-  //
-  // void _clear() {
-  //   _currentNumber = '';
-  //   _operator = '';
-  //   _output = '0';
-  // }
-  //
-  // void _calculate() {
-  //   double? result;
-  //   if (_operator == '+') {
-  //     result = _num1! + _num2!;
-  //   } else if (_operator == '-') {
-  //     result = _num1! - _num2!;
-  //   } else if (_operator == 'x') {
-  //     result = _num1! * _num2!;
-  //   } else if (_operator == '/') {
-  //     if (_num2 != 0) {
-  //       result = _num1! / _num2!;
-  //     } else {
-  //       result = 0; // Handle division by zero
-  //     }
-  //   }
-  //   _currentNumber = result.toString();
-  //   _operator = '';
-  // }
-
   String input = "";
   double num1 = 0;
   double num2 = 0;
   String operand = "";
   String result = "";
 
+  // void _buttonPressed(String buttonText) {
+  //   if (buttonText == "+" || buttonText == "-" || buttonText == "x" || buttonText == "/") {
+  //     // Check if the last pressed button was an operator, if yes, update the operand
+  //     if (["/", "x", "+", "-"].contains(input)) {
+  //       input = input.substring(0, input.length - 1) + buttonText;
+  //     } else {
+  //       _processOperator(buttonText);
+  //       input += buttonText; // Add the pressed operator to the input
+  //     }
+  //   } else if (buttonText == "=") {
+  //     _calculateResult();
+  //   } else if (buttonText == "AC") {
+  //     _clear();
+  //   } else {
+  //     input += buttonText;
+  //   }
+  //
+  //   setState(() {});
+  // }
+
   void _buttonPressed(String buttonText) {
     if (buttonText == "+" || buttonText == "-" || buttonText == "x" || buttonText == "/") {
-      if (num1 != 0) {
-        num2 = double.parse(input);
-        switch (operand) {
-          case "+":
-            num1 += num2;
-            break;
-          case "-":
-            num1 -= num2;
-            break;
-          case "x":
-            num1 *= num2;
-            break;
-          case "/":
-            if (num2 != 0) {
-              num1 /= num2;
-            } else {
-              result = "Error";
-            }
-            break;
-        }
-        operand = buttonText;
-        input = "";
-      } else {
-        num1 = double.parse(input);
-        operand = buttonText;
-        input = "";
+      if (["/", "x", "+", "-"].contains(input)) {
+        // Remove the last operator if there is one
+        input = input.substring(0, input.length - 1);
       }
+      _processOperator(buttonText);
+      input += buttonText; // Add the pressed operator to the input
+      print(input);
+
     } else if (buttonText == "=") {
-      if (operand != "" && input != "") {
-        num2 = double.parse(input);
-        switch (operand) {
-          case "+":
-            result = (num1 + num2).toString();
-            break;
-          case "-":
-            result = (num1 - num2).toString();
-            break;
-          case "x":
-            result = (num1 * num2).toString();
-            break;
-          case "/":
-            if (num2 != 0) {
-              result = (num1 / num2).toString();
-            } else {
-              result = "Error";
-            }
-            break;
-        }
-        num1 = 0;
-        num2 = 0;
-        operand = "";
-        input = "";
-      }
+      _calculateResult();
     } else if (buttonText == "AC") {
-      num1 = 0;
-      num2 = 0;
-      operand = "";
-      input = "";
-      result = "";
+      _clear();
     } else {
+      // Append the pressed button text to the input
       input += buttonText;
     }
 
     setState(() {});
   }
+
+
+
+
+
+
+  void _processOperator(String newOperand) {
+    if (num1 != 0) {
+      num2 = double.tryParse(input) ?? 0; // Use tryParse to handle invalid doubles
+
+      if (num2 == null) {
+        result = "Error";
+        _clear();
+        return;
+      }
+
+      switch (operand) {
+        case "+":
+          num1 += num2;
+          break;
+        case "-":
+          num1 -= num2;
+          break;
+        case "x":
+          num1 *= num2;
+          break;
+        case "/":
+          if (num2 != 0) {
+            num1 /= num2;
+          } else {
+            result = "Error";
+            _clear();
+            return;
+          }
+          break;
+      }
+      operand = newOperand;
+    } else {
+      num1 = double.tryParse(input) ?? 0;
+      operand = newOperand;
+    }
+  }
+
+
+  // void _calculateResult() {
+  //   if (operand.isNotEmpty && input.isNotEmpty) {
+  //     // Split the input into numbers and operators
+  //     List<String> components = input.split(RegExp(r'[-+*/]'));
+  //
+  //     // Remove empty strings from the list
+  //     components.removeWhere((element) => element.isEmpty);
+  //
+  //     // Perform calculations based on the components
+  //     num1 = double.parse(components[0]);
+  //     String currentOperand = "";
+  //     for (int i = 1; i < components.length; i++) {
+  //       String component = components[i];
+  //
+  //       if (RegExp(r'[-+*/]').hasMatch(component)) {
+  //         // If the component is an operator
+  //         currentOperand = component;
+  //       } else {
+  //         // If the component is a number
+  //         num2 = double.parse(component);
+  //
+  //         switch (currentOperand) {
+  //           case "+":
+  //             num1 += num2;
+  //             break;
+  //           case "-":
+  //             num1 -= num2;
+  //             break;
+  //           case "x":
+  //             num1 *= num2;
+  //             break;
+  //           case "/":
+  //             if (num2 != 0) {
+  //               num1 /= num2;
+  //             } else {
+  //               result = "Error";
+  //               _clear(); // Move _clear here to handle the error case
+  //               return;
+  //             }
+  //             break;
+  //           default:
+  //           // If there is no current operand, update the num1
+  //             num1 = num2;
+  //         }
+  //       }
+  //     }
+  //
+  //     result = num1.toString();
+  //   }
+  // }
+
+
+  void _calculateResult() {
+    if (operand.isNotEmpty && input.isNotEmpty) {
+      // Split the input into numbers and operators
+      List<String> components = input.split(RegExp(r'[-+*/]'));
+
+      // Remove empty strings from the list
+      components.removeWhere((element) => element.isEmpty);
+
+      // Initialize num1 with the first component
+      num1 = double.tryParse(components[0]) ?? 0;
+
+      // Initialize currentOperand to handle the first operator if present
+      String currentOperand = "";
+
+      for (int i = 1; i < components.length; i++) {
+        String component = components[i];
+
+        if (RegExp(r'[-+*/]').hasMatch(component)) {
+          // If the component is an operator
+          currentOperand = component;
+        } else {
+          // If the component is a number
+          num2 = double.tryParse(component) ?? 0;
+
+          switch (currentOperand) {
+            case "+":
+              num1 += num2;
+              print(input);
+              break;
+            case "-":
+              num1 -= num2;
+              print(input);
+              break;
+            case "x":
+              num1 *= num2;
+              print(input);
+              break;
+            case "/":
+              if (num2 != 0) {
+                num1 /= num2;
+              } else {
+                result = "Error";
+                _clear(); // Move _clear here to handle the error case
+                return;
+              }
+              break;
+            default:
+            // If there is no current operand, do nothing and continue to the next iteration
+              continue;
+          }
+        }
+      }
+
+      result = num1.toStringAsFixed(2); // Format the result to two decimal places
+    }
+  }
+
+
+
+  void _clear() {
+    num1 = 0; // Reset num1 to 0
+    num2 = 0;
+    operand = "";
+    input = "";
+    result = "";
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -143,37 +234,13 @@ class _CalculatorState extends State<Calculator> {
               width: MediaQuery.of(context).size.width,
               child: Column(
                 children: [
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      input,
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 29.51,
-                        fontFamily: 'Mulish',
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      "$result",
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 39.51,
-                        fontFamily: 'Mulish',
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  )
+                  _buildResultText(input, 29.51),
+                  _buildResultText1(result, 39.51),
+                  // _buildResultText(result, 39.51),
                 ],
               ),
             ),
           ),
-
           Positioned(
             top: 310,
             child: Container(
@@ -203,67 +270,95 @@ class _CalculatorState extends State<Calculator> {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  width: 356.67,
-                  height: MediaQuery.of(context).size.height,
-                  child: Column(
-                    children: [
-                      SizedBox(height: 15,),
-
-                      Row(
-                        children: [
-                          containerBtn('AC', Color(0xFFFAFAFA), Color(0xFF282828)),
-                          containerBtn('( )', Color(0xFFFAFAFA), Color(0xFF282828)),
-                          containerBtn('%', Color(0xFFFAFAFA), Color(0xFF282828)),
-                          containerBtn('/', Color(0xFFFAFAFA), Color(0xFF3868CE)),
-                        ],
-                      ),
-
-                      Row(
-                        children: [
-                          containerBtn('7', Color(0xFF282828), Color(0xFFFAFAFA)),
-                          containerBtn('8', Color(0xFF282828), Color(0xFFFAFAFA)),
-                          containerBtn('9', Color(0xFF282828), Color(0xFFFAFAFA)),
-                          containerBtn('x', Color(0xFF282828), Color(0xFF3868CE)),
-                        ],
-                      ),
-
-                      Row(
-                        children: [
-                          containerBtn('4', Color(0xFF282828), Color(0xFFFAFAFA)),
-                          containerBtn('5', Color(0xFF282828), Color(0xFFFAFAFA)),
-                          containerBtn('6', Color(0xFF282828), Color(0xFFFAFAFA)),
-                          containerBtn('-', Color(0xFF282828), Color(0xFF3868CE)),
-                        ],
-                      ),
-
-                      Row(
-                        children: [
-                          containerBtn('1', Color(0xFF282828), Color(0xFFFAFAFA)),
-                          containerBtn('2', Color(0xFF282828), Color(0xFFFAFAFA)),
-                          containerBtn('3', Color(0xFF282828), Color(0xFFFAFAFA)),
-                          containerBtn('+', Color(0xFF282828), Color(0xFF3868CE)),
-                        ],
-                      ),
-
-                      Row(
-                        children: [
-                          containerBtn('+/-', Color(0xFF282828), Color(0xFFFAFAFA)),
-                          containerBtn('0', Color(0xFF282828), Color(0xFFFAFAFA)),
-                          containerBtn('.', Color(0xFF282828), Color(0xFFFAFAFA)),
-                          containerBtn('=', Color(0xFF282828), Color(0xFF3868CE)),
-                        ],
-                      ),
-                    ],
-                  ),
+                child: Column(
+                  children: [
+                    SizedBox(height: 15),
+                    _buildRow(["AC", "( )", "%", "/"]),
+                    _buildRow(["7", "8", "9", "x"]),
+                    _buildRow(["4", "5", "6", "-"]),
+                    _buildRow(["1", "2", "3", "+"]),
+                    _buildRow(["+/-", "0", ".", "="]),
+                  ],
                 ),
               ),
             ),
           ),
-          // Other widgets on top of the positioned container if needed.
         ],
       ),
     );
+  }
+  Widget _buildResultText(String text, double fontSize) {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Text(
+        input,
+        textAlign: TextAlign.right,
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: fontSize,
+          fontFamily: 'Mulish',
+          fontWeight: FontWeight.w400,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildResultText1(String text, double fontSize) {
+    String formattedResult;
+    try {
+      double parsedResult = double.parse(text);
+      if (parsedResult == parsedResult.round()) {
+        formattedResult = parsedResult.round().toString();
+      } else {
+        formattedResult = parsedResult.toStringAsFixed(2);
+      }
+    } catch (e) {
+      formattedResult = 'Error';
+    }
+
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Text(
+        formattedResult,
+        textAlign: TextAlign.right,
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: fontSize,
+          fontFamily: 'Mulish',
+          fontWeight: FontWeight.w400,
+        ),
+      ),
+    );
+  }
+
+
+
+  Widget _buildRow(List<String> buttons) {
+    return Row(
+      children: buttons
+          .map((text) => containerBtn(
+        text,
+        _getButtonTextColor(text),
+        _getButtonColor(text),
+      ))
+          .toList(),
+    );
+  }
+
+  Color _getButtonTextColor(String text) {
+    if (["=", "+", "-", "/"].contains(text)) {
+      return Colors.black; // Set the text color for '=', '+', '-', '/'
+    } else {
+      return Colors.white; // Set the default text color for other buttons
+    }
+  }
+
+  Color _getButtonColor(String text) {
+    if (["=", "+", "-", "/"].contains(text)) {
+      return Colors.green; // Set the color for '=', '+', '-', '/'
+    } else {
+      return Color(0xFF9B3030); // Set the default color for other buttons
+    }
   }
 
   Widget containerBtn(String text, Color txtColor, Color color) {

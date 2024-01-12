@@ -1,6 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/model/stck_detls_lst.dart';
+import 'package:untitled/widgets/widgets.dart';
 
 class CreditPayment extends StatefulWidget {
   const CreditPayment({super.key});
@@ -13,31 +14,31 @@ class _CreditPaymentState extends State<CreditPayment> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar:  AppBar(
-        elevation: 0,
-        centerTitle: true,// No elevation (no shadow)
-        backgroundColor: Color(0xFF3A67C4), // Background color
-        // backgroundColor: Color(0xFF3563C2), // Background color
-        title:  Text(
-          'Credit Payment',
-          style: TextStyle(
-            color: Color(0xFFFEFEFE),
-            // Text color
-            fontSize: 20,
-            fontFamily: 'Mulish',
-            fontWeight: FontWeight.w700,
-            height: 0,
-          ),
-        ),
-
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Icon(
-            Icons.arrow_back_ios, // Back button icon
-            color: Colors.white, // Icon color
-          ),
-        ),
-      ),
+      // appBar:  AppBar(
+      //   elevation: 0,
+      //   centerTitle: true,// No elevation (no shadow)
+      //   backgroundColor: Color(0xFF3A67C4), // Background color
+      //   // backgroundColor: Color(0xFF3563C2), // Background color
+      //   title:  Text(
+      //     'Credit Payment',
+      //     style: TextStyle(
+      //       color: Color(0xFFFEFEFE),
+      //       // Text color
+      //       fontSize: 20,
+      //       fontFamily: 'Mulish',
+      //       fontWeight: FontWeight.w700,
+      //       height: 0,
+      //     ),
+      //   ),
+      //
+      //   leading: Padding(
+      //     padding: const EdgeInsets.all(8.0),
+      //     child: Icon(
+      //       Icons.arrow_back_ios, // Back button icon
+      //       color: Colors.white, // Icon color
+      //     ),
+      //   ),
+      // ),
       body:  Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -63,41 +64,59 @@ class _CreditPaymentState extends State<CreditPayment> {
                 ),
               ),
               Positioned(
+                top: 42,
+                right: 0,
+                left: 0,
+                child: appBar(context,"Credit Payment",false),
+              ),
+              Positioned(
                 left: 14,
-                top: 62,
+                top: 82,
                 right: 16,
-                child: Container(
-                  width: 388,
-                  height: 299,
-                  decoration: ShapeDecoration(
-                    color: Color(0xFFFEFEFE),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  child: Container(
+                    width: 396,
+                    height: 304,
+                    decoration: ShapeDecoration(
+                      color: Color(0xFFFEFEFE),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
-                  ),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20.0),
-                        child: SizedBox(
-                          width: 354,
-                          child: Text(
-                            'Memo ID: 415SADC',
-                            textAlign: TextAlign.right,
-                            style: TextStyle(
-                              color: Color(0xFF282828),
-                              fontSize: 16,
-                              fontFamily: 'Mulish',
-                              fontWeight: FontWeight.w700,
-                              height: 0,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0,right: 20),
+                          child: SizedBox(
+                            width: 354,
+                            child: Text(
+                              'Memo ID: 415SADC',
+                              textAlign: TextAlign.right,
+                              style: TextStyle(
+                                color: Color(0xFF282828),
+                                fontSize: 16,
+                                fontFamily: 'Mulish',
+                                fontWeight: FontWeight.w700,
+                                height: 0,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      cashContainer1("*", "Customer name", true),
-                      cashContainer1("*", "Customer name", true),
-                      cashContainer1("*", "Customer name", false),
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.only(left:8.0,right: 8.0,top: 15.0),
+                          child: cashContainer1("*", "Customer name", true),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left:8.0,right: 8.0),
+                          child: cashContainer1("*", "Phono no.", true),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left:8.0,right: 8.0),
+                          child: cashContainer1("*", "Address", false),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -156,41 +175,6 @@ class _CreditPaymentState extends State<CreditPayment> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: DottedBorder(
-                          color: Color(0xFF3868CE),
-                          // Border color
-                          strokeWidth: 2,
-                          // Border width
-                          borderType: BorderType.RRect,
-                          // Rounded rectangle border
-                          radius: Radius.circular(999),
-                          // Border radius
-                          // padding: EdgeInsets.all(5), // Padding around the border
-                          child: Container(
-                            width: 396, // Container width
-                            height: 56, // Container height
-                            decoration: BoxDecoration(
-                              color: Color(0xFFF6F6F6),
-                              borderRadius: BorderRadius.circular(
-                                  999), // Border radius
-                            ), // Background color
-                            child: Center(
-                                child: Text(
-                                  'Edit',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Color(0xFF3868CE),
-                                    fontSize: 16,
-                                    fontFamily: 'Mulish',
-                                    fontWeight: FontWeight.w700,
-                                    height: 0,
-                                  ),
-                                )),
-                          ),
-                        ),
-                      )
                     ],
                   ),
                 ),
@@ -410,7 +394,7 @@ class ContainerWithScreenSize extends StatelessWidget {
                         SizedBox(
                           height: 15,
                         ),
-                        // horizontalLine()
+                        Divider(height: 1,)
                       ],
                     ),
                   );
@@ -617,12 +601,13 @@ Widget cashContainer1(String strText,String hints,bool w ) {
                   color:  Color(0xFF939598),
                   fontSize: 16,
                   fontFamily: 'Mulish',
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w700,
                   height: 0,
                 ),
                 decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintText: 'Customer name',
+                    hintText: hints,
+
                     hintStyle: TextStyle(color: Color(0xFF939598) )
                 ),
               ),
