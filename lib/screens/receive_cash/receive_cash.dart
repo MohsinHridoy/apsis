@@ -118,7 +118,7 @@ class _ReceiveCashState extends State<ReceiveCash> {
                                 ),
                                 child: Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Cash',
@@ -143,7 +143,8 @@ class _ReceiveCashState extends State<ReceiveCash> {
                                               BorderRadius.circular(5),
                                         ),
                                       ),
-                                      child: Center(
+                                      child: Align(
+                                        alignment: Alignment.centerRight,
                                         child: Text(
                                           '1000.0',
                                           textAlign: TextAlign.right,
@@ -172,7 +173,7 @@ class _ReceiveCashState extends State<ReceiveCash> {
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Credit',
@@ -496,7 +497,7 @@ class _ReceiveCashState extends State<ReceiveCash> {
                       ),
                     ),
                     SizedBox(
-                      width: 90,
+                      width: MediaQuery.of(context).size.width * 0.17,
                     ),
                     Text(
                       '৳ 16,547.00',

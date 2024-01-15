@@ -51,6 +51,96 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
       productAmount: 125.00,
       is_Added: false,
     ),
+    ProductList(
+      title: 'Product 1',
+      productId: '123456',
+      quantity: 5,
+      stknmbr: '150 ml',
+      unitprice: 25,
+      image: 'assets/images/product1.png',
+      productAmount: 125.00,
+      is_Added: false,
+    ),
+    ProductList(
+      title: 'Product 1',
+      productId: '123456',
+      quantity: 5,
+      stknmbr: '150 ml',
+      unitprice: 25,
+      image: 'assets/images/product1.png',
+      productAmount: 125.00,
+      is_Added: false,
+    ),
+    ProductList(
+      title: 'Product 1',
+      productId: '123456',
+      quantity: 5,
+      stknmbr: '150 ml',
+      unitprice: 25,
+      image: 'assets/images/product1.png',
+      productAmount: 125.00,
+      is_Added: false,
+    ),
+    ProductList(
+      title: 'Product 1',
+      productId: '123456',
+      quantity: 5,
+      stknmbr: '150 ml',
+      unitprice: 25,
+      image: 'assets/images/product1.png',
+      productAmount: 125.00,
+      is_Added: false,
+    ),
+    ProductList(
+      title: 'Product 1',
+      productId: '123456',
+      quantity: 5,
+      stknmbr: '150 ml',
+      unitprice: 25,
+      image: 'assets/images/product1.png',
+      productAmount: 125.00,
+      is_Added: false,
+    ),
+    ProductList(
+      title: 'Product 1',
+      productId: '123456',
+      quantity: 5,
+      stknmbr: '150 ml',
+      unitprice: 25,
+      image: 'assets/images/product1.png',
+      productAmount: 125.00,
+      is_Added: false,
+    ),
+    ProductList(
+      title: 'Product 1',
+      productId: '123456',
+      quantity: 5,
+      stknmbr: '150 ml',
+      unitprice: 25,
+      image: 'assets/images/product1.png',
+      productAmount: 125.00,
+      is_Added: false,
+    ),
+    ProductList(
+      title: 'Product 1',
+      productId: '123456',
+      quantity: 5,
+      stknmbr: '150 ml',
+      unitprice: 25,
+      image: 'assets/images/product1.png',
+      productAmount: 125.00,
+      is_Added: false,
+    ),
+    ProductList(
+      title: 'Product 1',
+      productId: '123456',
+      quantity: 5,
+      stknmbr: '150 ml',
+      unitprice: 25,
+      image: 'assets/images/product1.png',
+      productAmount: 125.00,
+      is_Added: false,
+    ),
     // Add more ProductList items as needed
   ];
 
@@ -69,194 +159,42 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
         ),
         child: Stack(
           children: [
-            Positioned(
-              // left: 124,
-              top: 42,
-              child: appBar(),
-            ),
-            Positioned(top: 90, left: 0, right: 0, child: customerDetails()),
+            SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                appBar(),
 
-            Positioned(
-              top: 350,
-              child: Container(
-                  height: productListItems.length *
-                      (heightOfSingleItem + verticalSpacingBetweenItems),
-                  // width: 388,
-                  decoration: ShapeDecoration(
-                    color: Colors.red,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: ShapeDecoration(
-                          color: Color(0xFF3868CE),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(5),
-                              topRight: Radius.circular(5),
+                customerDetails(),
+
+                Container(
+                    // height: productListItems.length *
+                    //     (heightOfSingleItem + verticalSpacingBetweenItems),
+                    // width: 388,
+                    decoration: ShapeDecoration(
+                      color: Colors.red,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5)),
+                    ),
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 50,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: ShapeDecoration(
+                            color: Color(0xFF3868CE),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(5),
+                                topRight: Radius.circular(5),
+                              ),
                             ),
                           ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Product',
-                              style: TextStyle(
-                                color: Color(0xFFFEFEFE),
-                                fontSize: 16,
-                                fontFamily: 'Mulish',
-                                fontWeight: FontWeight.w700,
-                                height: 0,
-                              ),
-                            ),
-                            Text(
-                              'Amount',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Color(0xFFFEFEFE),
-                                fontSize: 16,
-                                fontFamily: 'Mulish',
-                                fontWeight: FontWeight.w700,
-                                height: 0,
-                              ),
-                            ),
-                            Text(
-                              'Price',
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                color: Color(0xFFFEFEFE),
-                                fontSize: 16,
-                                fontFamily: 'Mulish',
-                                fontWeight: FontWeight.w700,
-                                height: 0,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: productListItems.length *
-                            (heightOfSingleItem + verticalSpacingBetweenItems),
-                        width: MediaQuery.of(context).size.width,
-                        color: Colors.white,
-                        child: ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: productListItems.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                              padding: EdgeInsets.only(
-                                  left: 8.0, right: 8.0, bottom: 8.0, top: 5),
-                              // decoration: BoxDecoration(
-                              //   border: Border.all(color: Colors.grey),
-                              //   borderRadius: BorderRadius.circular(8.0),
-                              // ),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    // crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Container(
-                                        width: 97,
-                                        child: Column(
-                                          children: [
-                                            // Text(
-                                            //   " ${items[index].title}",
-                                            //   style: TextStyle(fontSize: 18),
-                                            // ),
-                                            // Text(
-                                            //   "${items[index].subtitle}",
-                                            //   style: TextStyle(fontSize: 14),
-                                            // ),
-                                            stkItm1(
-                                                productListItems[index].title,
-                                                Color(0xFF282828),
-                                                16),
-                                            stkItm1(
-                                                productListItems[index]
-                                                    .stknmbr
-                                                    .toString(),
-                                                Color(0xFF7A7A7A),
-                                                14),
-                                            // stkItm1(
-                                            //     '(In Stk: 100)', Color(0xFF2E7229), 12),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        width: 31,
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(1.0),
-                                              child: Text(
-                                                productListItems[index]
-                                                    .quantity
-                                                    .toString(),
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  color: Color(0xFF282828),
-                                                  fontSize: 16,
-                                                  fontFamily: 'Mulish',
-                                                  fontWeight: FontWeight.w500,
-                                                  height: 0,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        width: 60,
-                                        child: Text(
-                                          '৳${(productListItems[index].quantity * productListItems[index].unitprice).toString()}',
-                                          textAlign: TextAlign.right,
-                                          style: TextStyle(
-                                            color: Color(0xFF282828),
-                                            fontSize: 16,
-                                            fontFamily: 'Mulish',
-                                            fontWeight: FontWeight.w500,
-                                            height: 0,
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  Divider(
-                                    height: 1,
-                                  )
-                                  // horizontalLine()
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                      Container(
-                        width: 369,
-                        height: 37,
-                        decoration: ShapeDecoration(
-                          color: Color(0xFF3868CE),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5)),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Total',
+                                'Product',
                                 style: TextStyle(
                                   color: Color(0xFFFEFEFE),
                                   fontSize: 16,
@@ -266,7 +204,18 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
                                 ),
                               ),
                               Text(
-                                "190",
+                                'Amount',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Color(0xFFFEFEFE),
+                                  fontSize: 16,
+                                  fontFamily: 'Mulish',
+                                  fontWeight: FontWeight.w700,
+                                  height: 0,
+                                ),
+                              ),
+                              Text(
+                                'Price',
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
                                   color: Color(0xFFFEFEFE),
@@ -279,32 +228,177 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
                             ],
                           ),
                         ),
-                      ),
-                      Container(
-                        width: 369,
-                        height: 67,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Cash',
-                                style: TextStyle(
-                                  color: Color(0xFF282828),
-                                  fontSize: 16,
-                                  fontFamily: 'Mulish',
-                                  fontWeight: FontWeight.w700,
-                                  height: 0,
+                        Container(
+                          height: productListItems.length *
+                              (heightOfSingleItem +
+                                  verticalSpacingBetweenItems),
+                          width: MediaQuery.of(context).size.width,
+                          color: Colors.white,
+                          child: ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: productListItems.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Container(
+                                padding: EdgeInsets.only(
+                                    left: 8.0, right: 8.0, bottom: 8.0, top: 5),
+                                // decoration: BoxDecoration(
+                                //   border: Border.all(color: Colors.grey),
+                                //   borderRadius: BorderRadius.circular(8.0),
+                                // ),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      // crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                          width: 97,
+                                          child: Column(
+                                            children: [
+                                              // Text(
+                                              //   " ${items[index].title}",
+                                              //   style: TextStyle(fontSize: 18),
+                                              // ),
+                                              // Text(
+                                              //   "${items[index].subtitle}",
+                                              //   style: TextStyle(fontSize: 14),
+                                              // ),
+                                              stkItm1(
+                                                  productListItems[index].title,
+                                                  Color(0xFF282828),
+                                                  16),
+                                              stkItm1(
+                                                  productListItems[index]
+                                                      .stknmbr
+                                                      .toString(),
+                                                  Color(0xFF7A7A7A),
+                                                  14),
+                                              // stkItm1(
+                                              //     '(In Stk: 100)', Color(0xFF2E7229), 12),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          width: 31,
+                                          child: Row(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(1.0),
+                                                child: Text(
+                                                  productListItems[index]
+                                                      .quantity
+                                                      .toString(),
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    color: Color(0xFF282828),
+                                                    fontSize: 16,
+                                                    fontFamily: 'Mulish',
+                                                    fontWeight: FontWeight.w500,
+                                                    height: 0,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          width: 60,
+                                          child: Text(
+                                            '৳${(productListItems[index].quantity * productListItems[index].unitprice).toString()}',
+                                            textAlign: TextAlign.right,
+                                            style: TextStyle(
+                                              color: Color(0xFF282828),
+                                              fontSize: 16,
+                                              fontFamily: 'Mulish',
+                                              fontWeight: FontWeight.w500,
+                                              height: 0,
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Divider(
+                                      height: 1,
+                                    )
+                                    // horizontalLine()
+                                  ],
                                 ),
-                              ),
-                            ],
+                              );
+                            },
                           ),
                         ),
-                      ),
-                    ],
-                  )),
+                        Container(
+                          width: 369,
+                          height: 37,
+                          decoration: ShapeDecoration(
+                            color: Color(0xFF3868CE),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5)),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Total',
+                                  style: TextStyle(
+                                    color: Color(0xFFFEFEFE),
+                                    fontSize: 16,
+                                    fontFamily: 'Mulish',
+                                    fontWeight: FontWeight.w700,
+                                    height: 0,
+                                  ),
+                                ),
+                                Text(
+                                  "190",
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                    color: Color(0xFFFEFEFE),
+                                    fontSize: 16,
+                                    fontFamily: 'Mulish',
+                                    fontWeight: FontWeight.w700,
+                                    height: 0,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 369,
+                          height: 67,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Cash',
+                                  style: TextStyle(
+                                    color: Color(0xFF282828),
+                                    fontSize: 16,
+                                    fontFamily: 'Mulish',
+                                    fontWeight: FontWeight.w700,
+                                    height: 0,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
+
+
+              ],
             ),
+          ),
             Positioned(
               bottom: 40,
               right: 10,
@@ -350,15 +444,20 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
                 ),
               ),
             )
+
           ],
         ),
       ),
     );
   }
+
   Widget customerDetails() {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 500,
+      height: 240,
+/*
+      color: Colors.red,
+*/
       child: Column(
         children: [
           // SizedBox(height: 15),
@@ -449,7 +548,7 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
 
                                   overflow: TextOverflow.ellipsis,
                                   maxLines:
-                                  4, // Adjust the number of lines based on your needs
+                                      4, // Adjust the number of lines based on your needs
                                 ),
                               )
                             ],
@@ -495,14 +594,13 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
                               padding: const EdgeInsets.only(
                                   right: 12.0, top: 3, left: 1),
                               child: GestureDetector(
-                                onTap: (){
+                                onTap: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => Alert(),
                                     ),
                                   );
-
                                 },
                                 child: Container(
                                   width: 109,
@@ -549,7 +647,7 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
           ),
           SizedBox(height: 15),
           Padding(
-            padding: const EdgeInsets.only(left: 15.0,right:15),
+            padding: const EdgeInsets.only(left: 15.0, right: 15),
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: 56,
@@ -581,7 +679,7 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
                                 BlendMode.srcATop,
                               ),
                               child:
-                              Image.asset("assets/icons/personalcard1.png"),
+                                  Image.asset("assets/icons/personalcard1.png"),
                             ),
                           ),
                         )),
@@ -629,14 +727,14 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
       throw 'Could not launch $phoneNumber';
     }
   }
+
   Widget appBar() {
     return Container(
-      // width: MediaQuery.of(context).size.width,
+      width: MediaQuery.of(context).size.width,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          // Center the children horizontally
+          mainAxisAlignment: MainAxisAlignment.start, // Align the children to the start (left) of the row
           children: [
             GestureDetector(
               onTap: () {
@@ -648,24 +746,24 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/icons/left_arrow.png'),
-                    // Replace 'your_image.png' with the actual path to your asset image
-                    fit: BoxFit.cover, // Adjust the fit as needed
+                    fit: BoxFit.cover,
                   ),
-                  // You can also add other decoration properties here, such as borderRadius, border, color, etc.
                 ),
               ),
             ),
-            SizedBox(width: 98),
-            // Add a SizedBox for some space between icon and text
-            Text(
-              'Abdul Miah',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Color(0xFFFEFEFE),
-                fontSize: 20,
-                fontFamily: 'Mulish',
-                fontWeight: FontWeight.w700,
-                height: 0,
+            Expanded(
+              child: Center(
+                child: Text(
+                  'Abdul Miah',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color(0xFFFEFEFE),
+                    fontSize: 20,
+                    fontFamily: 'Mulish',
+                    fontWeight: FontWeight.w700,
+                    height: 0,
+                  ),
+                ),
               ),
             ),
           ],

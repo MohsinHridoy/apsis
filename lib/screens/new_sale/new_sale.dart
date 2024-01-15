@@ -20,7 +20,7 @@ class NewSale extends StatefulWidget {
 
 class _NewSaleState extends State<NewSale> {
   double heightOfSingleItem =
-      70.0; // Change the value based on your item height
+      65.0; // Change the value based on your item height
   double verticalSpacingBetweenItems = 8.0;
   final ScrollController _scrollController = ScrollController();
   TextEditingController priceController = TextEditingController();
@@ -154,7 +154,7 @@ class _NewSaleState extends State<NewSale> {
         productAmount: 125.00,
         is_Added: false),
     ProductList(
-        title: 'Potato Chips',
+        title: 'Banana Chips',
         productId: '789012',
         quantity: 10,
         stknmbr: 'N/A',
@@ -172,7 +172,7 @@ class _NewSaleState extends State<NewSale> {
         productAmount: 150.00,
         is_Added: false),
     ProductList(
-        title: 'Potato Chips',
+        title: 'Mango Chips',
         productId: '789012',
         quantity: 10,
         stknmbr: '250 ml',
@@ -181,7 +181,7 @@ class _NewSaleState extends State<NewSale> {
         productAmount: 150.00,
         is_Added: false),
     ProductList(
-        title: 'Potato Chips',
+        title: 'Rice Chips',
         productId: '789012',
         quantity: 10,
         stknmbr: '250 ml',
@@ -199,7 +199,7 @@ class _NewSaleState extends State<NewSale> {
         productAmount: 150.00,
         is_Added: false),
     ProductList(
-        title: 'Potato Chips',
+        title: 'Frech Chips',
         productId: '789012',
         quantity: 10,
         stknmbr: '200 ml',
@@ -230,11 +230,11 @@ class _NewSaleState extends State<NewSale> {
   void updateTotalPrice(ProductList selectedItem, int index) {
     setState(() {
       // Calculate the total price based on the selected item
-      double totalPrice =
-          (selectedItem.quantity * selectedItem.unitprice) as double;
+      double totalPrice = (selectedItem.quantity * selectedItem.unitprice).toDouble();
 
       // Update the text in the corresponding controller
       controllers[index].text = '৳${totalPrice.toString()}';
+      print(totalPrice);
 
       // Update the quantity in the selected item
       selectedItem.quantity = int.parse(controllers[index].text);
@@ -392,7 +392,7 @@ class _NewSaleState extends State<NewSale> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                          left: 22.0, right: 22.0, top: 8.0, bottom: 8.0),
+                          left: 15.0, right: 15.0, top: 8.0, bottom: 8.0),
                       child: Container(
                         width: 388,
                         height: 50,
@@ -454,7 +454,7 @@ class _NewSaleState extends State<NewSale> {
               ),
 
               Padding(
-                padding: const EdgeInsets.only(left: 22.0, right: 22),
+                padding: const EdgeInsets.only(left: 15.0, right: 15),
                 child: Container(
                   width: 388,
                   height: 50,
@@ -513,7 +513,7 @@ class _NewSaleState extends State<NewSale> {
               //
               Flexible(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                   child: SingleChildScrollView(
                     child: Container(
                       width: MediaQuery.of(context).size.width,
@@ -522,10 +522,11 @@ class _NewSaleState extends State<NewSale> {
                             borderRadius: BorderRadius.circular(5)),
                       ),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Padding(
                             padding:
-                                const EdgeInsets.only(left: 8.0, right: 8.0),
+                                const EdgeInsets.only(left: 8.0, right: 8.0,),
                             child: Container(
                               color: Colors.white,
                               height: items.length *

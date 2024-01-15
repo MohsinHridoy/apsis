@@ -142,7 +142,7 @@ class _CustomerListState extends State<CustomerList> {
 
             // Top container (Second half)
             Positioned(
-              top: MediaQuery.of(context).size.height / 2.9,
+              top: MediaQuery.of(context).size.height / 3.3,
               left: 0,
               right: 0,
               bottom: 0,
