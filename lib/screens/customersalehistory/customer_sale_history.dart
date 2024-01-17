@@ -320,7 +320,7 @@ class _CustomerSaleHistoryState extends State<CustomerSaleHistory> {
 
                                   overflow: TextOverflow.ellipsis,
                                   maxLines:
-                                      4, // Adjust the number of lines based on your needs
+                                  4, // Adjust the number of lines based on your needs
                                 ),
                               )
                             ],
@@ -373,7 +373,6 @@ class _CustomerSaleHistoryState extends State<CustomerSaleHistory> {
                                       builder: (context) => Alert(),
                                     ),
                                   );
-
                                 },
                                 child: Container(
                                   width: 109,
@@ -420,7 +419,7 @@ class _CustomerSaleHistoryState extends State<CustomerSaleHistory> {
           ),
           SizedBox(height: 15),
           Padding(
-            padding: const EdgeInsets.only(left: 15.0,right:15),
+            padding: const EdgeInsets.only(left: 15.0, right: 15),
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: 56,
@@ -452,7 +451,7 @@ class _CustomerSaleHistoryState extends State<CustomerSaleHistory> {
                                 BlendMode.srcATop,
                               ),
                               child:
-                                  Image.asset("assets/icons/personalcard1.png"),
+                              Image.asset("assets/icons/personalcard1.png"),
                             ),
                           ),
                         )),
@@ -470,7 +469,7 @@ class _CustomerSaleHistoryState extends State<CustomerSaleHistory> {
                       ),
                     ),
                     SizedBox(
-                      width: 90,
+                      width: MediaQuery.of(context).size.width * 0.17,
                     ),
                     Text(
                       '৳ 16,547.00',

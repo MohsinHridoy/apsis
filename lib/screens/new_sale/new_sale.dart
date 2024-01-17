@@ -468,7 +468,7 @@ class _NewSaleState extends State<NewSale> {
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.only(left: 25.0,right: 25),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -547,8 +547,8 @@ class _NewSaleState extends State<NewSale> {
 
                                     child: Container(
                                       padding: EdgeInsets.only(
-                                          left: 8.0,
-                                          right: 8.0,
+                                          left: 15.0,
+                                          right: 15.0,
                                           bottom: 8.0,
                                           top: 1),
                                       child: Column(

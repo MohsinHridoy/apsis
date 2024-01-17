@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:untitled/model/peoductList/productlist.dart';
 import 'package:untitled/model/stck_detls_lst.dart';
 import 'package:untitled/screens/customerlist/customer_list.dart';
+import 'package:untitled/screens/new_sale/new_sale.dart';
 import 'package:untitled/widgets/widgets.dart';
 
 class CashPayment extends StatefulWidget {
@@ -214,36 +215,46 @@ class _CashPaymentState extends State<CashPayment> {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: DottedBorder(
-                          color: Color(0xFF3868CE),
-                          // Border color
-                          strokeWidth: 1,
-                          // Border width
-                          borderType: BorderType.RRect,
-                          // Rounded rectangle border
-                          radius: Radius.circular(999),
-                          // Border radius
-                          // padding: EdgeInsets.all(5), // Padding around the border
-                          child: Container(
-                            width: 396, // Container width
-                            height: 56, // Container height
-                            decoration: BoxDecoration(
-                              color: Color(0xFFF6F6F6),
-                              borderRadius:
-                                  BorderRadius.circular(999), // Border radius
-                            ), // Background color
-                            child: Center(
-                                child: Text(
-                              'Edit',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Color(0xFF3868CE),
-                                fontSize: 16,
-                                fontFamily: 'Mulish',
-                                fontWeight: FontWeight.w700,
-                                height: 0,
+                        child: GestureDetector(
+                          onTap: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => NewSale(),
                               ),
-                            )),
+                            );
+                          },
+                          child: DottedBorder(
+                            color: Color(0xFF3868CE),
+                            // Border color
+                            strokeWidth: 1,
+                            // Border width
+                            borderType: BorderType.RRect,
+                            // Rounded rectangle border
+                            radius: Radius.circular(999),
+                            // Border radius
+                            // padding: EdgeInsets.all(5), // Padding around the border
+                            child: Container(
+                              width: 396, // Container width
+                              height: 56, // Container height
+                              decoration: BoxDecoration(
+                                color: Color(0xFFF6F6F6),
+                                borderRadius:
+                                    BorderRadius.circular(999), // Border radius
+                              ), // Background color
+                              child: Center(
+                                  child: Text(
+                                'Edit',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Color(0xFF3868CE),
+                                  fontSize: 16,
+                                  fontFamily: 'Mulish',
+                                  fontWeight: FontWeight.w700,
+                                  height: 0,
+                                ),
+                              )),
+                            ),
                           ),
                         ),
                       )

@@ -392,7 +392,7 @@ class _AlertState extends State<Alert> {
                       ),
                     ),
                     SizedBox(
-                      width: 90,
+                      width: MediaQuery.of(context).size.width * 0.17,
                     ),
                     Text(
                       '৳ 16,547.00',

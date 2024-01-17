@@ -454,10 +454,7 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
   Widget customerDetails() {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 240,
-/*
-      color: Colors.red,
-*/
+      height: 500,
       child: Column(
         children: [
           // SizedBox(height: 15),
@@ -548,7 +545,7 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
 
                                   overflow: TextOverflow.ellipsis,
                                   maxLines:
-                                      4, // Adjust the number of lines based on your needs
+                                  4, // Adjust the number of lines based on your needs
                                 ),
                               )
                             ],
@@ -593,46 +590,36 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
                             Padding(
                               padding: const EdgeInsets.only(
                                   right: 12.0, top: 3, left: 1),
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Alert(),
+                              child: Container(
+                                width: 109,
+                                height: 22,
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFDFF6FF),
+                                  // color: Colors.red,
+                                  border: Border.all(
+                                      width: 0.50, color: Color(0xFF88CADA)),
+                                  borderRadius: BorderRadius.circular(2),
+                                ),
+                                child: Row(
+                                  children: [
+                                    SizedBox(width: 10),
+                                    // Icon(Icons.sms_rounded, size: 11),
+                                    Image.asset(
+                                      "assets/icons/mail.png",
+                                      width: 15,
+                                      height: 15,
                                     ),
-                                  );
-                                },
-                                child: Container(
-                                  width: 109,
-                                  height: 22,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFFDFF6FF),
-                                    // color: Colors.red,
-                                    border: Border.all(
-                                        width: 0.50, color: Color(0xFF88CADA)),
-                                    borderRadius: BorderRadius.circular(2),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      SizedBox(width: 10),
-                                      // Icon(Icons.sms_rounded, size: 11),
-                                      Image.asset(
-                                        "assets/icons/mail.png",
-                                        width: 15,
-                                        height: 15,
+                                    SizedBox(width: 3),
+                                    Text(
+                                      'Send alert',
+                                      style: TextStyle(
+                                        color: Color(0xFF282828),
+                                        fontSize: 12,
+                                        fontFamily: 'Mulish',
+                                        fontWeight: FontWeight.w400,
                                       ),
-                                      SizedBox(width: 3),
-                                      Text(
-                                        'Send alert',
-                                        style: TextStyle(
-                                          color: Color(0xFF282828),
-                                          fontSize: 12,
-                                          fontFamily: 'Mulish',
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -679,7 +666,7 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
                                 BlendMode.srcATop,
                               ),
                               child:
-                                  Image.asset("assets/icons/personalcard1.png"),
+                              Image.asset("assets/icons/personalcard1.png"),
                             ),
                           ),
                         )),
@@ -697,7 +684,7 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
                       ),
                     ),
                     SizedBox(
-                      width: 90,
+                      width: MediaQuery.of(context).size.width * 0.17,
                     ),
                     Text(
                       '৳ 16,547.00',
