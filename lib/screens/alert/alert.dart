@@ -32,7 +32,7 @@ class _AlertState extends State<Alert> {
         child: Stack(
           children: [
             Positioned(
-              // left: 124,
+              left: 8,
               top: 42,
               child: Container(
                 // width: MediaQuery.of(context).size.width,
@@ -77,12 +77,12 @@ class _AlertState extends State<Alert> {
                 ),
               ),
             ),
-            Positioned(top: 90, left: 0, right: 0, child: customerDetails()),
+            Positioned(top: 120, left: 10, right: 10, child: customerDetails()),
 
 
 
             Positioned(
-              top: 290,
+              top: 360,
               left: 8,
               right: 8,
               bottom: 0,
@@ -153,7 +153,7 @@ class _AlertState extends State<Alert> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10,),
+
 
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -241,7 +241,7 @@ class _AlertState extends State<Alert> {
         children: [
           // SizedBox(height: 15),
           Padding(
-            padding: const EdgeInsets.only(left: 15.0, right: 15.00),
+            padding: const EdgeInsets.only(left: 10.0, right: 10.00),
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: 138,
@@ -276,7 +276,7 @@ class _AlertState extends State<Alert> {
                       child: Container(
                         height: 138,
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 10.0, bottom: 8),
+                          padding: const EdgeInsets.only(top: 20.0, bottom: 3),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -342,7 +342,7 @@ class _AlertState extends State<Alert> {
           ),
           SizedBox(height: 15),
           Padding(
-            padding: const EdgeInsets.only(left: 15.0,right:15),
+            padding: const EdgeInsets.only(left: 8.0, right: 8),
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: 56,
@@ -392,7 +392,7 @@ class _AlertState extends State<Alert> {
                       ),
                     ),
                     SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.17,
+                      width: MediaQuery.of(context).size.width * 0.13,
                     ),
                     Text(
                       '৳ 16,547.00',

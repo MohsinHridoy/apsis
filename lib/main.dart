@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:untitled/providers/newsell/newSellProvider.dart';
 import 'package:untitled/providers/registrationprovider.dart';
 
 import 'package:untitled/screens/addnewcustomer/new_customer.dart';
@@ -44,6 +45,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<RegistrationProvider>(
           create: (_) => RegistrationProvider(),
           child: Register(),
+        ),
+        ChangeNotifierProvider<NewSellProvider>(
+          create: (_) => NewSellProvider(),
+          child: NewSale(),
         ),
       ],
       child: MaterialApp(

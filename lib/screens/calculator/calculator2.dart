@@ -24,10 +24,16 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       //   title: Text('Simple Calculator'),
       // ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(0.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15.0,top: 45),
+                  child: Image.asset("assets/icons/right_arrow.png",width: 25,height: 25,),
+                )),
             Expanded(
               child: ListView(
                 reverse: true, // Scroll to the bottom initially
@@ -35,26 +41,27 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                   Stack(
                     alignment: Alignment.centerRight,
                     children: [
-                      TextField(
-                        controller: expressionController,
-                        keyboardType: TextInputType.text,
-                        textAlign: TextAlign.right,
-                        readOnly: true,
-                        maxLines: null,
-
-                        decoration: InputDecoration(
-                          // labelText: 'Enter Expression',
-                          border: InputBorder.none, // Remove underline
-
+                      Padding(
+                        padding: const EdgeInsets.only(left: 0.0),
+                        child: TextField(
+                          controller: expressionController,
+                          keyboardType: TextInputType.text,
+                          textAlign: TextAlign.right,
+                          readOnly: true,
+                          maxLines: null,
+                          decoration: InputDecoration(
+                            // labelText: 'Enter Expression',
+                            border: InputBorder.none, // Remove underline
+                          ),
+                          style: TextStyle(color: Colors.white),
+                          onChanged: (value) {
+                            setState(
+                                () {}); // Trigger a rebuild when the text changes
+                          },
                         ),
-                        style: TextStyle(color: Colors.white),
-                        onChanged: (value) {
-                          setState(
-                              () {}); // Trigger a rebuild when the text changes
-                        },
                       ),
                       Positioned(
-                        right: 10.0,
+                        right: 40.0,
                         child: buildTextWithStyle(),
                       ),
                     ],
@@ -65,32 +72,39 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             SizedBox(height: 16.0),
             Visibility(
                 visible: isResult,
-                child: Align(alignment:Alignment.centerRight,child: Container(height: 40, child: Text(result,style: TextStyle(fontSize: 22),)))),
-
+                child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 40.0),
+                      child: Container(
+                          height: 40,
+                          child: Text(
+                            result,
+                            style: TextStyle(fontSize: 22),
+                          )),
+                    ))),
             Container(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(
+                    left: 40.0, top: 18, right: 40, bottom: 28),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      height:24,
-                      width:24,
+                      height: 24,
+                      width: 24,
                       child: Image.asset("assets/icons/history_icon.png"),
-
                     ),
-                    GestureDetector (
-                      onTap:(){
+                    GestureDetector(
+                      onTap: () {
                         setState(() {
                           clearLast();
-
                         });
                       },
                       child: Container(
-                        height:24,
-                        width:24,
+                        height: 24,
+                        width: 24,
                         child: Image.asset("assets/icons/delete_icon.png"),
-
                       ),
                     ),
                   ],
@@ -101,7 +115,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               alignment: Alignment.bottomCenter,
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                height: 450.11,
+                height: 480.11,
                 decoration: ShapeDecoration(
                   color: Color(0xFFF0EFEF),
                   shape: RoundedRectangleBorder(
@@ -114,7 +128,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
+                      padding:
+                          const EdgeInsets.only(top: 55.0, left: 20, right: 20),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -130,7 +145,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
+                      padding:
+                          const EdgeInsets.only(top: 15.0, left: 20, right: 20),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -146,7 +162,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
+                      padding:
+                          const EdgeInsets.only(top: 15.0, left: 20, right: 20),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -161,7 +178,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
+                      padding:
+                          const EdgeInsets.only(top: 20.0, left: 20, right: 20),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -186,7 +204,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                     //   ],
                     // ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
+                      padding:
+                          const EdgeInsets.only(top: 15.0, left: 20, right: 20),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -232,10 +251,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         setState(() {});
       },
       child: Padding(
-        padding: const EdgeInsets.only(left: 3.0, top: 3),
+        padding: const EdgeInsets.only(left: 0.0, top: 0),
         child: Container(
-          width: 76.82,
-          height: 76.82,
+          width: 66.82,
+          height: 66.82,
           decoration: ShapeDecoration(
             color: color,
             shape: RoundedRectangleBorder(
@@ -324,15 +343,15 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         setState(() {});
       },
       child: Container(
-        width: 76.82,
-        height: 76.82,
+        width: 66.82,
+        height: 66.82,
         decoration: ShapeDecoration(
           color: Color(0xFF3868CE),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.97),
           ),
         ),
-        child: Center(child: Text(getOperatorSymbol(operator))),
+        child: Center(child: Text(getOperatorSymbol(operator),style: TextStyle(color: Colors.white,fontSize: 25),)),
       ),
     );
   }
@@ -352,17 +371,17 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     return GestureDetector(
       onTap: (calculateResult),
       child: Padding(
-        padding: const EdgeInsets.all(3.0),
+        padding: const EdgeInsets.all(0.0),
         child: Container(
-          width: 76.82,
-          height: 76.82,
+          width: 66.82,
+          height: 66.82,
           decoration: ShapeDecoration(
             color: Color(0xFF3868CE),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.97),
             ),
           ),
-          child: Center(child: Text('=')),
+          child: Center(child: Text('=',style: TextStyle(color: Colors.white,fontSize: 25),)),
         ),
       ),
     );
@@ -378,7 +397,9 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       spans.add(TextSpan(
         text: char,
         style: TextStyle(
-          color: char == '+' || char == '-'  || char == '*' || char == '/' ? plusMinusColor : Colors.black,
+          color: char == '+' || char == '-' || char == '*' || char == '/'
+              ? plusMinusColor
+              : Colors.black,
           fontSize: 20.0,
         ),
       ));
@@ -407,10 +428,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     setState(() {});
   }
 
-
-
   double evaluateExpression(String expression) {
-    List<String> operators = ['+', '-','*'];
+    List<String> operators = ['+', '-', '*'];
     String currentNumber = '';
     double result = 0.0;
     String currentOperator = '+';

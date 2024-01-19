@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/screens/alert/alert.dart';
+import 'package:untitled/screens/customersalehistory/customer_sale_history001.dart';
 import 'package:untitled/widgets/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -31,6 +32,7 @@ class _CustomerSaleHistoryState extends State<CustomerSaleHistory> {
             Positioned(
               // left: 124,
               top: 42,
+              left: 10,
               child: Container(
                 // width: MediaQuery.of(context).size.width,
                 child: Padding(
@@ -74,9 +76,9 @@ class _CustomerSaleHistoryState extends State<CustomerSaleHistory> {
                 ),
               ),
             ),
-            Positioned(top: 90, left: 0, right: 0, child: customerDetails()),
+            Positioned(top: 120, left: 10, right: 10, child: customerDetails()),
             Positioned(
-              top: 330,
+              top: 360,
               left: 0,
               right: 0,
               bottom: 0,
@@ -92,76 +94,100 @@ class _CustomerSaleHistoryState extends State<CustomerSaleHistory> {
                       itemBuilder: (BuildContext context, int index) {
                         // This is a callback function that builds each item in the list
                         // You can use the 'index' to access the data for the current item
-                        return Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(left:18.0),
-                                      child: Text(
-                                        '10-11-2023',
-                                        style: TextStyle(
-                                          color: Color(0xFF282828),
-                                          fontSize: 14,
-                                          fontFamily: 'Mulish',
-                                          fontWeight: FontWeight.w400,
-                                          height: 0,
+                        return GestureDetector(
+                          onTap: (){
+                            // Navigate to a new screen when a tap is detected
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => CustomerSaleHistory001()),
+                            );
+                          },
+                          child: Container(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 8.0, right: 8),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 25.0),
+                                        child: Text(
+                                          '10-11-2023',
+                                          style: TextStyle(
+                                            color: Color(0xFF282828),
+                                            fontSize: 14,
+                                            fontFamily: 'Mulish',
+                                            fontWeight: FontWeight.w400,
+                                            height: 0,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        children: [
-                                          Column(
-                                            children: [
-                                              Text(
-                                                '৳ 16,547.00',
-                                                textAlign: TextAlign.right,
-                                                style: TextStyle(
-                                                  color: Color(0xFFEE6161),
-                                                  fontSize: 14,
-                                                  fontFamily: 'Mulish',
-                                                  fontWeight: FontWeight.w600,
-                                                  height: 0,
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 35.0),
-                                                child: Text(
-                                                  'Credit',
-                                                  style: TextStyle(
-                                                    color: Color(0xFF7A7A7A),
-                                                    fontSize: 12,
-                                                    fontFamily: 'Mulish',
-                                                    fontWeight: FontWeight.w500,
-                                                    height: 0,
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 10.0, right: 10),
+                                        child: Row(
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
+                                                  child: Text(
+                                                    '৳ 16,547.00',
+                                                    textAlign: TextAlign.right,
+                                                    style: TextStyle(
+                                                      color: Color(0xFFEE6161),
+                                                      fontSize: 14,
+                                                      fontFamily: 'Mulish',
+                                                      fontWeight: FontWeight.w600,
+                                                      height: 0,
+                                                    ),
                                                   ),
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            width: 25,
-                                          ),
-                                          Icon(
-                                            Icons.arrow_forward_ios_outlined,
-                                            size: 15,
-                                          )
-                                        ],
+                                                Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      left: 35.0),
+                                                  child: Text(
+                                                    'Credit',
+                                                    style: TextStyle(
+                                                      color: Color(0xFF7A7A7A),
+                                                      fontSize: 12,
+                                                      fontFamily: 'Mulish',
+                                                      fontWeight: FontWeight.w500,
+                                                      height: 0,
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              width: 25,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 8.0),
+                                              child: Icon(
+                                                Icons.arrow_forward_ios_outlined,
+                                                size: 15,
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Text(
-                                    "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
-                              ],
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 8.0, right: 8),
+                                    child: customDivider(),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         );
@@ -192,8 +218,7 @@ class _CustomerSaleHistoryState extends State<CustomerSaleHistory> {
     );
   }
 
-
-  Widget cashButton(){
+  Widget cashButton() {
     return Container(
       width: 195,
       height: 56,
@@ -211,21 +236,47 @@ class _CustomerSaleHistoryState extends State<CustomerSaleHistory> {
           )
         ],
       ),
-      child: Center(
-        child: Text(
-          '+ Receive Cash',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-            fontFamily: 'Mulish',
-            fontWeight: FontWeight.w700,
-            height: 0,
+      child: Container(
+        width: 170,
+        height: 56,
+        decoration: ShapeDecoration(
+          color: Color(0xFF3868CE),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(999),
           ),
+          shadows: [
+            BoxShadow(
+              color: Color(0x59293072),
+              blurRadius: 22,
+              offset: Offset(2, 7),
+              spreadRadius: -2,
+            )
+          ],
+        ),
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children:[
+              Padding(
+                padding: const EdgeInsets.only(left: 14.0,right: 8.0),
+                child: Image.asset("assets/icons/add_cart.png",height: 20,width: 20,),
+              ),
+              Text(
+                'Receive Cash',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontFamily: 'Mulish',
+                  fontWeight: FontWeight.w700,
+                  height: 0,
+                ),
+              ),
+            ]
         ),
       ),
     );
   }
+
   Widget customerDetails() {
     return Container(
       width: MediaQuery.of(context).size.width,
@@ -234,7 +285,7 @@ class _CustomerSaleHistoryState extends State<CustomerSaleHistory> {
         children: [
           // SizedBox(height: 15),
           Padding(
-            padding: const EdgeInsets.only(left: 15.0, right: 15.00),
+            padding: const EdgeInsets.only(left: 10.0, right: 10.00),
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: 138,
@@ -269,7 +320,7 @@ class _CustomerSaleHistoryState extends State<CustomerSaleHistory> {
                       child: Container(
                         height: 138,
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 10.0, bottom: 8),
+                          padding: const EdgeInsets.only(top: 22.0, bottom: 2),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -320,7 +371,7 @@ class _CustomerSaleHistoryState extends State<CustomerSaleHistory> {
 
                                   overflow: TextOverflow.ellipsis,
                                   maxLines:
-                                  4, // Adjust the number of lines based on your needs
+                                      4, // Adjust the number of lines based on your needs
                                 ),
                               )
                             ],
@@ -331,7 +382,7 @@ class _CustomerSaleHistoryState extends State<CustomerSaleHistory> {
                     Expanded(
                       flex: 4, // 30% width
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 15.0, left: 8.0),
+                        padding: const EdgeInsets.only(top: 25.0, left: 10.0),
                         child: Column(
                           children: [
                             GestureDetector(
@@ -343,7 +394,7 @@ class _CustomerSaleHistoryState extends State<CustomerSaleHistory> {
                                   // Icon(Icons.call, size: 11),
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        left: 8.0, right: 4.0),
+                                        left: 1.0, right: 4.0),
                                     child: Image.asset(
                                         "assets/icons/call_icon.png",
                                         width: 15,
@@ -364,9 +415,9 @@ class _CustomerSaleHistoryState extends State<CustomerSaleHistory> {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(
-                                  right: 12.0, top: 3, left: 1),
+                                  right: 8.0, top: 3, left: 2),
                               child: GestureDetector(
-                                onTap: (){
+                                onTap: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -393,7 +444,7 @@ class _CustomerSaleHistoryState extends State<CustomerSaleHistory> {
                                         width: 15,
                                         height: 15,
                                       ),
-                                      SizedBox(width: 3),
+                                      SizedBox(width: 5),
                                       Text(
                                         'Send alert',
                                         style: TextStyle(
@@ -419,7 +470,7 @@ class _CustomerSaleHistoryState extends State<CustomerSaleHistory> {
           ),
           SizedBox(height: 15),
           Padding(
-            padding: const EdgeInsets.only(left: 15.0, right: 15),
+            padding: const EdgeInsets.only(left: 8.0, right: 8),
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: 56,
@@ -451,7 +502,7 @@ class _CustomerSaleHistoryState extends State<CustomerSaleHistory> {
                                 BlendMode.srcATop,
                               ),
                               child:
-                              Image.asset("assets/icons/personalcard1.png"),
+                                  Image.asset("assets/icons/personalcard1.png"),
                             ),
                           ),
                         )),

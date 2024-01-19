@@ -412,9 +412,9 @@ Widget customDivider(){
   return Container(
     margin: EdgeInsets.symmetric(vertical: 10),  // Adjust margin as needed
     child: Row(
-      children: List.generate(30, (index) {
+      children: List.generate(43, (index) {
         return Container(
-          width: 7,   // Adjust width as needed
+          width: 3,   // Adjust width as needed
           height: 0.5,   // Adjust height as needed
           color: Colors.grey,  // Adjust color as needed
           margin: EdgeInsets.symmetric(horizontal: 2),  // Adjust horizontal spacing as needed

@@ -39,14 +39,14 @@ class _ReceiveCashState extends State<ReceiveCash> {
             Positioned(
               // left: 124,
               top: 42,
+              left: 10,
               child: appBar(),
             ),
-            Positioned(top: 100, left: 0, right: 0, child: customerDetails()),
+            Positioned(top: 120, left: 10.5, right: 10.5, child: customerDetails()),
             Positioned(
-              top: MediaQuery.of(context).size.height / 2.1,
-              left: 0,
-              right: 0,
-              bottom: 0,
+              top: MediaQuery.of(context).size.height / 2.3,
+              left: 3,
+              right: 3,
               child: Container(
                 decoration: ShapeDecoration(
                   // color: Color(0xFFF6F6F6),
@@ -69,7 +69,7 @@ class _ReceiveCashState extends State<ReceiveCash> {
                         child: Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.only(left: 14.0,right: 14,top: 8,bottom: 8),
                               child: Container(
                                 width: 369,
                                 height: 37,
@@ -78,33 +78,36 @@ class _ReceiveCashState extends State<ReceiveCash> {
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(5)),
                                 ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Total',
-                                      style: TextStyle(
-                                        color: Color(0xFFFEFEFE),
-                                        fontSize: 16,
-                                        fontFamily: 'Mulish',
-                                        fontWeight: FontWeight.w700,
-                                        height: 0,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 12.0,right: 12),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Total',
+                                        style: TextStyle(
+                                          color: Color(0xFFFEFEFE),
+                                          fontSize: 16,
+                                          fontFamily: 'Mulish',
+                                          fontWeight: FontWeight.w700,
+                                          height: 0,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      '৳ 16,547.00',
-                                      textAlign: TextAlign.right,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        fontFamily: 'Mulish',
-                                        fontWeight: FontWeight.w600,
-                                        height: 0,
+                                      Text(
+                                        '৳ 16,547.00',
+                                        textAlign: TextAlign.right,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontFamily: 'Mulish',
+                                          fontWeight: FontWeight.w600,
+                                          height: 0,
+                                        ),
                                       ),
-                                    ),
 
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -116,54 +119,60 @@ class _ReceiveCashState extends State<ReceiveCash> {
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(5)),
                                 ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Cash',
-                                      style: TextStyle(
-                                        color: Color(0xFF282828),
-                                        fontSize: 16,
-                                        fontFamily: 'Mulish',
-                                        fontWeight: FontWeight.w500,
-                                        height: 0,
-                                      ),
-                                    ),
-                                    Container(
-                                      width: 152,
-                                      height: 60,
-                                      decoration: ShapeDecoration(
-                                        color: Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          side: BorderSide(
-                                              width: 1,
-                                              color: Color(0xFF88CADA)),
-                                          borderRadius:
-                                              BorderRadius.circular(5),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 15.0,right: 8.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Cash',
+                                        style: TextStyle(
+                                          color: Color(0xFF282828),
+                                          fontSize: 16,
+                                          fontFamily: 'Mulish',
+                                          fontWeight: FontWeight.w500,
+                                          height: 0,
                                         ),
                                       ),
-                                      child: Align(
-                                        alignment: Alignment.centerRight,
-                                        child: Text(
-                                          '1000.0',
-                                          textAlign: TextAlign.right,
-                                          style: TextStyle(
-                                            color: Color(0xFF282828),
-                                            fontSize: 16,
-                                            fontFamily: 'Mulish',
-                                            fontWeight: FontWeight.w500,
-                                            height: 0,
+                                      Container(
+                                        width: 152,
+                                        height: 60,
+                                        decoration: ShapeDecoration(
+                                          color: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                            side: BorderSide(
+                                                width: 1,
+                                                color: Color(0xFF88CADA)),
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                          ),
+                                        ),
+                                        child: Align(
+                                          alignment: Alignment.centerRight,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(
+                                              '1000.0',
+                                              textAlign: TextAlign.right,
+                                              style: TextStyle(
+                                                color: Color(0xFF282828),
+                                                fontSize: 16,
+                                                fontFamily: 'Mulish',
+                                                fontWeight: FontWeight.w500,
+                                                height: 0,
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.only(left: 22.0,right: 24),
                               child: Container(
                                 width: 369,
                                 decoration: ShapeDecoration(
@@ -272,7 +281,7 @@ class _ReceiveCashState extends State<ReceiveCash> {
         children: [
           // SizedBox(height: 15),
           Padding(
-            padding: const EdgeInsets.only(left: 15.0, right: 15.00),
+            padding: const EdgeInsets.only(left: 10.0, right: 10.00),
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: 138,
@@ -307,7 +316,7 @@ class _ReceiveCashState extends State<ReceiveCash> {
                       child: Container(
                         height: 138,
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 10.0, bottom: 8),
+                          padding: const EdgeInsets.only(top: 22.0, bottom: 2),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -358,7 +367,7 @@ class _ReceiveCashState extends State<ReceiveCash> {
 
                                   overflow: TextOverflow.ellipsis,
                                   maxLines:
-                                      4, // Adjust the number of lines based on your needs
+                                  4, // Adjust the number of lines based on your needs
                                 ),
                               )
                             ],
@@ -369,7 +378,7 @@ class _ReceiveCashState extends State<ReceiveCash> {
                     Expanded(
                       flex: 4, // 30% width
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 15.0, left: 8.0),
+                        padding: const EdgeInsets.only(top: 25.0, left: 10.0),
                         child: Column(
                           children: [
                             GestureDetector(
@@ -381,7 +390,7 @@ class _ReceiveCashState extends State<ReceiveCash> {
                                   // Icon(Icons.call, size: 11),
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        left: 8.0, right: 4.0),
+                                        left: 1.0, right: 4.0),
                                     child: Image.asset(
                                         "assets/icons/call_icon.png",
                                         width: 15,
@@ -402,37 +411,47 @@ class _ReceiveCashState extends State<ReceiveCash> {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(
-                                  right: 12.0, top: 3, left: 1),
-                              child: Container(
-                                width: 109,
-                                height: 22,
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFDFF6FF),
-                                  // color: Colors.red,
-                                  border: Border.all(
-                                      width: 0.50, color: Color(0xFF88CADA)),
-                                  borderRadius: BorderRadius.circular(2),
-                                ),
-                                child: Row(
-                                  children: [
-                                    SizedBox(width: 10),
-                                    // Icon(Icons.sms_rounded, size: 11),
-                                    Image.asset(
-                                      "assets/icons/mail.png",
-                                      width: 15,
-                                      height: 15,
+                                  right: 8.0, top: 3, left: 2),
+                              child: GestureDetector(
+                                onTap: (){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Alert(),
                                     ),
-                                    SizedBox(width: 3),
-                                    Text(
-                                      'Send alert',
-                                      style: TextStyle(
-                                        color: Color(0xFF282828),
-                                        fontSize: 12,
-                                        fontFamily: 'Mulish',
-                                        fontWeight: FontWeight.w400,
+                                  );
+                                },
+                                child: Container(
+                                  width: 109,
+                                  height: 22,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFFDFF6FF),
+                                    // color: Colors.red,
+                                    border: Border.all(
+                                        width: 0.50, color: Color(0xFF88CADA)),
+                                    borderRadius: BorderRadius.circular(2),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      SizedBox(width: 10),
+                                      // Icon(Icons.sms_rounded, size: 11),
+                                      Image.asset(
+                                        "assets/icons/mail.png",
+                                        width: 15,
+                                        height: 15,
                                       ),
-                                    ),
-                                  ],
+                                      SizedBox(width: 5),
+                                      Text(
+                                        'Send alert',
+                                        style: TextStyle(
+                                          color: Color(0xFF282828),
+                                          fontSize: 12,
+                                          fontFamily: 'Mulish',
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -447,7 +466,7 @@ class _ReceiveCashState extends State<ReceiveCash> {
           ),
           SizedBox(height: 15),
           Padding(
-            padding: const EdgeInsets.only(left: 15.0, right: 15),
+            padding: const EdgeInsets.only(left: 8.0, right: 8),
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: 56,
@@ -479,7 +498,7 @@ class _ReceiveCashState extends State<ReceiveCash> {
                                 BlendMode.srcATop,
                               ),
                               child:
-                                  Image.asset("assets/icons/personalcard1.png"),
+                              Image.asset("assets/icons/personalcard1.png"),
                             ),
                           ),
                         )),
@@ -497,7 +516,7 @@ class _ReceiveCashState extends State<ReceiveCash> {
                       ),
                     ),
                     SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.17,
+                      width: MediaQuery.of(context).size.width * 0.13,
                     ),
                     Text(
                       '৳ 16,547.00',

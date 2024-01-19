@@ -55,6 +55,7 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
             Positioned(
               // left: 124,
               top: 42,
+              left: 10,
               child: Container(
                 // width: MediaQuery.of(context).size.width,
                 child: Padding(
@@ -80,7 +81,7 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 78),
+                      SizedBox(width: 65),
                       // Add a SizedBox for some space between icon and text
                       Text(
                         'Add New Customer',
@@ -161,7 +162,7 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
             ),
             Positioned(
               left: 14,
-              top: 100,
+              top: 110,
               right: 16,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -199,8 +200,8 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
             ),
 
             Positioned(
-              left: 20,
-              right: 20,
+              left: 25,
+              right: 25,
               top: 500,
               child: Container(
                 width: 388,

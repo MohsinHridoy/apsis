@@ -160,243 +160,323 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
         child: Stack(
           children: [
             SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                appBar(),
+            child: Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
 
-                customerDetails(),
 
-                Container(
-                    // height: productListItems.length *
-                    //     (heightOfSingleItem + verticalSpacingBetweenItems),
-                    // width: 388,
-                    decoration: ShapeDecoration(
-                      color: Colors.red,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5)),
-                    ),
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 50,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: ShapeDecoration(
-                            color: Color(0xFF3868CE),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(5),
-                                topRight: Radius.circular(5),
+                children: [
+
+                  Padding(
+                    padding: const EdgeInsets.only(left: .0,right: 130,top: 50,bottom: 25),
+                    child: Container(
+                      // width: MediaQuery.of(context).size.width,
+                      child: Padding(
+                        padding: const EdgeInsets.all(0.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          // Center the children horizontally
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                width: 24,
+                                height: 24,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage('assets/icons/left_arrow.png'),
+                                    // Replace 'your_image.png' with the actual path to your asset image
+                                    fit: BoxFit.cover, // Adjust the fit as needed
+                                  ),
+                                  // You can also add other decoration properties here, such as borderRadius, border, color, etc.
+                                ),
                               ),
                             ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Product',
-                                style: TextStyle(
-                                  color: Color(0xFFFEFEFE),
-                                  fontSize: 16,
-                                  fontFamily: 'Mulish',
-                                  fontWeight: FontWeight.w700,
-                                  height: 0,
-                                ),
+                            SizedBox(width: 98),
+                            // Add a SizedBox for some space between icon and text
+                            Text(
+                              'Abdul Miah',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xFFFEFEFE),
+                                fontSize: 20,
+                                fontFamily: 'Mulish',
+                                fontWeight: FontWeight.w700,
+                                height: 0,
                               ),
-                              Text(
-                                'Amount',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xFFFEFEFE),
-                                  fontSize: 16,
-                                  fontFamily: 'Mulish',
-                                  fontWeight: FontWeight.w700,
-                                  height: 0,
-                                ),
-                              ),
-                              Text(
-                                'Price',
-                                textAlign: TextAlign.right,
-                                style: TextStyle(
-                                  color: Color(0xFFFEFEFE),
-                                  fontSize: 16,
-                                  fontFamily: 'Mulish',
-                                  fontWeight: FontWeight.w700,
-                                  height: 0,
-                                ),
-                              )
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        Container(
-                          height: productListItems.length *
-                              (heightOfSingleItem +
-                                  verticalSpacingBetweenItems),
-                          width: MediaQuery.of(context).size.width,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20,),
+
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10.0,right: 10),
+                    child: customerDetails(),
+                  ),
+
+
+                  Padding(
+                    padding: const EdgeInsets.only(left: 19.0,right: 19.0),
+                    child: Container(
+                        // height: productListItems.length *
+                        //     (heightOfSingleItem + verticalSpacingBetweenItems),
+                        // width: 388,
+                        decoration: ShapeDecoration(
                           color: Colors.white,
-                          child: ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: productListItems.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Container(
-                                padding: EdgeInsets.only(
-                                    left: 8.0, right: 8.0, bottom: 8.0, top: 5),
-                                // decoration: BoxDecoration(
-                                //   border: Border.all(color: Colors.grey),
-                                //   borderRadius: BorderRadius.circular(8.0),
-                                // ),
-                                child: Column(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5)),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 50,
+                              width: MediaQuery.of(context).size.width,
+                              decoration: ShapeDecoration(
+                                color: Color(0xFF3868CE),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(5),
+                                    topRight: Radius.circular(5),
+                                  ),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 18.0,right: 18.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
-                                      // crossAxisAlignment: CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Container(
-                                          width: 97,
-                                          child: Column(
-                                            children: [
-                                              // Text(
-                                              //   " ${items[index].title}",
-                                              //   style: TextStyle(fontSize: 18),
-                                              // ),
-                                              // Text(
-                                              //   "${items[index].subtitle}",
-                                              //   style: TextStyle(fontSize: 14),
-                                              // ),
-                                              stkItm1(
-                                                  productListItems[index].title,
-                                                  Color(0xFF282828),
-                                                  16),
-                                              stkItm1(
-                                                  productListItems[index]
-                                                      .stknmbr
-                                                      .toString(),
-                                                  Color(0xFF7A7A7A),
-                                                  14),
-                                              // stkItm1(
-                                              //     '(In Stk: 100)', Color(0xFF2E7229), 12),
-                                            ],
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 31,
-                                          child: Row(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(1.0),
-                                                child: Text(
-                                                  productListItems[index]
-                                                      .quantity
-                                                      .toString(),
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                    color: Color(0xFF282828),
-                                                    fontSize: 16,
-                                                    fontFamily: 'Mulish',
-                                                    fontWeight: FontWeight.w500,
-                                                    height: 0,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 60,
-                                          child: Text(
-                                            '৳${(productListItems[index].quantity * productListItems[index].unitprice).toString()}',
-                                            textAlign: TextAlign.right,
-                                            style: TextStyle(
-                                              color: Color(0xFF282828),
-                                              fontSize: 16,
-                                              fontFamily: 'Mulish',
-                                              fontWeight: FontWeight.w500,
-                                              height: 0,
-                                            ),
-                                          ),
-                                        )
-                                      ],
+                                    Text(
+                                      'Product',
+                                      style: TextStyle(
+                                        color: Color(0xFFFEFEFE),
+                                        fontSize: 16,
+                                        fontFamily: 'Mulish',
+                                        fontWeight: FontWeight.w700,
+                                        height: 0,
+                                      ),
                                     ),
-                                    SizedBox(
-                                      height: 15,
+                                    Text(
+                                      'Amount',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Color(0xFFFEFEFE),
+                                        fontSize: 16,
+                                        fontFamily: 'Mulish',
+                                        fontWeight: FontWeight.w700,
+                                        height: 0,
+                                      ),
                                     ),
-                                    Divider(
-                                      height: 1,
+                                    Text(
+                                      'Price',
+                                      textAlign: TextAlign.right,
+                                      style: TextStyle(
+                                        color: Color(0xFFFEFEFE),
+                                        fontSize: 16,
+                                        fontFamily: 'Mulish',
+                                        fontWeight: FontWeight.w700,
+                                        height: 0,
+                                      ),
                                     )
-                                    // horizontalLine()
                                   ],
                                 ),
-                              );
-                            },
-                          ),
-                        ),
-                        Container(
-                          width: 369,
-                          height: 37,
-                          decoration: ShapeDecoration(
-                            color: Color(0xFF3868CE),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5)),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Total',
-                                  style: TextStyle(
-                                    color: Color(0xFFFEFEFE),
-                                    fontSize: 16,
-                                    fontFamily: 'Mulish',
-                                    fontWeight: FontWeight.w700,
-                                    height: 0,
+                              ),
+                            ),
+                            Container(
+                              height: productListItems.length *
+                                  (heightOfSingleItem +
+                                      verticalSpacingBetweenItems-20),
+                              width: MediaQuery.of(context).size.width,
+                              color: Colors.white,
+                              child: ListView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: productListItems.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Container(
+                                    padding: EdgeInsets.only(
+                                        left: 15.0, right: 15.0, bottom: 6.0, top: 6),
+                                    // decoration: BoxDecoration(
+                                    //   border: Border.all(color: Colors.grey),
+                                    //   borderRadius: BorderRadius.circular(8.0),
+                                    // ),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          // crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Container(
+                                              width: 97,
+                                              child: Column(
+                                                children: [
+                                                  // Text(
+                                                  //   " ${items[index].title}",
+                                                  //   style: TextStyle(fontSize: 18),
+                                                  // ),
+                                                  // Text(
+                                                  //   "${items[index].subtitle}",
+                                                  //   style: TextStyle(fontSize: 14),
+                                                  // ),
+                                                  stkItm1(
+                                                      productListItems[index].title,
+                                                      Color(0xFF282828),
+                                                      16),
+                                                  stkItm1(
+                                                      productListItems[index]
+                                                          .stknmbr
+                                                          .toString(),
+                                                      Color(0xFF7A7A7A),
+                                                      14),
+                                                  // stkItm1(
+                                                  //     '(In Stk: 100)', Color(0xFF2E7229), 12),
+                                                ],
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 31,
+                                              child: Row(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(1.0),
+                                                    child: Text(
+                                                      productListItems[index]
+                                                          .quantity
+                                                          .toString(),
+                                                      textAlign: TextAlign.center,
+                                                      style: TextStyle(
+                                                        color: Color(0xFF282828),
+                                                        fontSize: 16,
+                                                        fontFamily: 'Mulish',
+                                                        fontWeight: FontWeight.w500,
+                                                        height: 0,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 60,
+                                              child: Text(
+                                                '৳${(productListItems[index].quantity * productListItems[index].unitprice).toString()}',
+                                                textAlign: TextAlign.right,
+                                                style: TextStyle(
+                                                  color: Color(0xFF282828),
+                                                  fontSize: 16,
+                                                  fontFamily: 'Mulish',
+                                                  fontWeight: FontWeight.w500,
+                                                  height: 0,
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        Divider(
+                                          height: 1,
+                                        )
+                                        // horizontalLine()
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+                              child: Container(
+                                width: 369,
+                                height: 37,
+                                decoration: ShapeDecoration(
+                                  color: Color(0xFF3868CE),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5)),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Total',
+                                        style: TextStyle(
+                                          color: Color(0xFFFEFEFE),
+                                          fontSize: 16,
+                                          fontFamily: 'Mulish',
+                                          fontWeight: FontWeight.w700,
+                                          height: 0,
+                                        ),
+                                      ),
+                                      Text(
+                                        "190",
+                                        textAlign: TextAlign.right,
+                                        style: TextStyle(
+                                          color: Color(0xFFFEFEFE),
+                                          fontSize: 16,
+                                          fontFamily: 'Mulish',
+                                          fontWeight: FontWeight.w700,
+                                          height: 0,
+                                        ),
+                                      )
+                                    ],
                                   ),
                                 ),
-                                Text(
-                                  "190",
-                                  textAlign: TextAlign.right,
-                                  style: TextStyle(
-                                    color: Color(0xFFFEFEFE),
-                                    fontSize: 16,
-                                    fontFamily: 'Mulish',
-                                    fontWeight: FontWeight.w700,
-                                    height: 0,
-                                  ),
-                                )
-                              ],
+                              ),
                             ),
-                          ),
-                        ),
-                        Container(
-                          width: 369,
-                          height: 67,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Cash',
-                                  style: TextStyle(
-                                    color: Color(0xFF282828),
-                                    fontSize: 16,
-                                    fontFamily: 'Mulish',
-                                    fontWeight: FontWeight.w700,
-                                    height: 0,
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                width: 369,
+                                height: 67,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Cash Received',
+                                        style: TextStyle(
+                                          color: Color(0xFF282828),
+                                          fontSize: 16,
+                                          fontFamily: 'Mulish',
+                                          fontWeight: FontWeight.w700,
+                                          height: 0,
+                                        ),
+                                      ),
+                                      Text(
+                                        '৳ 570.0',
+                                        textAlign: TextAlign.right,
+                                        style: TextStyle(
+                                          color: Color(0xFFEE6161),
+                                          fontSize: 16,
+                                          fontFamily: 'Mulish',
+                                          fontWeight: FontWeight.w500,
+                                          height: 0,
+                                        ),
+                                      )
+                                    ],
                                   ),
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ),
-                      ],
-                    )),
+                            SizedBox(height: 100,)
+                          ],
+                        )),
+                  ),
 
 
-              ],
+                ],
+              ),
             ),
           ),
             Positioned(
@@ -412,7 +492,7 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
                   );
                 },
                 child: Container(
-                  width: 195,
+                  width: 170,
                   height: 56,
                   decoration: ShapeDecoration(
                     color: Color(0xFF3868CE),
@@ -428,18 +508,25 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
                       )
                     ],
                   ),
-                  child: Center(
-                    child: Text(
-                      '+ Receive Cash',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontFamily: 'Mulish',
-                        fontWeight: FontWeight.w700,
-                        height: 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children:[
+                      Padding(
+                        padding: const EdgeInsets.only(left: 14.0,right: 8.0),
+                        child: Image.asset("assets/icons/add_cart.png",height: 20,width: 20,),
                       ),
-                    ),
+                      Text(
+                        'Receive Cash',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontFamily: 'Mulish',
+                          fontWeight: FontWeight.w700,
+                          height: 0,
+                        ),
+                      ),
+                    ]
                   ),
                 ),
               ),
@@ -454,12 +541,12 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
   Widget customerDetails() {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 500,
+      height: 250,
       child: Column(
         children: [
           // SizedBox(height: 15),
           Padding(
-            padding: const EdgeInsets.only(left: 15.0, right: 15.00),
+            padding: const EdgeInsets.only(left: 10.0, right: 10.00),
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: 138,
@@ -494,7 +581,7 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
                       child: Container(
                         height: 138,
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 10.0, bottom: 8),
+                          padding: const EdgeInsets.only(top: 22.0, bottom: 2),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -556,7 +643,7 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
                     Expanded(
                       flex: 4, // 30% width
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 15.0, left: 8.0),
+                        padding: const EdgeInsets.only(top: 25.0, left: 10.0),
                         child: Column(
                           children: [
                             GestureDetector(
@@ -568,7 +655,7 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
                                   // Icon(Icons.call, size: 11),
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        left: 8.0, right: 4.0),
+                                        left: 1.0, right: 4.0),
                                     child: Image.asset(
                                         "assets/icons/call_icon.png",
                                         width: 15,
@@ -589,37 +676,47 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(
-                                  right: 12.0, top: 3, left: 1),
-                              child: Container(
-                                width: 109,
-                                height: 22,
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFDFF6FF),
-                                  // color: Colors.red,
-                                  border: Border.all(
-                                      width: 0.50, color: Color(0xFF88CADA)),
-                                  borderRadius: BorderRadius.circular(2),
-                                ),
-                                child: Row(
-                                  children: [
-                                    SizedBox(width: 10),
-                                    // Icon(Icons.sms_rounded, size: 11),
-                                    Image.asset(
-                                      "assets/icons/mail.png",
-                                      width: 15,
-                                      height: 15,
+                                  right: 8.0, top: 3, left: 2),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Alert(),
                                     ),
-                                    SizedBox(width: 3),
-                                    Text(
-                                      'Send alert',
-                                      style: TextStyle(
-                                        color: Color(0xFF282828),
-                                        fontSize: 12,
-                                        fontFamily: 'Mulish',
-                                        fontWeight: FontWeight.w400,
+                                  );
+                                },
+                                child: Container(
+                                  width: 109,
+                                  height: 22,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFFDFF6FF),
+                                    // color: Colors.red,
+                                    border: Border.all(
+                                        width: 0.50, color: Color(0xFF88CADA)),
+                                    borderRadius: BorderRadius.circular(2),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      SizedBox(width: 10),
+                                      // Icon(Icons.sms_rounded, size: 11),
+                                      Image.asset(
+                                        "assets/icons/mail.png",
+                                        width: 15,
+                                        height: 15,
                                       ),
-                                    ),
-                                  ],
+                                      SizedBox(width: 5),
+                                      Text(
+                                        'Send alert',
+                                        style: TextStyle(
+                                          color: Color(0xFF282828),
+                                          fontSize: 12,
+                                          fontFamily: 'Mulish',
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -634,7 +731,7 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
           ),
           SizedBox(height: 15),
           Padding(
-            padding: const EdgeInsets.only(left: 15.0, right: 15),
+            padding: const EdgeInsets.only(left: 8.0, right: 8),
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: 56,
@@ -684,7 +781,7 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
                       ),
                     ),
                     SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.17,
+                      width: MediaQuery.of(context).size.width * 0.14,
                     ),
                     Text(
                       '৳ 16,547.00',
@@ -719,7 +816,7 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
     return Container(
       width: MediaQuery.of(context).size.width,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(left: 8.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start, // Align the children to the start (left) of the row
           children: [
@@ -739,8 +836,7 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
               ),
             ),
             Expanded(
-              child: Center(
-                child: Text(
+              child:  Text(
                   'Abdul Miah',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -751,7 +847,7 @@ class _CustomerSaleHistory001State extends State<CustomerSaleHistory001> {
                     height: 0,
                   ),
                 ),
-              ),
+
             ),
           ],
         ),

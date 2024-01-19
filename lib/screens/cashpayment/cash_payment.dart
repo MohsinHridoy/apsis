@@ -67,12 +67,10 @@ class _CashPaymentState extends State<CashPayment> {
                 height: 35,
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(19.0),
                 child: Container(
                   // width: MediaQuery.of(context).size.width,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
+                  child: Row(
                       // mainAxisAlignment: MainAxisAlignment.center,
                       // Center the children horizontally
                       children: [
@@ -109,12 +107,14 @@ class _CashPaymentState extends State<CashPayment> {
                         ),
                       ],
                     ),
-                  ),
                 ),
+              ),
+              SizedBox(
+                height: 15,
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    left: 15.0, right: 15.0, top: 8.0, bottom: 8.0),
+                    left: 20.0, right: 20.0, top: 8.0, bottom: 8.0),
                 child: Container(
                   width: 396,
                   height: 304,
@@ -162,7 +162,7 @@ class _CashPaymentState extends State<CashPayment> {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    left: 15.0, right: 15.0, top: 8.0, bottom: 8.0),
+                    left: 20.0, right: 20.0, top: 8.0, bottom: 8.0),
                 child: ContainerWithScreenSize(
                     items: widget.items!,
                     sum: sum,
@@ -170,7 +170,7 @@ class _CashPaymentState extends State<CashPayment> {
                     creditAmount2: creditAmount2),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(left: 12.0,right: 12,top:8,bottom: 8),
                 child: Container(
                   child: Column(
                     children: [
@@ -378,7 +378,7 @@ class _ContainerWithScreenSizeState extends State<ContainerWithScreenSize> {
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
                     padding: EdgeInsets.only(
-                        left: 8.0, right: 8.0, bottom: 8.0, top: 5),
+                        left: 22.0, right: 22.0, bottom: 8.0, top: 5),
                     // decoration: BoxDecoration(
                     //   border: Border.all(color: Colors.grey),
                     //   borderRadius: BorderRadius.circular(8.0),
@@ -462,163 +462,59 @@ class _ContainerWithScreenSizeState extends State<ContainerWithScreenSize> {
                 },
               ),
             ),
-            Container(
-              width: 369,
-              height: 37,
-              decoration: ShapeDecoration(
-                color: Color(0xFF3868CE),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5)),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Total',
-                      style: TextStyle(
-                        color: Color(0xFFFEFEFE),
-                        fontSize: 16,
-                        fontFamily: 'Mulish',
-                        fontWeight: FontWeight.w700,
-                        height: 0,
-                      ),
-                    ),
-                    Text(
-                      "${widget.sum}",
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                        color: Color(0xFFFEFEFE),
-                        fontSize: 16,
-                        fontFamily: 'Mulish',
-                        fontWeight: FontWeight.w700,
-                        height: 0,
-                      ),
-                    )
-                  ],
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0,right:20),
+              child: Container(
+                width: 369,
+                height: 37,
+                decoration: ShapeDecoration(
+                  color: Color(0xFF3868CE),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
                 ),
-              ),
-            ),
-            Container(
-              width: 369,
-              height: 67,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Cash',
-                      style: TextStyle(
-                        color: Color(0xFF282828),
-                        fontSize: 16,
-                        fontFamily: 'Mulish',
-                        fontWeight: FontWeight.w700,
-                        height: 0,
-                      ),
-                    ),
-                    Container(
-                      width: 152,
-                      height: 60,
-                      decoration: ShapeDecoration(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(width: 1, color: Color(0xFF88CADA)),
-                          borderRadius: BorderRadius.circular(5),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Total',
+                        style: TextStyle(
+                          color: Color(0xFFFEFEFE),
+                          fontSize: 16,
+                          fontFamily: 'Mulish',
+                          fontWeight: FontWeight.w700,
+                          height: 0,
                         ),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: Row(
-                          children: [
-                            Text(
-                              '৳',
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                color: Color(0xFF282828),
-                                fontSize: 16,
-                                fontFamily: 'Mulish',
-                                fontWeight: FontWeight.w700,
-                                height: 0,
-                              ),
-                            ),
-                            Container(
-                              width: 132,
-                              height: 67,
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: Expanded(
-                                  child: TextFormField(
-                                    keyboardType: TextInputType.number,
-                                    textAlign: TextAlign.right,
-                                    // Align the text to the right
-                                    decoration: InputDecoration(
-                                      border: InputBorder
-                                          .none, // Remove the underline
-                                    ),
-
-                                    style: TextStyle(
-                                      color: Color(0xFF282828),
-                                      fontSize: 16,
-                                      fontFamily: 'Mulish',
-                                      fontWeight: FontWeight.w700,
-                                      height: 0,
-                                    ),
-                                    onChanged: (value) {
-                                      double enteredValue =
-                                          double.tryParse(value) ?? 0.0;
-
-                                      setState(() {
-                                        creditAmount4 = creditAmount3 =
-                                            widget.sum - enteredValue;
-                                        print(widget.sum);
-                                        print(creditAmount3);
-                                      });
-
-                                      // Assuming the entered value is the credit amount
-                                      //creditAmount2 = sum - creditAmount;
-                                      // print(creditAmount);
-                                      // Perform any additional logic with the creditAmount if needed
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              width: 369,
-              height: 67,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "credit", // Display the calculated credit amount
-                      style: TextStyle(
-                        color: Color(0xFF282828),
-                        fontSize: 16,
-                        fontFamily: 'Mulish',
-                        fontWeight: FontWeight.w700,
-                        height: 0,
-                      ),
-                    ),
-                    Container(
-                      width: 152,
-                      height: 67,
-                      child: Text(
-                        (creditAmount3 != null && creditAmount3! > 0)
-                            ? creditAmount3.toString()
-                            : '0',
+                      Text(
+                        "${widget.sum}",
                         textAlign: TextAlign.right,
+                        style: TextStyle(
+                          color: Color(0xFFFEFEFE),
+                          fontSize: 16,
+                          fontFamily: 'Mulish',
+                          fontWeight: FontWeight.w700,
+                          height: 0,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0,right: 14.0,top:8),
+              child: Container(
+                width: 369,
+                height: 67,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Cash',
                         style: TextStyle(
                           color: Color(0xFF282828),
                           fontSize: 16,
@@ -627,8 +523,122 @@ class _ContainerWithScreenSizeState extends State<ContainerWithScreenSize> {
                           height: 0,
                         ),
                       ),
-                    ),
-                  ],
+                      Container(
+                        width: 152,
+                        height: 60,
+                        decoration: ShapeDecoration(
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(width: 1, color: Color(0xFF88CADA)),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 14.0,right: 5,top: 5),
+                          child: Row(
+                            children: [
+                              Text(
+                                '৳',
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                  color: Color(0xFF282828),
+                                  fontSize: 16,
+                                  fontFamily: 'Mulish',
+                                  fontWeight: FontWeight.w700,
+                                  height: 0,
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  height: 67,
+                                  child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Expanded(
+                                      child: TextFormField(
+                                        keyboardType: TextInputType.number,
+                                        textAlign: TextAlign.right,
+                                        // Align the text to the right
+                                        decoration: InputDecoration(
+                                          border: InputBorder
+                                              .none, // Remove the underline
+                                        ),
+
+                                        style: TextStyle(
+                                          color: Color(0xFF282828),
+                                          fontSize: 16,
+                                          fontFamily: 'Mulish',
+                                          fontWeight: FontWeight.w700,
+                                          height: 0,
+                                        ),
+                                        onChanged: (value) {
+                                          double enteredValue =
+                                              double.tryParse(value) ?? 0.0;
+
+                                          setState(() {
+                                            creditAmount4 = creditAmount3 =
+                                                widget.sum - enteredValue;
+                                            print(widget.sum);
+                                            print(creditAmount3);
+                                          });
+
+                                          // Assuming the entered value is the credit amount
+                                          //creditAmount2 = sum - creditAmount;
+                                          // print(creditAmount);
+                                          // Perform any additional logic with the creditAmount if needed
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 27.0,right: 25.0,top:8,bottom: 20),
+              child: Container(
+                width: 369,
+                height: 20,
+                child: Padding(
+                  padding: const EdgeInsets.all(0.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Credit", // Display the calculated credit amount
+                        style: TextStyle(
+                          color: Color(0xFF282828),
+                          fontSize: 16,
+                          fontFamily: 'Mulish',
+                          fontWeight: FontWeight.w700,
+                          height: 0,
+                        ),
+                      ),
+                      Container(
+                        width: 152,
+                        height: 67,
+                        child: Text(
+                          (creditAmount3 != null && creditAmount3! > 0)
+                              ? creditAmount3.toString()
+                              : '0',
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            color: Color(0xFF282828),
+                            fontSize: 16,
+                            fontFamily: 'Mulish',
+                            fontWeight: FontWeight.w700,
+                            height: 0,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
