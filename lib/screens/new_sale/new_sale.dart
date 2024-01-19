@@ -32,19 +32,16 @@ class _NewSaleState extends State<NewSale> {
 
   List<TextEditingController> controllers = [];
 
-
-  void decreaseQuantity(ProductList product) {
-    if (product.quantity > 1) {
-      setState(() {
-        product.quantity--;
-      });
-    }
+  void decreaseQuantity(ProductList product, int index) {
+    productProvider.decreaseQuantity(index);
   }
 
-  void increaseQuantity(ProductList product) {
-    setState(() {
-      product.quantity++;
-    });
+  void increaseQuantity(ProductList product, int index) {
+    productProvider.increaseQuantity(index);
+  }
+
+  void updateTotalPrice(ProductList selectedItem, int index) {
+    productProvider.updateTotalPrice(index);
   }
 
   bool _searchIconVisible = true;
@@ -55,62 +52,6 @@ class _NewSaleState extends State<NewSale> {
   List<ProductList> filteredItems = [];
   List<ProductList> selectedItems = [];
 
-  // List<ProductList> items1 = [
-  //   ProductList(
-  //       title: 'Cola',
-  //       productId: '123456',
-  //       quantity: 5,
-  //       stknmbr: '150 ml',
-  //       unitprice: 25,
-  //       image: 'assets/images/product1.png',
-  //       productAmount: 125.00,
-  //       is_Added: false),
-  //   ProductList(
-  //       title: 'Sprite ',
-  //       productId: '789012',
-  //       quantity: 10,
-  //       stknmbr: 'N/A',
-  //       unitprice: 15,
-  //       image: 'assets/images/product2.png',
-  //       productAmount: 150.00,
-  //       is_Added: false),
-  //   ProductList(
-  //       title: 'Potato Chips',
-  //       productId: '789012',
-  //       quantity: 10,
-  //       stknmbr: '250 ml',
-  //       unitprice: 15,
-  //       image: 'assets/images/product2.png',
-  //       productAmount: 150.00,
-  //       is_Added: false),
-  //   ProductList(
-  //       title: 'Potato Cakes',
-  //       productId: '789012',
-  //       quantity: 10,
-  //       stknmbr: '250 ml',
-  //       unitprice: 15,
-  //       image: 'assets/images/product2.png',
-  //       productAmount: 150.00,
-  //       is_Added: false),
-  //   ProductList(
-  //       title: 'Fried Chips',
-  //       productId: '789012',
-  //       quantity: 10,
-  //       stknmbr: '250 ml',
-  //       unitprice: 15,
-  //       image: 'assets/images/product2.png',
-  //       productAmount: 150.00,
-  //       is_Added: false),
-  //   ProductList(
-  //       title: 'Potato Chips',
-  //       productId: '789012',
-  //       quantity: 10,
-  //       stknmbr: '200 ml',
-  //       unitprice: 15,
-  //       image: 'assets/images/product2.png',
-  //       productAmount: 150.00,
-  //       is_Added: false),
-  // ];
 
   @override
   void initState() {
@@ -129,17 +70,17 @@ class _NewSaleState extends State<NewSale> {
 
 
 
-  void updateTotalPrice(ProductList selectedItem, int index) {
-
-    setState(() {
-      double totalPrice = (selectedItem.quantity * selectedItem.unitprice).toDouble();
-      controllers[index].text = '৳${totalPrice.toString()}';
-      selectedItem.quantity = int.parse(controllers[index].text);
-
-      // Update the quantity using the provider
-      productProvider.updateQuantity(index, selectedItem.quantity);
-    });
-  }
+  // void updateTotalPrice(ProductList selectedItem, int index) {
+  //
+  //   setState(() {
+  //     double totalPrice = (selectedItem.quantity * selectedItem.unitprice).toDouble();
+  //     controllers[index].text = '৳${totalPrice.toString()}';
+  //     selectedItem.quantity = int.parse(controllers[index].text);
+  //
+  //     // Update the quantity using the provider
+  //     productProvider.updateQuantity(index, selectedItem.quantity);
+  //   });
+  // }
 
   void filterSearchResults(String query) {
     if (query.isEmpty) {
@@ -512,7 +453,7 @@ class _NewSaleState extends State<NewSale> {
                                     GestureDetector(
                                       onTap: () {
                                         // Handle the click event for '-'
-                                        decreaseQuantity(productProvider.items[index]);
+                                        decreaseQuantity(productProvider.items[index],index);
                                         print(
                                             "++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                                         print(productProvider.items[index].quantity.toString());
@@ -607,7 +548,10 @@ class _NewSaleState extends State<NewSale> {
                                     GestureDetector(
                                       onTap: () {
                                         // Handle the click event for '+'
-                                        increaseQuantity(productProvider.items[index]);
+                                        increaseQuantity(productProvider.items[index],index);
+                                     print(productProvider.items[index].quantity);
+
+
                                       },
                                       child: Container(
                                         width: 31,

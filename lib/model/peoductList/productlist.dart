@@ -5,7 +5,7 @@ class ProductList {
   final String stknmbr;
   final int unitprice;
   final String image;
-  final double productAmount;
+   double productAmount;
   bool is_Added;
 
   ProductList({

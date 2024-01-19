@@ -197,7 +197,23 @@ class NewSellProvider extends ChangeNotifier {
   List<ProductList> get searchItems => _searchItems;
 
 
+  void decreaseQuantity(int index) {
+    if (_items[index].quantity > 1) {
+      _items[index].quantity--;
+      notifyListeners();
+    }
+  }
 
+  void increaseQuantity(int index) {
+    _items[index].quantity++;
+    notifyListeners();
+  }
+
+  void updateTotalPrice(int index) {
+    double totalPrice = (_items[index].quantity * _items[index].unitprice).toDouble();
+    _items[index].productAmount = totalPrice;
+    notifyListeners();
+  }
 
 
 
