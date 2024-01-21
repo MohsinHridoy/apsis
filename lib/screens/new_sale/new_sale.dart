@@ -22,15 +22,15 @@ class NewSale extends StatefulWidget {
 }
 
 class _NewSaleState extends State<NewSale> {
-  double heightOfSingleItem =
-      65.0; // Change the value based on your item height
-  double verticalSpacingBetweenItems = 8.0;
-  final ScrollController _scrollController = ScrollController();
-  TextEditingController priceController = TextEditingController();
+  // double heightOfSingleItem =
+  //     65.0; // Change the value based on your item height
+  // double verticalSpacingBetweenItems = 8.0;
+  // final ScrollController _scrollController = ScrollController();
+  // TextEditingController priceController = TextEditingController();
+  //
+  // late NewSellProvider productProvider; // Declare productProvider variable
 
-  late NewSellProvider productProvider; // Declare productProvider variable
-
-  List<TextEditingController> controllers = [];
+  // List<TextEditingController> controllers = [];
 
   void decreaseQuantity(ProductList product, int index) {
     productProvider.decreaseQuantity(index);
@@ -44,31 +44,32 @@ class _NewSaleState extends State<NewSale> {
     productProvider.updateTotalPrice(index);
   }
 
+  double heightOfSingleItem = 65.0;
+  double verticalSpacingBetweenItems = 8.0;
+  final ScrollController _scrollController = ScrollController();
+  TextEditingController priceController = TextEditingController();
+
+  late NewSellProvider productProvider;
+
+  List<TextEditingController> controllers = [];
   bool _searchIconVisible = true;
   bool firstContainerVisible = false;
   TextEditingController _textEditingController = TextEditingController();
 
-
-  List<ProductList> filteredItems = [];
-  List<ProductList> selectedItems = [];
-
-
   @override
   void initState() {
     super.initState();
-    productProvider = Provider.of<NewSellProvider>(context, listen: false);
+    productProvider = context.read<NewSellProvider>();
 
-    filteredItems.clear();
-    selectedItems.clear();
+    productProvider.filteredItems.clear();
+    productProvider.selectedItems.clear();
     controllers = List.generate(
-        productProvider.items.length,
-        (index) =>
-            TextEditingController(text: productProvider.items[index].quantity.toString()));
-
-    // filteredItems = items;
+      productProvider.items.length,
+      (index) => TextEditingController(
+        text: productProvider.items[index].quantity.toString(),
+      ),
+    );
   }
-
-
 
   // void updateTotalPrice(ProductList selectedItem, int index) {
   //
@@ -82,49 +83,50 @@ class _NewSaleState extends State<NewSale> {
   //   });
   // }
 
-  void filterSearchResults(String query) {
-    if (query.isEmpty) {
-      setState(() {
-        filteredItems = 0 as List<ProductList>;
-      });
-    } else {
-      List<ProductList> searchResults = productProvider.items
-          .where(
-              (item) => item.title.toLowerCase().contains(query.toLowerCase()))
-          .toList();
+  // void filterSearchResults(String query) {
+  //   if (query.isEmpty) {
+  //     setState(() {
+  //       filteredItems = 0 as List<ProductList>;
+  //     });
+  //   } else {
+  //     List<ProductList> searchResults = productProvider.items
+  //         .where(
+  //             (item) => item.title.toLowerCase().contains(query.toLowerCase()))
+  //         .toList();
+  //
+  //     setState(() {
+  //       filteredItems = searchResults;
+  //       print(filteredItems.length);
+  //       print(''''''
+  //           ''''''
+  //           ''''''
+  //           ''''''
+  //           ''''''
+  //           ''''''
+  //           ''''''
+  //           ''''''
+  //           ''''''
+  //           ''''''
+  //           '');
+  //     });
+  //   }
+  // }
 
-      setState(() {
-        filteredItems = searchResults;
-        print(filteredItems.length);
-        print(''''''
-            ''''''
-            ''''''
-            ''''''
-            ''''''
-            ''''''
-            ''''''
-            ''''''
-            ''''''
-            ''''''
-            '');
-      });
-    }
+  void filterSearchResults(String query) {
+    productProvider.filterSearchResults(query);
   }
 
   void filterIsAddedResults() {
     List<ProductList> searchResults =
-    productProvider.items.where((item) => item.is_Added == true).toList();
-
-    setState(() {
-      selectedItems = searchResults;
-      print(selectedItems.length);
-    });
+        productProvider.items.where((item) => item.is_Added == false).toList();
+    // No need to use setState here, just update the provider's state
+    // and let listeners (widgets using this provider) rebuild accordingly.
+    productProvider.updateSelectedItems(searchResults);
   }
 
-
-
   Widget build(BuildContext context) {
-    productProvider = Provider.of<NewSellProvider>(context); // Initialize productProvider in build
+    productProvider = Provider.of<NewSellProvider>(
+        context); // Initialize productProvider in build
 
     return Scaffold(
       // appBar: AppBar(
@@ -171,18 +173,30 @@ class _NewSaleState extends State<NewSale> {
               //
               Flexible(
                 child: SingleChildScrollView(
-                  child: listItem(),
+                  child: Consumer<NewSellProvider>(
+                    builder: (context, provider, child) {
+                      return listItem(provider);
+                    },
+                  ),
                 ),
               ),
             ],
           ),
         ),
-        if (filteredItems.length > 0)
+        if (productProvider.filteredItems.length > 0)
           Positioned(
             top: 165,
             left: 20,
             right: 20,
-            child: searchItem(),
+            child: Consumer<NewSellProvider>(
+              builder: (context, provider, child) {
+                // Your widget code that depends on provider state
+                return searchItem(
+                  provider,
+                  // other parameters...
+                );
+              },
+            ),
           )
         else
           // Widget to show when filteredItems.length is not greater than 0
@@ -193,7 +207,7 @@ class _NewSaleState extends State<NewSale> {
     );
   }
 
-  Widget searchItem() {
+  Widget searchItem(NewSellProvider filteredItems) {
     return Container(
       width: 388,
       height: 176,
@@ -212,7 +226,7 @@ class _NewSaleState extends State<NewSale> {
         ],
       ),
       child: ListView.builder(
-        itemCount: filteredItems.length,
+        itemCount: filteredItems.filteredItems.length,
         // The number of items in your list
         itemBuilder: (BuildContext context, int index) {
           // This is a callback function that builds each item in the list
@@ -245,7 +259,7 @@ class _NewSaleState extends State<NewSale> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  filteredItems[index].title,
+                                  filteredItems.filteredItems[index].title,
                                   style: TextStyle(
                                     color: Color(0xFF282828),
                                     fontSize: 14,
@@ -255,7 +269,7 @@ class _NewSaleState extends State<NewSale> {
                                   ),
                                 ),
                                 Text(
-                                  filteredItems[index].stknmbr,
+                                  filteredItems.filteredItems[index].stknmbr,
                                   style: TextStyle(
                                     color: Color(0xFF7A7A7A),
                                     fontSize: 12,
@@ -265,7 +279,7 @@ class _NewSaleState extends State<NewSale> {
                                   ),
                                 ),
                                 stkItm1(
-                                    '(In Stk: ${filteredItems[index].stknmbr.toString()})',
+                                    '(In Stk: ${filteredItems.filteredItems[index].stknmbr.toString()})',
                                     Color(0xFF2E7229),
                                     12),
                               ],
@@ -306,13 +320,12 @@ class _NewSaleState extends State<NewSale> {
                                 // )
                               ],
                             ),
-                            if (filteredItems[index].is_Added == false)
+                            if (filteredItems.filteredItems[index].is_Added ==
+                                false)
                               GestureDetector(
                                 onTap: () {
-                                  setState(() {
-                                    productProvider.items[index].is_Added = true;
-                                    filterIsAddedResults();
-                                  });
+
+                                  filteredItems.updateIsAdded(index);
                                 },
                                 child: Container(
                                   width: 66,
@@ -342,10 +355,11 @@ class _NewSaleState extends State<NewSale> {
                             else
                               GestureDetector(
                                 onTap: () {
-                                  setState(() {
-                                    productProvider.items[index].is_Added = false;
-                                    filterIsAddedResults();
-                                  });
+                                  // setState(() {
+                                  //   //productProvider.items[index].is_Added = false;
+                                  //   filterIsAddedResults();
+                                  // });
+                                  filteredItems.updateIsAdded(index);
                                 },
                                 child: Container(
                                   width: 66,
@@ -388,12 +402,12 @@ class _NewSaleState extends State<NewSale> {
     );
   }
 
-  Widget listItem() {
+  Widget listItem(NewSellProvider provider) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height:
-      productProvider.items.length * (heightOfSingleItem + verticalSpacingBetweenItems) +
-              200,
+      height: provider.addedItems.length *
+              (heightOfSingleItem + verticalSpacingBetweenItems) +
+          200,
       // decoration: ShapeDecoration(
       //   shape: RoundedRectangleBorder(
       //       borderRadius: BorderRadius.circular(5)),
@@ -405,11 +419,11 @@ class _NewSaleState extends State<NewSale> {
             padding: const EdgeInsets.only(left: 18.0, right: 18.0, top: 0),
             child: Container(
               color: Colors.white,
-              height: productProvider.items.length *
+              height: productProvider.addedItems.length *
                   (heightOfSingleItem + verticalSpacingBetweenItems),
               child: ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: productProvider.items.length,
+                itemCount: productProvider.addedItems.length,
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
                     // behavior: HitTestBehavior.translucent,
@@ -435,10 +449,13 @@ class _NewSaleState extends State<NewSale> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    stkItm1(productProvider.items[index].title,
+                                    stkItm1(productProvider.addedItems[index].title,
                                         Color(0xFF282828), 16),
-                                    stkItm1(productProvider.items[index].stknmbr.toString(),
-                                        Color(0xFF7A7A7A), 14),
+                                    stkItm1(
+                                        productProvider.addedItems[index].stknmbr
+                                            .toString(),
+                                        Color(0xFF7A7A7A),
+                                        14),
                                     // stkItm1(
                                     //     '(In Stk: ${items[index].stknmbr.toString()})',
                                     //     Color(0xFF2E7229),
@@ -453,10 +470,14 @@ class _NewSaleState extends State<NewSale> {
                                     GestureDetector(
                                       onTap: () {
                                         // Handle the click event for '-'
-                                        decreaseQuantity(productProvider.items[index],index);
+                                        decreaseQuantity(
+                                            productProvider.addedItems[index],
+                                            index);
                                         print(
                                             "++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                                        print(productProvider.items[index].quantity.toString());
+                                        print(productProvider
+                                            .filteredItems[index].quantity
+                                            .toString());
                                       },
                                       child: Container(
                                         width: 31,
@@ -532,11 +553,13 @@ class _NewSaleState extends State<NewSale> {
                                                   onChanged: (newText) {
                                                     // Update the total price and synchronize the quantity for every item
                                                     updateTotalPrice(
-                                                        productProvider.items[index], index);
+                                                        productProvider
+                                                            .filteredItems[index],
+                                                        index);
                                                   },
                                                   decoration: InputDecoration(
                                                     hintText:
-                                                        'Quantity: ${productProvider.items[index].quantity}', // Set the hintText dynamically
+                                                        'Quantity: ${productProvider.filteredItems[index].quantity}', // Set the hintText dynamically
                                                   ),
                                                 ),
                                               ),
@@ -548,10 +571,11 @@ class _NewSaleState extends State<NewSale> {
                                     GestureDetector(
                                       onTap: () {
                                         // Handle the click event for '+'
-                                        increaseQuantity(productProvider.items[index],index);
-                                     print(productProvider.items[index].quantity);
-
-
+                                        increaseQuantity(
+                                            productProvider.filteredItems[index],
+                                            index);
+                                        print(productProvider
+                                            .filteredItems[index].quantity);
                                       },
                                       child: Container(
                                         width: 31,
@@ -591,7 +615,7 @@ class _NewSaleState extends State<NewSale> {
                                 child: Container(
                                   width: 50,
                                   child: Text(
-                                    '৳${(productProvider.items[index].quantity * productProvider.items[index].unitprice).toString()}',
+                                    '৳${(productProvider.filteredItems[index].quantity * productProvider.filteredItems[index].unitprice).toString()}',
                                     textAlign: TextAlign.right,
                                     style: TextStyle(
                                       color: Color(0xFF282828),
@@ -608,7 +632,7 @@ class _NewSaleState extends State<NewSale> {
                           SizedBox(
                             height: 15,
                           ),
-                          if (productProvider.items.length > 1) horizontalLine()
+                          if (productProvider.filteredItems.length > 1) horizontalLine()
                         ],
                       ),
                     ),
