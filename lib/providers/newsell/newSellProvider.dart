@@ -136,6 +136,7 @@ class NewSellProvider extends ChangeNotifier {
         productAmount: 150.00,
         is_Added: false),
   ];
+  bool searchItemVisible = true;
 
   List<ProductList> get items => _items;
   List<ProductList> _searchItems = [
@@ -200,6 +201,26 @@ class NewSellProvider extends ChangeNotifier {
 
   List<ProductList> get filteredItems => _filteredItems;
 
+  List<ProductList> _addedItemsList = [];
+
+  List<ProductList> get addedItemsList => _addedItemsList;
+
+  void updateAddedItemsList() {
+    _addedItemsList = _filteredItems.where((item) => item.is_Added).toList();
+    notifyListeners();
+  }
+  void searchItemVisibility() {
+    if (_filteredItems.length > 0)
+      searchItemVisible = true;
+    else
+      searchItemVisible = false;
+    notifyListeners();
+  }
+
+  void toggleSearchItemVisibility() {
+    searchItemVisible = !searchItemVisible;
+    notifyListeners();
+  }
   void filterSearchResults(String query) {
     if (query.isEmpty) {
       _filteredItems = []; // Set it to an empty list when the query is empty
@@ -209,6 +230,7 @@ class NewSellProvider extends ChangeNotifier {
               (item) => item.title.toLowerCase().contains(query.toLowerCase()))
           .toList();
     }
+    searchItemVisibility(); // Update visibility status
 
     // Notify listeners to rebuild widgets that depend on filteredItems
     notifyListeners();
@@ -216,19 +238,19 @@ class NewSellProvider extends ChangeNotifier {
 
   List<ProductList> get addedItems {
     // Filter items where is_Added is true
-    return _items.where((item) => item.is_Added).toList();
+    return _filteredItems.where((item) => item.is_Added).toList();
   }
 
 
   void decreaseQuantity(int index) {
-    if (_items[index].quantity > 1) {
-      _items[index].quantity--;
+    if (_filteredItems[index].quantity > 1) {
+      _filteredItems[index].quantity--;
       notifyListeners();
     }
   }
 
   void increaseQuantity(int index) {
-    _items[index].quantity++;
+    _filteredItems[index].quantity++;
     notifyListeners();
   }
   void updateIsAdded(int index) {

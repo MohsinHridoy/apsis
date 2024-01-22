@@ -23,7 +23,6 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
   File? _image;
   CustomerListDetails? _customerDetails;
 
-
   Future<void> _pickImage() async {
     final ImagePicker _picker = ImagePicker();
     final XFile? pickedImage =
@@ -40,18 +39,17 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          width: 428,
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment(0.00, -1.00),
-              end: Alignment(0, 1),
-              colors: [Color(0xFF2F73FE), Color(0x00D0DFEB)],
-            ),
+        width: 428,
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment(0.00, -1.00),
+            end: Alignment(0, 1),
+            colors: [Color(0xFF2F73FE), Color(0x00D0DFEB)],
           ),
+        ),
         child: Stack(
           children: [
-
             Positioned(
               // left: 124,
               top: 42,
@@ -102,15 +100,19 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
             Positioned(
               left: 20,
               right: 20,
-              top: _image == null ? 625 : 725,
+              top: _image == null ? 750 : 750,
               child: GestureDetector(
                 onTap: () {
                   _customerDetails = CustomerListDetails(
                     name: _nameController.text,
                     role: _phoneController.text,
-                    amount: double.tryParse(_creditAmountController.text) ?? 0.0,
-                    creditStatus: "",  // You need to set the credit status accordingly
-                    profileImage: _image != null ? _image!.path : "", // You need to set the profile image accordingly
+                    amount:
+                        double.tryParse(_creditAmountController.text) ?? 0.0,
+                    creditStatus: "",
+                    // You need to set the credit status accordingly
+                    profileImage: _image != null
+                        ? _image!.path
+                        : "", // You need to set the profile image accordingly
                   );
 
                   Navigator.push(
@@ -125,7 +127,6 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
                   if (_customerDetails != null) {
                     print(_customerDetails!.name);
                   }
-
                 },
                 child: Container(
                   width: 388,
@@ -168,7 +169,7 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                 child: Container(
                   width: 396,
-                  height: 360,
+                  height: 570,
                   decoration: ShapeDecoration(
                     color: Color(0xFFFEFEFE),
                     shape: RoundedRectangleBorder(
@@ -178,130 +179,139 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left:8.0,right: 8.0,top: 15.0),
-                        child: cashContainer1("*", "Customer name", true, false, _nameController),
+                        padding: const EdgeInsets.only(
+                            left: 8.0, right: 8.0, top: 15.0),
+                        child: cashContainer1(
+                            "*", "Customer name", true, false, _nameController),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left:8.0,right: 8.0),
-                        child: cashContainer1("*", "Phone no", true, false, _phoneController),
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: cashContainer1(
+                            "*", "Phone no", true, false, _phoneController),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left:8.0,right: 8.0),
-                        child: cashContainer1("*", "Address", false, false, _addressController),
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: cashContainer1(
+                            "*", "Address", false, false, _addressController),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left:8.0,right: 8.0),
-                        child: cashContainer1("", "Credit Amount", true, false, _creditAmountController),
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: cashContainer1("", "Credit Amount", true, false,
+                            _creditAmountController),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Container(
+                          width: 388,
+                          child: Column(
+                            children: [
+                              DottedBorder(
+                                color: Color(0xFF728ABE),
+                                // Border color
+                                strokeWidth: 2,
+                                // Border width
+                                borderType: BorderType.RRect,
+                                // Rounded rectangle border
+                                // radius: Radius.circular(999),
+                                // Border radius
+                                // padding: EdgeInsets.all(5), // Padding around the border
+                                child: GestureDetector(
+                                  onTap: () {},
+                                  child: _image == null
+                                      ? GestureDetector(
+                                          onTap: () {
+                                            _pickImage();
+                                          },
+                                          child: Container(
+                                            width: 396,
+                                            // Container width
+                                            height: 66,
+                                            // Container height
+                                            // decoration: BoxDecoration(
+                                            //   color: Color(0xFFFDE3E5),
+                                            //   // borderRadius: BorderRadius.circular(999), // Border radius
+                                            // ), // Background color
+                                            child: Column(
+                                              children: [
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                                Icon(Icons.camera_alt),
+                                                Text(
+                                                  'Take Photo',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    color: Color(0xFF7A7A7A),
+                                                    fontSize: 16,
+                                                    fontFamily: 'Mulish',
+                                                    fontWeight: FontWeight.w700,
+                                                    height: 0,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      : Stack(
+                                          children: [
+                                            Container(
+                                              width: 396,
+                                              height: 200,
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                  image: FileImage(_image!),
+                                                  // Assuming _image is your image
+                                                  fit: BoxFit.fitHeight,
+                                                ),
+                                              ),
+                                            ),
+                                            Positioned(
+                                              top: 10,
+                                              // Adjust the top position as needed
+                                              right: 10,
+                                              // Adjust the right position as needed
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  setState(() {
+                                                    _image = null;
+                                                  }); // Add your logic to remove the image here
+                                                },
+                                                child: Icon(
+                                                  Icons.close,
+                                                  // You can change the icon to your preference
+                                                  color: Colors
+                                                      .red, // You can change the color to your preference
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
               ),
             ),
-
-            Positioned(
-              left: 25,
-              right: 25,
-              top: 500,
-              child: Container(
-                width: 388,
-                child: Column(
-                  children: [
-                    DottedBorder(
-                      color: Color(0xFF728ABE),
-                      // Border color
-                      strokeWidth: 2,
-                      // Border width
-                      borderType: BorderType.RRect,
-                      // Rounded rectangle border
-                      // radius: Radius.circular(999),
-                      // Border radius
-                      // padding: EdgeInsets.all(5), // Padding around the border
-                      child: GestureDetector(
-                        onTap: () {
-                        },
-                        child: _image == null
-                            ? GestureDetector(
-                              onTap: (){
-                                _pickImage();
-
-                              },
-                              child: Container(
-                                  width: 396,
-                                  // Container width
-                                  height: 66,
-                                  // Container height
-                                  // decoration: BoxDecoration(
-                                  //   color: Color(0xFFFDE3E5),
-                                  //   // borderRadius: BorderRadius.circular(999), // Border radius
-                                  // ), // Background color
-                                  child: Column(
-                                    children: [
-                                      SizedBox(
-                                        height: 15,
-                                      ),
-                                      Icon(Icons.camera_alt),
-                                      Text(
-                                        'Take Photo',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Color(0xFF7A7A7A),
-                                          fontSize: 16,
-                                          fontFamily: 'Mulish',
-                                          fontWeight: FontWeight.w700,
-                                          height: 0,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                            )
-                            : Stack(
-                                children: [
-                                  Container(
-                                    width: 396,
-                                    height: 200,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: FileImage(_image!),
-                                        // Assuming _image is your image
-                                        fit: BoxFit.fitHeight,
-                                      ),
-                                    ),
-                                  ),
-                                  Positioned(
-                                    top:
-                                        10, // Adjust the top position as needed
-                                    right:
-                                        10, // Adjust the right position as needed
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          _image = null;
-                                        });// Add your logic to remove the image here
-                                      },
-                                      child: Icon(
-                                        Icons.close,
-                                        // You can change the icon to your preference
-                                        color: Colors
-                                            .red, // You can change the color to your preference
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            //
+            // Positioned(
+            //   left: 25,
+            //   right: 25,
+            //   top: 500,
+            //   child: ,
+            // ),
           ],
         ),
       ),
     );
   }
-  Widget cashContainer1(String strText,String hints,bool star,bool profile,TextEditingController controller ) {
+
+  Widget cashContainer1(String strText, String hints, bool star, bool profile,
+      TextEditingController controller) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -336,38 +346,47 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
             Expanded(
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 2.0),
-                child: TextFormField(
+                child: TextField(
                   controller: controller, // Add this line to bind the controller
-
+                  cursorColor: Colors.red, // Set the cursor color to red
                   style: TextStyle(
-                    color:  Color(0xFF939598),
+                    color: Color(0xFF939598),
                     fontSize: 16,
                     fontFamily: 'Mulish',
                     fontWeight: FontWeight.w500,
                     height: 0,
-                    // overflow: ,
                   ),
                   decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: hints,
-
-                      hintStyle: TextStyle(color: Color(0xFF939598) )
+                    // focusedBorder: LexicalFocusOrder(
+                    //   borderSide: BorderSide(color: Colors.red), // Set the cursor color to red
+                    // ),
+                    // enabledBorder: UnderlineInputBorder(
+                    //   borderSide: BorderSide(color: Colors.red), // Set the cursor color to red
+                    // ),
+                    border: InputBorder.none,
+                    hintText: hints,
+                    hintStyle: TextStyle(color: Color(0xFF939598)),
                   ),
                 ),
               ),
             ),
-            Visibility(visible:profile,child: Container(
-              height: 34,
-              width: 34,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.asset("assets/icons/profile.png",color:  Color(0xFF939598),),
+            Visibility(
+              visible: profile,
+              child: Container(
+                height: 34,
+                width: 34,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset(
+                    "assets/icons/profile.png",
+                    color: Color(0xFF939598),
+                  ),
+                ),
               ),
-            ),)
+            )
           ],
         ),
       ),
     );
   }
-
 }

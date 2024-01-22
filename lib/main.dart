@@ -12,6 +12,7 @@ import 'package:untitled/screens/cashpayment/cash_payment.dart';
 import 'package:untitled/screens/creaditpayment/creadit_payment.dart';
 import 'package:untitled/screens/customerlist/customerList2.dart';
 import 'package:untitled/screens/customerlist/customer_list.dart';
+import 'package:untitled/screens/customerlist/customer_list3.dart';
 import 'package:untitled/screens/customersalehistory/customer_sale_history.dart';
 import 'package:untitled/screens/customersalehistory/customer_sale_history001.dart';
 import 'package:untitled/screens/dashboard/dashboard.dart';
@@ -58,7 +59,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: NewSale(),
+        home: Dashboard(),
       ),
     );
   }

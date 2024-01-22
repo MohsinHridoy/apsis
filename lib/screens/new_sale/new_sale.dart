@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled/model/customerlist/customerlist.dart';
 import 'package:untitled/model/peoductList/productlist.dart';
 import 'package:untitled/screens/cashpayment/cash_payment.dart';
@@ -54,6 +56,7 @@ class _NewSaleState extends State<NewSale> {
   List<TextEditingController> controllers = [];
   bool _searchIconVisible = true;
   bool firstContainerVisible = false;
+  bool searchItemVisible = false;
   TextEditingController _textEditingController = TextEditingController();
 
   @override
@@ -171,6 +174,7 @@ class _NewSaleState extends State<NewSale> {
               ),
 
               //
+              if (productProvider.addedItems.length > 0)
               Flexible(
                 child: SingleChildScrollView(
                   child: Consumer<NewSellProvider>(
@@ -179,18 +183,21 @@ class _NewSaleState extends State<NewSale> {
                     },
                   ),
                 ),
-              ),
+              )
+              else
+                Container()
             ],
           ),
         ),
         if (productProvider.filteredItems.length > 0)
           Positioned(
-            top: 165,
+            top: 172,
             left: 20,
             right: 20,
             child: Consumer<NewSellProvider>(
               builder: (context, provider, child) {
                 // Your widget code that depends on provider state
+
                 return searchItem(
                   provider,
                   // other parameters...
@@ -208,196 +215,208 @@ class _NewSaleState extends State<NewSale> {
   }
 
   Widget searchItem(NewSellProvider filteredItems) {
-    return Container(
-      width: 388,
-      height: 176,
-      decoration: ShapeDecoration(
-        color: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5),
-        ),
-        shadows: [
-          BoxShadow(
-            color: Color(0x59293072),
-            blurRadius: 22,
-            offset: Offset(2, 7),
-            spreadRadius: -2,
+    return GestureDetector(
+      onTap: (){
+        // setState(() {
+        //   searchItemVisible=false;
+        //
+        // });
+        filteredItems.toggleSearchItemVisibility();
+      },
+      child: Visibility(
+        visible: filteredItems.searchItemVisible,
+        child: Container(
+          width: 388,
+          height: filteredItems.filteredItems.length * 50.0, // Set a fixed value based on your item's height
+          decoration: ShapeDecoration(
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
+            shadows: [
+              BoxShadow(
+                color: Color(0x59293072),
+                blurRadius: 22,
+                offset: Offset(2, 7),
+                spreadRadius: -2,
+              ),
+            ],
           ),
-        ],
-      ),
-      child: ListView.builder(
-        itemCount: filteredItems.filteredItems.length,
-        // The number of items in your list
-        itemBuilder: (BuildContext context, int index) {
-          // This is a callback function that builds each item in the list
-          // You can use the 'index' to access the data for the current item
-          return Container(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: ListView.builder(
+            itemCount: filteredItems.filteredItems.length,
+            // The number of items in your list
+            itemBuilder: (BuildContext context, int index) {
+              // This is a callback function that builds each item in the list
+              // You can use the 'index' to access the data for the current item
+              return Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          // Container(
-                          //   width: 43,
-                          //   height: 43,
-                          //   decoration: ShapeDecoration(
-                          //     image: DecorationImage(
-                          //       image: AssetImage(filteredItems[index]
-                          //           .image),
-                          //       fit: BoxFit.fill,
-                          //     ),
-                          //     shape: OvalBorder(),
-                          //   ),
-                          // ),
+                          Row(
+                            children: [
+                              // Container(
+                              //   width: 43,
+                              //   height: 43,
+                              //   decoration: ShapeDecoration(
+                              //     image: DecorationImage(
+                              //       image: AssetImage(filteredItems[index]
+                              //           .image),
+                              //       fit: BoxFit.fill,
+                              //     ),
+                              //     shape: OvalBorder(),
+                              //   ),
+                              // ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      filteredItems.filteredItems[index].title,
+                                      style: TextStyle(
+                                        color: Color(0xFF282828),
+                                        fontSize: 14,
+                                        fontFamily: 'Mulish',
+                                        fontWeight: FontWeight.w500,
+                                        height: 0,
+                                      ),
+                                    ),
+                                    Text(
+                                      filteredItems.filteredItems[index].stknmbr,
+                                      style: TextStyle(
+                                        color: Color(0xFF7A7A7A),
+                                        fontSize: 12,
+                                        fontFamily: 'Mulish',
+                                        fontWeight: FontWeight.w500,
+                                        height: 0,
+                                      ),
+                                    ),
+                                    stkItm1(
+                                        '(In Stk: ${filteredItems.filteredItems[index].stknmbr.toString()})',
+                                        Color(0xFF2E7229),
+                                        12),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            child: Row(
                               children: [
-                                Text(
-                                  filteredItems.filteredItems[index].title,
-                                  style: TextStyle(
-                                    color: Color(0xFF282828),
-                                    fontSize: 14,
-                                    fontFamily: 'Mulish',
-                                    fontWeight: FontWeight.w500,
-                                    height: 0,
-                                  ),
+                                Column(
+                                  children: [
+                                    // Text(
+                                    //   "$items[index].amount",
+                                    //   textAlign: TextAlign.right,
+                                    //   style: TextStyle(
+                                    //     color: Color(0xFFEE6161),
+                                    //     fontSize: 14,
+                                    //     fontFamily: 'Mulish',
+                                    //     fontWeight: FontWeight.w600,
+                                    //     height: 0,
+                                    //   ),
+                                    // ),
+                                    // Padding(
+                                    //   padding:
+                                    //   EdgeInsets.only(left: 35.0),
+                                    //   child: Text(
+                                    //     items[index].title,
+                                    //     style: TextStyle(
+                                    //       color: Color(0xFF7A7A7A),
+                                    //       fontSize: 12,
+                                    //       fontFamily: 'Mulish',
+                                    //       fontWeight: FontWeight.w500,
+                                    //       height: 0,
+                                    //     ),
+                                    //   ),
+                                    // )
+                                  ],
                                 ),
-                                Text(
-                                  filteredItems.filteredItems[index].stknmbr,
-                                  style: TextStyle(
-                                    color: Color(0xFF7A7A7A),
-                                    fontSize: 12,
-                                    fontFamily: 'Mulish',
-                                    fontWeight: FontWeight.w500,
-                                    height: 0,
-                                  ),
-                                ),
-                                stkItm1(
-                                    '(In Stk: ${filteredItems.filteredItems[index].stknmbr.toString()})',
-                                    Color(0xFF2E7229),
-                                    12),
+                                if (filteredItems.filteredItems[index].is_Added ==
+                                    false)
+                                  GestureDetector(
+                                    onTap: () {
+
+                                      filteredItems.updateIsAdded(index);
+                                    },
+                                    child: Container(
+                                      width: 66,
+                                      height: 34,
+                                      decoration: ShapeDecoration(
+                                        color: Color(0xFF3868CE),
+                                        shape: RoundedRectangleBorder(
+                                          side: BorderSide(
+                                              width: 1, color: Color(0xFF3868CE)),
+                                          borderRadius: BorderRadius.circular(5),
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          'Add',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontFamily: 'Mulish',
+                                            fontWeight: FontWeight.w700,
+                                            height: 0,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                else
+                                  GestureDetector(
+                                    onTap: () {
+                                      // setState(() {
+                                      //   //productProvider.items[index].is_Added = false;
+                                      //   filterIsAddedResults();
+                                      // });
+                                      filteredItems.updateIsAdded(index);
+                                    },
+                                    child: Container(
+                                      width: 66,
+                                      height: 34,
+                                      decoration: ShapeDecoration(
+                                        color: Color(0xFF7A7A7A),
+                                        shape: RoundedRectangleBorder(
+                                          side: BorderSide(
+                                              width: 1, color: Color(0xFF7A7A7A)),
+                                          borderRadius: BorderRadius.circular(5),
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          'Added',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontFamily: 'Mulish',
+                                            fontWeight: FontWeight.w700,
+                                            height: 0,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )
                               ],
                             ),
                           ),
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Column(
-                              children: [
-                                // Text(
-                                //   "$items[index].amount",
-                                //   textAlign: TextAlign.right,
-                                //   style: TextStyle(
-                                //     color: Color(0xFFEE6161),
-                                //     fontSize: 14,
-                                //     fontFamily: 'Mulish',
-                                //     fontWeight: FontWeight.w600,
-                                //     height: 0,
-                                //   ),
-                                // ),
-                                // Padding(
-                                //   padding:
-                                //   EdgeInsets.only(left: 35.0),
-                                //   child: Text(
-                                //     items[index].title,
-                                //     style: TextStyle(
-                                //       color: Color(0xFF7A7A7A),
-                                //       fontSize: 12,
-                                //       fontFamily: 'Mulish',
-                                //       fontWeight: FontWeight.w500,
-                                //       height: 0,
-                                //     ),
-                                //   ),
-                                // )
-                              ],
-                            ),
-                            if (filteredItems.filteredItems[index].is_Added ==
-                                false)
-                              GestureDetector(
-                                onTap: () {
-
-                                  filteredItems.updateIsAdded(index);
-                                },
-                                child: Container(
-                                  width: 66,
-                                  height: 34,
-                                  decoration: ShapeDecoration(
-                                    color: Color(0xFF3868CE),
-                                    shape: RoundedRectangleBorder(
-                                      side: BorderSide(
-                                          width: 1, color: Color(0xFF3868CE)),
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      'Add',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        fontFamily: 'Mulish',
-                                        fontWeight: FontWeight.w700,
-                                        height: 0,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              )
-                            else
-                              GestureDetector(
-                                onTap: () {
-                                  // setState(() {
-                                  //   //productProvider.items[index].is_Added = false;
-                                  //   filterIsAddedResults();
-                                  // });
-                                  filteredItems.updateIsAdded(index);
-                                },
-                                child: Container(
-                                  width: 66,
-                                  height: 34,
-                                  decoration: ShapeDecoration(
-                                    color: Color(0xFF7A7A7A),
-                                    shape: RoundedRectangleBorder(
-                                      side: BorderSide(
-                                          width: 1, color: Color(0xFF7A7A7A)),
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      'Added',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        fontFamily: 'Mulish',
-                                        fontWeight: FontWeight.w700,
-                                        height: 0,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              )
-                          ],
-                        ),
-                      ),
+                      // customDivider()
+                      Divider()
                     ],
                   ),
-                  // customDivider()
-                  Divider()
-                ],
-              ),
-            ),
-          );
-        },
+                ),
+              );
+            },
+          ),
+        ),
       ),
     );
   }
@@ -407,7 +426,7 @@ class _NewSaleState extends State<NewSale> {
       width: MediaQuery.of(context).size.width,
       height: provider.addedItems.length *
               (heightOfSingleItem + verticalSpacingBetweenItems) +
-          200,
+          230,
       // decoration: ShapeDecoration(
       //   shape: RoundedRectangleBorder(
       //       borderRadius: BorderRadius.circular(5)),
@@ -554,7 +573,7 @@ class _NewSaleState extends State<NewSale> {
                                                     // Update the total price and synchronize the quantity for every item
                                                     updateTotalPrice(
                                                         productProvider
-                                                            .filteredItems[index],
+                                                            .addedItems[index],
                                                         index);
                                                   },
                                                   decoration: InputDecoration(
@@ -645,13 +664,14 @@ class _NewSaleState extends State<NewSale> {
             height: 20,
           ),
           Container(
-            color: Colors.white.withOpacity(0.3),
+            // color: Colors.transparent.withOpacity(0.3),
             child: Column(
               children: [
                 InkWell(
-                  onTap: () {
+                  onTap: () async{
                     setState(() {
-                      _navigateToDetailsScreen1(context, productProvider.items);
+                      saveListToPrefs(productProvider.items);
+                      _navigateToDetailsScreen2(context,);
                     });
                   },
                   child: Padding(
@@ -746,7 +766,12 @@ class _NewSaleState extends State<NewSale> {
       ),
     );
   }
-
+  Future<void> saveListToPrefs(List<ProductList> items) async {
+    final prefs = await SharedPreferences.getInstance();
+    final jsonData = jsonEncode(items.map((item) => item.toJson()).toList());
+    prefs.setString('productList', jsonData);
+    print(jsonData);
+  }
   Widget headerItemTitle() {
     return Container(
       width: 388,
@@ -940,12 +965,21 @@ void _navigateToDetailsScreen(BuildContext context, ProductList item) {
     ),
   );
 }
+//
+// void _navigateToDetailsScreen1(BuildContext context, List<ProductList> item) {
+//   Navigator.push(
+//     context,
+//     MaterialPageRoute(
+//       builder: (context) => CashPayment(items: item),
+//     ),
+//   );
+// }
 
-void _navigateToDetailsScreen1(BuildContext context, List<ProductList> item) {
+void _navigateToDetailsScreen2(BuildContext context) {
   Navigator.push(
     context,
     MaterialPageRoute(
-      builder: (context) => CashPayment(items: item),
+      builder: (context) => CashPayment(),
     ),
   );
 }

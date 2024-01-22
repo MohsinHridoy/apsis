@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/model/customerlist/customerlist.dart';
 import 'package:untitled/screens/addnewcustomer/new_customer.dart';
+import 'package:untitled/screens/cashpayment/cash_payment.dart';
 import 'package:untitled/screens/customersalehistory/customer_sale_history.dart';
 import 'package:untitled/screens/customersalehistory/customer_sale_history001.dart';
+import 'package:untitled/screens/new_sale/new_sale.dart';
 import 'package:untitled/widgets/widgets.dart';
 
-class CustomerList extends StatefulWidget {
+class CustomerList3 extends StatefulWidget {
   final CustomerListDetails? customerDetails;
 
-  const CustomerList({super.key,  this.customerDetails});
+  const CustomerList3({super.key,  this.customerDetails});
 
   @override
-  State<CustomerList> createState() => _CustomerListState();
+  State<CustomerList3> createState() => _CustomerList3State();
 }
 
-class _CustomerListState extends State<CustomerList> {
+class _CustomerList3State extends State<CustomerList3> {
   List<CustomerListDetails> items = [
     CustomerListDetails(
         name: 'Abdul Miah',
@@ -58,9 +60,9 @@ class _CustomerListState extends State<CustomerList> {
     super.initState();
     filteredItems.clear();
     if(widget.customerDetails!=null)
-      {
-        items.add(widget.customerDetails!);
-      }
+    {
+      items.add(widget.customerDetails!);
+    }
     if (widget.customerDetails != null) {
       print(widget.customerDetails!.name);
     }
@@ -157,7 +159,7 @@ class _CustomerListState extends State<CustomerList> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => CustomerSaleHistory(),
+                      builder: (context) => CashPayment(),
                     ),
                   );
 
@@ -176,118 +178,129 @@ class _CustomerListState extends State<CustomerList> {
                         itemBuilder: (BuildContext context, int index) {
                           // This is a callback function that builds each item in the list
                           // You can use the 'index' to access the data for the current item
-                          return Container(
-                            // height: 80,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 25.0),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            width: 43,
-                                            height: 43,
-                                            decoration: ShapeDecoration(
-                                              image: DecorationImage(
-                                                image: AssetImage(
-                                                    items[index].profileImage),
-                                                fit: BoxFit.fill,
-                                              ),
-                                              shape: OvalBorder(),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(left: 8.0),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  items[index].name,
-                                                  style: TextStyle(
-                                                    color: Color(0xFF282828),
-                                                    fontSize: 14,
-                                                    fontFamily: 'Mulish',
-                                                    fontWeight: FontWeight.w500,
-                                                    height: 0,
-                                                  ),
+                          return GestureDetector(
+                            onTap: (){
+                              print(items[index]);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CashPayment(customerDetails:items[index]),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              // height: 80,
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 25.0),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Container(
+                                              width: 43,
+                                              height: 43,
+                                              decoration: ShapeDecoration(
+                                                image: DecorationImage(
+                                                  image: AssetImage(
+                                                      items[index].profileImage),
+                                                  fit: BoxFit.fill,
                                                 ),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(top: 2.0),
-                                                  child: Text(
-                                                    items[index].role,
+                                                shape: OvalBorder(),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 8.0),
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    items[index].name,
                                                     style: TextStyle(
-                                                      color: Color(0xFF7A7A7A),
-                                                      fontSize: 12,
+                                                      color: Color(0xFF282828),
+                                                      fontSize: 14,
                                                       fontFamily: 'Mulish',
                                                       fontWeight: FontWeight.w500,
                                                       height: 0,
                                                     ),
                                                   ),
-                                                )
-                                              ],
+                                                  Padding(
+                                                    padding: const EdgeInsets.only(top: 2.0),
+                                                    child: Text(
+                                                      items[index].role,
+                                                      style: TextStyle(
+                                                        color: Color(0xFF7A7A7A),
+                                                        fontSize: 12,
+                                                        fontFamily: 'Mulish',
+                                                        fontWeight: FontWeight.w500,
+                                                        height: 0,
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
                                             ),
-                                          ),
 
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(right: 30.0),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.end,
-                                              children: [
-                                                Text(
-                                                  items[index].amount.toString(),
-                                                  textAlign: TextAlign.right,
-                                                  style: TextStyle(
-                                                    color: Color(0xFFEE6161),
-                                                    fontSize: 14,
-                                                    fontFamily: 'Mulish',
-                                                    fontWeight: FontWeight.w600,
-                                                    height: 0,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(top: 2.0),
-                                                  child: Text(
-                                                    items[index].creditStatus,
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(right: 30.0),
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.end,
+                                                children: [
+                                                  Text(
+                                                    items[index].amount.toString(),
+                                                    textAlign: TextAlign.right,
                                                     style: TextStyle(
-                                                      color: Color(0xFF7A7A7A),
-                                                      fontSize: 12,
+                                                      color: Color(0xFFEE6161),
+                                                      fontSize: 14,
                                                       fontFamily: 'Mulish',
-                                                      fontWeight:
-                                                      FontWeight.w500,
+                                                      fontWeight: FontWeight.w600,
                                                       height: 0,
                                                     ),
                                                   ),
-                                                )
-                                              ],
+                                                  Padding(
+                                                    padding: const EdgeInsets.only(top: 2.0),
+                                                    child: Text(
+                                                      items[index].creditStatus,
+                                                      style: TextStyle(
+                                                        color: Color(0xFF7A7A7A),
+                                                        fontSize: 12,
+                                                        fontFamily: 'Mulish',
+                                                        fontWeight:
+                                                        FontWeight.w500,
+                                                        height: 0,
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(right: 25.0),
-                                            child: Icon(
-                                              Icons.arrow_forward_ios_outlined,
-                                              size: 15,
-                                            ),
-                                          )
-                                        ],
-                                      ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(right: 25.0),
+                                              child: Icon(
+                                                Icons.arrow_forward_ios_outlined,
+                                                size: 15,
+                                              ),
+                                            )
+                                          ],
+                                        ),
 
 
 
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 1.0,right: 1),
-                                    child: customDivider(),
-                                  )
-                                ],
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 1.0,right: 1),
+                                      child: customDivider(),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           );
@@ -329,7 +342,6 @@ class _CustomerListState extends State<CustomerList> {
                       CustomerListDetails currentItem = filteredItems.length > 0 ? filteredItems[index] : items[index];
 
                       // Check if the item's name contains the search query
-                      // Check if the item's name contains the search query
                       String name = currentItem.name;
                       String role = currentItem.role;
 
@@ -344,7 +356,7 @@ class _CustomerListState extends State<CustomerList> {
                               children: [
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
                                       children: [
@@ -364,7 +376,7 @@ class _CustomerListState extends State<CustomerList> {
                                         Padding(
                                           padding: const EdgeInsets.only(left: 8.0),
                                           child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               // Text(
                                               //   filteredItems[index].name,
@@ -409,7 +421,7 @@ class _CustomerListState extends State<CustomerList> {
                                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                         children: [
                                           Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                                            crossAxisAlignment: CrossAxisAlignment.end,
 
                                             children: [
 
@@ -426,7 +438,7 @@ class _CustomerListState extends State<CustomerList> {
                                               ),
                                               Padding(
                                                 padding:
-                                                    EdgeInsets.only(left: 35.0),
+                                                EdgeInsets.only(left: 35.0),
                                                 child: Text(
                                                   items[index].creditStatus,
                                                   style: TextStyle(
@@ -447,7 +459,7 @@ class _CustomerListState extends State<CustomerList> {
                                           //   Icons.arrow_forward_ios_outlined,
                                           //   size: 15,
                                           // )
-                                          
+
                                           Image.asset("assets/icons/left_arrow2.png",width: 20,height: 20,)
                                         ],
                                       ),
@@ -465,10 +477,10 @@ class _CustomerListState extends State<CustomerList> {
                 ),
               )
             else
-              // Widget to show when filteredItems.length is not greater than 0
+            // Widget to show when filteredItems.length is not greater than 0
               Container(
-                  // Replace with your widget configuration
-                  ),
+                // Replace with your widget configuration
+              ),
 
             // Overlay container
             Positioned(

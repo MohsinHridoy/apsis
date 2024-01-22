@@ -20,6 +20,16 @@ class _ReceiveCashState extends State<ReceiveCash> {
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
   );
+  double originalValue = 16547.0;
+  TextEditingController controller = TextEditingController();
+  double calculatedValue=0;
+
+  @override
+  void initState() {
+    super.initState();
+    // Set the initial value after creating the TextEditingController
+    controller.text = '1000';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -152,8 +162,9 @@ class _ReceiveCashState extends State<ReceiveCash> {
                                           alignment: Alignment.centerRight,
                                           child: Padding(
                                             padding: const EdgeInsets.all(8.0),
-                                            child: Text(
-                                              '1000.0',
+                                            child: TextFormField(
+                                              controller: controller,
+                                              keyboardType: TextInputType.number, // Set the keyboard type as needed
                                               textAlign: TextAlign.right,
                                               style: TextStyle(
                                                 color: Color(0xFF282828),
@@ -162,6 +173,24 @@ class _ReceiveCashState extends State<ReceiveCash> {
                                                 fontWeight: FontWeight.w500,
                                                 height: 0,
                                               ),
+                                              decoration: InputDecoration(
+                                                border: InputBorder.none,
+                                                contentPadding: EdgeInsets.zero,
+                                              ),
+                                              onChanged: (value) {
+                                                // Parse the input value to a double
+
+
+                                                // Use the calculated value as needed (for example, print it)
+                                                print(calculatedValue);
+                                                setState(() {
+                                                  double inputValue = double.tryParse(value) ?? 0.0;
+
+                                                  // Calculate the new value based on the original value and the input value
+                                                   calculatedValue = originalValue - inputValue;
+                                                });
+
+                                              },
                                             ),
                                           ),
                                         ),
@@ -198,7 +227,7 @@ class _ReceiveCashState extends State<ReceiveCash> {
                                       width: 10,
                                     ),
                                     Text(
-                                      '৳ 570.0',
+                                      '৳ $calculatedValue',
                                       textAlign: TextAlign.right,
                                       style: TextStyle(
                                         color: Color(0xFFEE6161),
