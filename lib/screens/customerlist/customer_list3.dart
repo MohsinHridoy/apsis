@@ -155,13 +155,13 @@ class _CustomerList3State extends State<CustomerList3> {
               bottom: 0,
               child: GestureDetector(
                 onTap: () {
-                  filteredItems.clear();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CashPayment(),
-                    ),
-                  );
+                  // filteredItems.clear();
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => CashPayment(),
+                  //   ),
+                  // );
 
                 },
                 child: Container(

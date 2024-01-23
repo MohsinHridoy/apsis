@@ -305,7 +305,7 @@ class _CustomerListState extends State<CustomerList> {
                 right: 16,
                 child: Container(
                   width: 388,
-                  height: filteredItems.length *80,
+                  height: filteredItems.length *100,
                   decoration: ShapeDecoration(
                     color: Colors.white,
                     shape: RoundedRectangleBorder(

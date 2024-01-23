@@ -119,13 +119,13 @@ class _NewSaleState extends State<NewSale> {
     productProvider.filterSearchResults(query);
   }
 
-  void filterIsAddedResults() {
-    List<ProductList> searchResults =
-        productProvider.items.where((item) => item.is_Added == false).toList();
-    // No need to use setState here, just update the provider's state
-    // and let listeners (widgets using this provider) rebuild accordingly.
-    productProvider.updateSelectedItems(searchResults);
-  }
+  // void filterIsAddedResults() {
+  //   List<ProductList> searchResults =
+  //       productProvider.items.where((item) => item.is_Added == false).toList();
+  //   // No need to use setState here, just update the provider's state
+  //   // and let listeners (widgets using this provider) rebuild accordingly.
+  //   productProvider.updateSelectedItems(searchResults);
+  // }
 
   Widget build(BuildContext context) {
     productProvider = Provider.of<NewSellProvider>(
@@ -244,10 +244,19 @@ class _NewSaleState extends State<NewSale> {
           ),
           child: ListView.builder(
             itemCount: filteredItems.filteredItems.length,
+
             // The number of items in your list
             itemBuilder: (BuildContext context, int index) {
               // This is a callback function that builds each item in the list
               // You can use the 'index' to access the data for the current item
+              ProductList currentItem = filteredItems.filteredItems.length > 0 ? filteredItems.filteredItems[index] : filteredItems.items[index];
+
+              // Check if the item's name contains the search query
+              // Check if the item's name contains the search query
+              String name = currentItem.title;
+              // String role = currentItem.role;
+
+              List<TextSpan> textSpans = highlightText(name, filteredItems.searchQuery);
               return Container(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -275,14 +284,25 @@ class _NewSaleState extends State<NewSale> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      filteredItems.filteredItems[index].title,
-                                      style: TextStyle(
-                                        color: Color(0xFF282828),
-                                        fontSize: 14,
-                                        fontFamily: 'Mulish',
-                                        fontWeight: FontWeight.w500,
-                                        height: 0,
+                                    // Text(
+                                    //   filteredItems.filteredItems[index].title,
+                                    //   style: TextStyle(
+                                    //     color: Color(0xFF282828),
+                                    //     fontSize: 14,
+                                    //     fontFamily: 'Mulish',
+                                    //     fontWeight: FontWeight.w500,
+                                    //     height: 0,
+                                    //   ),
+                                    // ),
+                                    RichText(
+                                      text: TextSpan(
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: 'Mulish',
+                                          fontWeight: FontWeight.w500,
+                                          color: Color(0xFF282828),
+                                        ),
+                                        children: textSpans,
                                       ),
                                     ),
                                     Text(
@@ -341,7 +361,7 @@ class _NewSaleState extends State<NewSale> {
                                     false)
                                   GestureDetector(
                                     onTap: () {
-
+                                      print(productProvider.addedItems.length);
                                       filteredItems.updateIsAdded(index);
                                     },
                                     child: Container(
@@ -438,11 +458,11 @@ class _NewSaleState extends State<NewSale> {
             padding: const EdgeInsets.only(left: 18.0, right: 18.0, top: 0),
             child: Container(
               color: Colors.white,
-              height: productProvider.addedItems.length *
+              height: provider.addedItems.length *
                   (heightOfSingleItem + verticalSpacingBetweenItems),
               child: ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: productProvider.addedItems.length,
+                itemCount: provider.addedItems.length,
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
                     // behavior: HitTestBehavior.translucent,
@@ -468,10 +488,10 @@ class _NewSaleState extends State<NewSale> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    stkItm1(productProvider.addedItems[index].title,
+                                    stkItm1(provider.addedItems[index].title,
                                         Color(0xFF282828), 16),
                                     stkItm1(
-                                        productProvider.addedItems[index].stknmbr
+                                        provider.addedItems[index].stknmbr
                                             .toString(),
                                         Color(0xFF7A7A7A),
                                         14),
@@ -490,11 +510,11 @@ class _NewSaleState extends State<NewSale> {
                                       onTap: () {
                                         // Handle the click event for '-'
                                         decreaseQuantity(
-                                            productProvider.addedItems[index],
+                                            provider.addedItems[index],
                                             index);
                                         print(
                                             "++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                                        print(productProvider
+                                        print(provider
                                             .filteredItems[index].quantity
                                             .toString());
                                       },
@@ -559,8 +579,7 @@ class _NewSaleState extends State<NewSale> {
                                                 padding: const EdgeInsets.only(
                                                     right: 4.0, left: 4),
                                                 child: TextFormField(
-                                                  controller:
-                                                      controllers[index],
+                                                  controller: controllers[index],
                                                   textAlign: TextAlign.right,
                                                   style: TextStyle(
                                                     color: Color(0xFF282828),
@@ -570,16 +589,14 @@ class _NewSaleState extends State<NewSale> {
                                                     height: 0,
                                                   ),
                                                   onChanged: (newText) {
-                                                    // Update the total price and synchronize the quantity for every item
-                                                    updateTotalPrice(
-                                                        productProvider
-                                                            .addedItems[index],
-                                                        index);
+                                                    // Update the quantity for the corresponding item
+                                                    int newQuantity = int.tryParse(newText) ?? 0;
+                                                    controllers[index].text=newQuantity.toString();
+                                                    productProvider.updateQuantity(index, newQuantity);
                                                   },
-                                                  decoration: InputDecoration(
-                                                    hintText:
-                                                        'Quantity: ${productProvider.filteredItems[index].quantity}', // Set the hintText dynamically
-                                                  ),
+                                                  // decoration: InputDecoration(
+                                                  //   hintText: 'Quantity: ${provider.addedItems[index].quantity}',
+                                                  // ),
                                                 ),
                                               ),
                                             ),
@@ -591,9 +608,11 @@ class _NewSaleState extends State<NewSale> {
                                       onTap: () {
                                         // Handle the click event for '+'
                                         increaseQuantity(
-                                            productProvider.filteredItems[index],
+                                            provider.filteredItems[index],
                                             index);
-                                        print(productProvider
+                                        int updatedQuantity = provider.addedItems[index].quantity;
+                                        controllers[index].text = updatedQuantity.toString();
+                                        print(provider
                                             .filteredItems[index].quantity);
                                       },
                                       child: Container(
@@ -634,7 +653,7 @@ class _NewSaleState extends State<NewSale> {
                                 child: Container(
                                   width: 50,
                                   child: Text(
-                                    '৳${(productProvider.filteredItems[index].quantity * productProvider.filteredItems[index].unitprice).toString()}',
+                                    '৳${(provider.addedItems[index].quantity * provider.addedItems[index].unitprice).toString()}',
                                     textAlign: TextAlign.right,
                                     style: TextStyle(
                                       color: Color(0xFF282828),
@@ -651,7 +670,7 @@ class _NewSaleState extends State<NewSale> {
                           SizedBox(
                             height: 15,
                           ),
-                          if (productProvider.filteredItems.length > 1) horizontalLine()
+                          if (provider.addedItems.length > 1) horizontalLine()
                         ],
                       ),
                     ),
@@ -670,7 +689,7 @@ class _NewSaleState extends State<NewSale> {
                 InkWell(
                   onTap: () async{
                     setState(() {
-                      saveListToPrefs(productProvider.items);
+                      saveListToPrefs(productProvider.addedItems);
                       _navigateToDetailsScreen2(context,);
                     });
                   },
@@ -766,6 +785,44 @@ class _NewSaleState extends State<NewSale> {
       ),
     );
   }
+  List<TextSpan> highlightText(String text, String query) {
+    List<TextSpan> spans = [];
+
+    // Handle the case when the query is empty
+    if (query.isEmpty) {
+      spans.add(TextSpan(text: text));
+      return spans;
+    }
+
+    // Perform case-insensitive search
+    String lowerCaseText = text.toLowerCase();
+    String lowerCaseQuery = query.toLowerCase();
+
+    int start = 0;
+    while (start < text.length) {
+      int matchIndex = lowerCaseText.indexOf(lowerCaseQuery, start);
+      if (matchIndex == -1) {
+        spans.add(TextSpan(text: text.substring(start)));
+        break;
+      }
+
+      // Add non-matching text
+      if (matchIndex > start) {
+        spans.add(TextSpan(text: text.substring(start, matchIndex)));
+      }
+
+      // Add matching text with green color
+      spans.add(TextSpan(
+        text: text.substring(matchIndex, matchIndex + query.length),
+        style: TextStyle(color: Colors.green),
+      ));
+
+      start = matchIndex + query.length;
+    }
+
+    return spans;
+  }
+
   Future<void> saveListToPrefs(List<ProductList> items) async {
     final prefs = await SharedPreferences.getInstance();
     final jsonData = jsonEncode(items.map((item) => item.toJson()).toList());

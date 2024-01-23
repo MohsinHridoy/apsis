@@ -3,6 +3,9 @@ import 'package:untitled/model/peoductList/productlist.dart';
 import 'package:async/async.dart';
 
 class NewSellProvider extends ChangeNotifier {
+
+  String searchQuery = ""; // Add this line to declare the searchQuery variable
+
   List<ProductList> _selectedItems = [];
   // final _updateDebouncer = Debouncer(milliseconds: 300); // Adjust the delay as needed
 
@@ -30,16 +33,16 @@ class NewSellProvider extends ChangeNotifier {
     ProductList(
         title: 'Potato Chips',
         productId: '789012',
-        quantity: 10,
+        quantity: 7,
         stknmbr: '250 ml',
-        unitprice: 15,
+        unitprice: 50,
         image: 'assets/images/product2.png',
         productAmount: 150.00,
         is_Added: false),
     ProductList(
         title: 'Potato Cakes',
         productId: '789012',
-        quantity: 10,
+        quantity: 20,
         stknmbr: '250 ml',
         unitprice: 15,
         image: 'assets/images/product2.png',
@@ -225,6 +228,8 @@ class NewSellProvider extends ChangeNotifier {
     if (query.isEmpty) {
       _filteredItems = []; // Set it to an empty list when the query is empty
     } else {
+      searchQuery = query;
+
       _filteredItems = items
           .where(
               (item) => item.title.toLowerCase().contains(query.toLowerCase()))
@@ -243,14 +248,15 @@ class NewSellProvider extends ChangeNotifier {
 
 
   void decreaseQuantity(int index) {
-    if (_filteredItems[index].quantity > 1) {
-      _filteredItems[index].quantity--;
+    if (addedItems[index].quantity > 1) {
+      addedItems[index].quantity--;
       notifyListeners();
     }
   }
 
   void increaseQuantity(int index) {
-    _filteredItems[index].quantity++;
+    addedItems[index].quantity++;
+    print(addedItems[index].quantity);
     notifyListeners();
   }
   void updateIsAdded(int index) {
@@ -269,8 +275,8 @@ class NewSellProvider extends ChangeNotifier {
 
   void updateTotalPrice(int index) {
     double totalPrice =
-        (_filteredItems[index].quantity * _filteredItems[index].unitprice).toDouble();
-    _filteredItems[index].productAmount = totalPrice;
+        (addedItems[index].quantity * addedItems[index].unitprice).toDouble();
+    addedItems[index].productAmount = totalPrice;
     notifyListeners();
   }
 

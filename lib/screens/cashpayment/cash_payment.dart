@@ -34,12 +34,12 @@ class _CashPaymentState extends State<CashPayment> {
   var sum = 0;
   late List<dynamic> decodedData;
   @override
-  void initState() {
+  void initState()  {
     super.initState();
     initializeData();
 
   }
-  void initializeData() async {
+  Future initializeData() async {
     await getListFromPrefs();
 
     if (widget.customerDetails != null) {
@@ -49,7 +49,6 @@ class _CashPaymentState extends State<CashPayment> {
 
 
       // Check if productList1 is still null, and set it to an empty list
-      productList1 = [];
 
       updateSum();
       print(productList1.length);
@@ -297,11 +296,9 @@ class _CashPaymentState extends State<CashPayment> {
                               (heightOfSingleItem + verticalSpacingBetweenItems),
                           // height: 200,
                           // color: Colors.white,
-                          child: Column(
-                            children: [
-                              Expanded(
-                                child: ListView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
+                          child:
+                              ListView.builder(
+                                  // physics: NeverScrollableScrollPhysics(),
                                   itemCount: productList1.length,
                                   itemBuilder: (BuildContext context, int index) {
                                     return Container(
@@ -389,9 +386,8 @@ class _CashPaymentState extends State<CashPayment> {
                                     );
                                   },
                                 ),
-                              ),
-                            ],
-                          ),
+
+
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 20.0,right:20),
