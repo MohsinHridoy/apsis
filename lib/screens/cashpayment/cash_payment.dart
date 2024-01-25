@@ -23,8 +23,9 @@ class CashPayment extends StatefulWidget {
 class _CashPaymentState extends State<CashPayment> {
    // CustomerListDetails? customerDetails;
  late List<ProductList> productList1=[];
+ // late List<ProductList> productList1=[];
   double heightOfSingleItem =
-      80.0; // Change the value based on your item height
+      65.0; // Change the value based on your item height
   double verticalSpacingBetweenItems = 8.0;
 
   // var creditAmount = 0; // New variable to hold the calculated credit amount
@@ -50,7 +51,6 @@ class _CashPaymentState extends State<CashPayment> {
 
       // Check if productList1 is still null, and set it to an empty list
 
-      updateSum();
       print(productList1.length);
       print("+++++++++++++++++++++++++++++++++++++++++");
       print(sum);
@@ -76,6 +76,8 @@ class _CashPaymentState extends State<CashPayment> {
           .cast<ProductList>());
 
       print("ProductList Information:");
+      updateSum();
+
       for (var product in productList1) {
         print("Title: ${product.title}");
         print("Product ID: ${product.productId}");
@@ -93,6 +95,7 @@ class _CashPaymentState extends State<CashPayment> {
       print(productList1.length);
 
       return productList1;
+
     } else {
       return null;
     }
@@ -211,7 +214,7 @@ class _CashPaymentState extends State<CashPayment> {
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 8.0, right: 8.0, top: 15.0),
-                        child: cashContainer1(context,"*", widget.customerDetails?.name ??"", true),
+                        child: cashContainer1(context,"*", widget.customerDetails?.name ??"Customer Name", true),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0, right: 8.0),
@@ -219,7 +222,7 @@ class _CashPaymentState extends State<CashPayment> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                        child: cashContainer1(context,"*", widget.customerDetails?.name??"", false),
+                        child: cashContainer1(context,"*", widget.customerDetails?.name??"Address", false),
                       ),
                     ],
                   ),
@@ -480,8 +483,7 @@ class _CashPaymentState extends State<CashPayment> {
                                               height: 67,
                                               child: Align(
                                                 alignment: Alignment.centerRight,
-                                                child: Expanded(
-                                                  child: TextFormField(
+                                                child: TextFormField(
                                                     keyboardType: TextInputType.number,
                                                     textAlign: TextAlign.right,
                                                     // Align the text to the right
@@ -501,20 +503,31 @@ class _CashPaymentState extends State<CashPayment> {
                                                       double enteredValue =
                                                           double.tryParse(value) ?? 0.0;
 
+                                                      // setState(() {
+                                                      //   creditAmount4 = creditAmount3 =
+                                                      //       sum - enteredValue;
+                                                      //   print(sum);
+                                                      //   print(creditAmount3);
+                                                      //   double enteredValue = double.tryParse(value) ?? 0.0;
+                                                      //
+                                                      //   setState(() {
+                                                      //     // Update the quantity or any other changes to the productList1
+                                                      //   });
+                                                      //   updateSum();
+                                                      //
+                                                      // });
+
                                                       setState(() {
-                                                        // creditAmount4 = creditAmount3 =
-                                                        //     sum - enteredValue;
-                                                        // print(sum);
-                                                        // print(creditAmount3);
+                                                        creditAmount2 = sum - enteredValue;
+                                                        print(creditAmount2);
                                                       });
 
                                                       // Assuming the entered value is the credit amount
-                                                      //creditAmount2 = sum - creditAmount;
-                                                      // print(creditAmount);
+
                                                       // Perform any additional logic with the creditAmount if needed
                                                     },
                                                   ),
-                                                ),
+
                                               ),
                                             ),
                                           ),
@@ -551,11 +564,10 @@ class _CashPaymentState extends State<CashPayment> {
                                     width: 152,
                                     height: 67,
                                     child: Text(
-                                      // (creditAmount3 != null && creditAmount3! > 0)
-                                      //     ? creditAmount3.toString()
-                                      //     : '0',
+                                      (creditAmount2 != null && creditAmount2! > 0)
+                                          ? creditAmount2.toString()
+                                          : '0',
 
-                                      '0',
                                       textAlign: TextAlign.right,
                                       style: TextStyle(
                                         color: Color(0xFF282828),

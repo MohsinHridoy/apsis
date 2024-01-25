@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled/model/peoductList/productlist.dart';
 import 'package:async/async.dart';
 
@@ -8,6 +12,17 @@ class NewSellProvider extends ChangeNotifier {
 
   List<ProductList> _selectedItems = [];
   // final _updateDebouncer = Debouncer(milliseconds: 300); // Adjust the delay as needed
+  TextEditingController? searchController;
+  List<TextEditingController> controllers = [];
+  void initControllers() {
+    searchController = TextEditingController();
+    controllers = List.generate(
+      addedItems.length,
+          (index) => TextEditingController(
+        text: addedItems[index].quantity.toString(),
+      ),
+    );
+  }
 
   List<ProductList> get selectedItems => _selectedItems;
 
@@ -199,6 +214,87 @@ class NewSellProvider extends ChangeNotifier {
         is_Added: false),
   ];
 
+
+
+  void selectAndStoreItem(ProductList selectedItem) async {
+    // Get the existing list from shared preferences
+    List<ProductList>? storedItems = await getStoredItems();
+
+    // If there's no existing list, create a new one
+    storedItems ??= [];
+
+    // Add the selected item to the list
+    storedItems.add(selectedItem);
+
+    // Convert the list of ProductList objects to a list of strings
+    List<String> encodedItems =
+    storedItems.map((item) => json.encode(item.toJson())).toList();
+
+    // Store the updated list in shared preferences
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setStringList('selectedItems', encodedItems);
+
+    print(storedItems.length);
+
+    // Do any other necessary operations with the selected item
+    // ...
+
+    notifyListeners();
+  }
+
+// Retrieve the list of selected items from shared preferences
+  Future<List<ProductList>> getStoredItems() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // Get the stored items as a list of strings
+    List<String>? encodedItems = prefs.getStringList('selectedItems');
+
+    // If there are no stored items, return an empty list
+    if (encodedItems == null) {
+      return [];
+    }
+
+    // Convert the list of strings back to a list of ProductList objects
+    List<ProductList> selectedItems = encodedItems
+        .map((encodedItem) =>
+        ProductList.fromJson(json.decode(encodedItem)))
+        .toList();
+
+    return selectedItems;
+  }
+
+
+
+  void removeStoredItem(int index) async {
+    List<ProductList>? storedItems = await getStoredItems();
+
+    if (storedItems != null && index >= 0 && index < storedItems.length) {
+      storedItems.removeAt(index);
+
+      List<String> encodedItems =
+      storedItems.map((item) => json.encode(item.toJson())).toList();
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setStringList('selectedItems', encodedItems);
+      print(storedItems.length);
+
+
+      notifyListeners();
+    }
+  }
+
+  void removeAllStoredItems() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('selectedItems');
+
+    notifyListeners();
+  }
+
+
+
+
+
+
   List<ProductList> get searchItems => _searchItems;
   List<ProductList> _filteredItems = [];
 
@@ -289,3 +385,4 @@ class NewSellProvider extends ChangeNotifier {
 
 // Add other methods as needed, for example, to add/remove items or update product details.
 }
+

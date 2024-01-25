@@ -20,8 +20,34 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
   TextEditingController _phoneController = TextEditingController();
   TextEditingController _addressController = TextEditingController();
   TextEditingController _creditAmountController = TextEditingController();
+  late FocusNode nameFocusNode;
+  late FocusNode phoneFocusNode;
+  late FocusNode addressFocusNode;
+  late FocusNode creditAmountFocusNode;
   File? _image;
   CustomerListDetails? _customerDetails;
+
+  @override
+  void initState() {
+    super.initState();
+
+
+    nameFocusNode = FocusNode();
+    phoneFocusNode = FocusNode();
+    addressFocusNode = FocusNode();
+    creditAmountFocusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    // Clean up the focus node when the Form is disposed.
+    nameFocusNode.dispose();
+    phoneFocusNode.dispose();
+    addressFocusNode.dispose();
+    creditAmountFocusNode.dispose();
+
+    super.dispose();
+  }
 
   Future<void> _pickImage() async {
     final ImagePicker _picker = ImagePicker();
@@ -182,22 +208,90 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
                         padding: const EdgeInsets.only(
                             left: 8.0, right: 8.0, top: 15.0),
                         child: cashContainer1(
-                            "*", "Customer name", true, false, _nameController),
+                          "*",
+                          "Customer name",
+                          true,
+                          false,
+                          _nameController,
+                          nameFocusNode,
+                        ),
+                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.all(8.0),
+                      //   child: Container(
+                      //     width: 354,
+                      //     height: 60,
+                      //     decoration: ShapeDecoration(
+                      //       color: Colors.pink,
+                      //       shape: RoundedRectangleBorder(
+                      //         side: BorderSide(width: 1, color: Color(0xFF88CADA)),
+                      //         borderRadius: BorderRadius.circular(5),
+                      //       ),
+                      //     ),
+                      //     child: Row(
+                      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //       children: [
+                      //         Expanded(
+                      //           child: Container(
+                      //             padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      //             child: TextField(
+                      //               focusNode: nameFocusNode,
+                      //               autofocus: true,
+                      //               controller: _nameController,
+                      //               // cursorColor: Colors.red,
+                      //               // style: TextStyle(
+                      //               //   color: Color(0xFF939598),
+                      //               //   fontSize: 16,
+                      //               //   fontFamily: 'Mulish',
+                      //               //   fontWeight: FontWeight.w500,
+                      //               //   height: 0,
+                      //               // ),
+                      //               decoration: InputDecoration(
+                      //                 border: InputBorder.none,
+                      //                 hintText: "Customer name",
+                      //                 hintStyle: TextStyle(color: Color(0xFF939598)),
+                      //               ),
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+
+
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                        child: cashContainer1(
+                          "*",
+                          "Phone no",
+                          true,
+                          false,
+                          _phoneController,
+                          phoneFocusNode,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                         child: cashContainer1(
-                            "*", "Phone no", true, false, _phoneController),
+                          "*",
+                          "Address",
+                          false,
+                          false,
+                          _addressController,
+                          addressFocusNode,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                         child: cashContainer1(
-                            "*", "Address", false, false, _addressController),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                        child: cashContainer1("", "Credit Amount", true, false,
-                            _creditAmountController),
+                          "",
+                          "Credit Amount",
+                          true,
+                          false,
+                          _creditAmountController,
+                          creditAmountFocusNode,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(18.0),
@@ -311,7 +405,7 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
   }
 
   Widget cashContainer1(String strText, String hints, bool star, bool profile,
-      TextEditingController controller) {
+      TextEditingController controller,FocusNode focusNode) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -347,15 +441,17 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 2.0),
                 child: TextField(
+                  focusNode: focusNode,
+
                   controller: controller, // Add this line to bind the controller
                   cursorColor: Colors.red, // Set the cursor color to red
-                  style: TextStyle(
-                    color: Color(0xFF939598),
-                    fontSize: 16,
-                    fontFamily: 'Mulish',
-                    fontWeight: FontWeight.w500,
-                    height: 0,
-                  ),
+                  // style: TextStyle(
+                  //   color: Color(0xFF939598),
+                  //   fontSize: 16,
+                  //   fontFamily: 'Mulish',
+                  //   fontWeight: FontWeight.w500,
+                  //   height: 0,
+                  // ),
                   decoration: InputDecoration(
                     // focusedBorder: LexicalFocusOrder(
                     //   borderSide: BorderSide(color: Colors.red), // Set the cursor color to red
@@ -387,6 +483,83 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
           ],
         ),
       ),
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+class MyCustomForm extends StatefulWidget {
+  const MyCustomForm({super.key});
+
+  @override
+  State<MyCustomForm> createState() => _MyCustomFormState();
+}
+
+// Define a corresponding State class.
+// This class holds data related to the form.
+class _MyCustomFormState extends State<MyCustomForm> {
+  // Define the focus node. To manage the lifecycle, create the FocusNode in
+  // the initState method, and clean it up in the dispose method.
+  late FocusNode myFocusNode;
+
+  @override
+  void initState() {
+    super.initState();
+
+    myFocusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    // Clean up the focus node when the Form is disposed.
+    myFocusNode.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Text Field Focus'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            // The first text field is focused on as soon as the app starts.
+            const TextField(
+              autofocus: true,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+              ),
+
+            ),
+            // The second text field is focused on when a user taps the
+            // FloatingActionButton.
+            TextField(
+              focusNode: myFocusNode,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+              ),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        // When the button is pressed,
+        // give focus to the text field using myFocusNode.
+        onPressed: () => myFocusNode.requestFocus(),
+        tooltip: 'Focus Second Text Field',
+        child: const Icon(Icons.edit),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

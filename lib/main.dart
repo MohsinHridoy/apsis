@@ -21,6 +21,7 @@ import 'package:untitled/screens/myStock/my_stock.dart';
 import 'package:untitled/screens/myStock/my_stock001.dart';
 import 'package:untitled/screens/new_sale/new_sale.dart';
 import 'package:untitled/screens/new_sale/new_sale1.dart';
+import 'package:untitled/screens/new_sale/new_sale2.dart';
 import 'package:untitled/screens/otp/otp.dart';
 import 'package:untitled/screens/payment_details/payment_details.dart';
 import 'package:untitled/screens/qcstock/qc_stock.dart';
@@ -59,7 +60,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: CustomerList(),
+        home: NewSale2(),
       ),
     );
   }
