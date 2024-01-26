@@ -59,17 +59,34 @@ List<TextEditingController>? _controllers = [];
   bool firstContainerVisible = false;
   bool searchItemVisible = false;
   TextEditingController _textEditingController = TextEditingController();
+  List<ProductList> storedItems=[];
 
   @override
   void initState() {
     super.initState();
     productProvider = context.read<NewSellProvider>();
+    productProvider.removeAllStoredItems();
 
     productProvider.initControllers();
 
   }
 
+  void someFunction() async {
+    // Assuming you are inside an asynchronous function (marked with async keyword)
 
+    // Create an instance of NewSellProvider (or use an existing one)
+    NewSellProvider provider = NewSellProvider();
+
+    // Make changes to the stored items (add, remove, update)
+
+    // Get the updated list of stored items
+    storedItems = await provider.getStoredItems();
+    print("stored Item leghth :${storedItems.length}");
+    print("stored Item leghth :${storedItems[0].title}");
+
+    // Now you can use the updated storedItems list as needed
+    // ...
+  }
 
   void filterSearchResults(String query) {
     productProvider.filterSearchResults(query);
@@ -123,7 +140,7 @@ List<TextEditingController>? _controllers = [];
               ),
 
               //
-              if (productProvider.addedItems.length > 0)
+              if (storedItems.length > 0)
                 Flexible(
                   child: SingleChildScrollView(
                     child: Consumer<NewSellProvider>(
@@ -215,10 +232,389 @@ List<TextEditingController>? _controllers = [];
     );
   }
 
+  // Widget listItem(NewSellProvider provider) {
+  //   return Container(
+  //     width: MediaQuery.of(context).size.width,
+  //     height: provider.addedItems.length *
+  //         (heightOfSingleItem + verticalSpacingBetweenItems) +
+  //         230,
+  //     // decoration: ShapeDecoration(
+  //     //   shape: RoundedRectangleBorder(
+  //     //       borderRadius: BorderRadius.circular(5)),
+  //     // ),
+  //     child: Column(
+  //       mainAxisAlignment: MainAxisAlignment.start,
+  //       children: [
+  //         Padding(
+  //           padding: const EdgeInsets.only(left: 18.0, right: 18.0, top: 0),
+  //           child: Container(
+  //             color: Colors.white,
+  //             height: provider.addedItems.length *
+  //                 (heightOfSingleItem + verticalSpacingBetweenItems),
+  //             child: ListView.builder(
+  //               physics: NeverScrollableScrollPhysics(),
+  //               itemCount: provider.addedItems.length,
+  //               itemBuilder: (BuildContext context, int index) {
+  //                 return GestureDetector(
+  //                   // behavior: HitTestBehavior.translucent,
+  //                   // Pass the gesture through to the list item
+  //
+  //                   onTap: () {
+  //                     // Handle the click event
+  //                     // _navigateToDetailsScreen(context, items[index]);
+  //                   },
+  //
+  //                   child: Container(
+  //                     padding: EdgeInsets.only(
+  //                         left: 15.0, right: 15.0, bottom: 8.0, top: 1),
+  //                     child: Column(
+  //                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                       children: [
+  //                         Row(
+  //                           // crossAxisAlignment: CrossAxisAlignment.spaceBetween,
+  //                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                           children: [
+  //                             Container(
+  //                               width: 97,
+  //                               child: Column(
+  //                                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                                 children: [
+  //                                   stkItm1(provider.addedItems[index].title,
+  //                                       Color(0xFF282828), 16),
+  //                                   stkItm1(
+  //                                       provider.addedItems[index].stknmbr
+  //                                           .toString(),
+  //                                       Color(0xFF7A7A7A),
+  //                                       14),
+  //                                   // stkItm1(
+  //                                   //     '(In Stk: ${items[index].stknmbr.toString()})',
+  //                                   //     Color(0xFF2E7229),
+  //                                   //     12),
+  //                                 ],
+  //                               ),
+  //                             ),
+  //                             Container(
+  //                               width: 102,
+  //                               child: Row(
+  //                                 children: [
+  //                                   GestureDetector(
+  //                                     onTap: () {
+  //                                       // Handle the click event for '-'
+  //                                       decreaseQuantity(
+  //                                           provider.addedItems[index], index);
+  //                                       print(
+  //                                           "++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+  //                                       print(provider
+  //                                           .addedItems[index].quantity
+  //                                           .toString());
+  //                                     },
+  //                                     child: Container(
+  //                                       width: 31,
+  //                                       height: 42,
+  //                                       decoration: ShapeDecoration(
+  //                                         color: Color(0xFF3868CE),
+  //                                         shape: RoundedRectangleBorder(
+  //                                           side: BorderSide(
+  //                                               width: 1,
+  //                                               color: Color(0xFF3868CE)),
+  //                                           borderRadius:
+  //                                           BorderRadius.circular(10),
+  //                                         ),
+  //                                       ),
+  //                                       child: Center(
+  //                                         child: Text(
+  //                                           '-',
+  //                                           style: TextStyle(
+  //                                             color: Colors.white,
+  //                                             fontSize: 16,
+  //                                             fontFamily: 'Mulish',
+  //                                             fontWeight: FontWeight.w700,
+  //                                             height: 0,
+  //                                           ),
+  //                                         ),
+  //                                       ),
+  //                                     ),
+  //                                   ),
+  //                                   Expanded(
+  //                                     child: Padding(
+  //                                       padding: const EdgeInsets.all(0.0),
+  //                                       child: Container(
+  //                                         height: 42,
+  //                                         width: 20,
+  //                                         child: Center(
+  //                                           child: Padding(
+  //                                             padding:
+  //                                             const EdgeInsets.all(1.0),
+  //                                             // child: Text(
+  //                                             //   items[index]
+  //                                             //       .quantity
+  //                                             //       .toString(),
+  //                                             //   textAlign:
+  //                                             //       TextAlign
+  //                                             //           .center,
+  //                                             //   style:
+  //                                             //       TextStyle(
+  //                                             //     color: Color(
+  //                                             //         0xFF282828),
+  //                                             //     fontSize: 16,
+  //                                             //     fontFamily:
+  //                                             //         'Mulish',
+  //                                             //     fontWeight:
+  //                                             //         FontWeight
+  //                                             //             .w500,
+  //                                             //     height: 0,
+  //                                             //   ),
+  //                                             // ),
+  //                                             child: Padding(
+  //                                               padding: const EdgeInsets.only(
+  //                                                   right: 4.0, left: 4),
+  //                                               // child: TextFormField(
+  //                                               //   controller:
+  //                                               //       _controllers1[index],
+  //                                               //   textAlign: TextAlign.right,
+  //                                               //   style: TextStyle(
+  //                                               //     color: Color(0xFF282828),
+  //                                               //     fontSize: 16,
+  //                                               //     fontFamily: 'Mulish',
+  //                                               //     fontWeight: FontWeight.w500,
+  //                                               //     height: 0,
+  //                                               //   ),
+  //                                               //   onChanged: (newText) {
+  //                                               //     // Update the quantity for the corresponding item
+  //                                               //     int newQuantity =
+  //                                               //         int.tryParse(newText) ??
+  //                                               //             0;
+  //                                               //     _controllers1[index].text =
+  //                                               //         newQuantity.toString();
+  //                                               //     productProvider
+  //                                               //         .updateQuantity(
+  //                                               //             index, newQuantity);
+  //                                               //   },
+  //                                               //   // decoration: InputDecoration(
+  //                                               //   //   hintText: 'Quantity: ${provider.addedItems[index].quantity}',
+  //                                               //   // ),
+  //                                               // ),
+  //
+  //
+  //                                               child: provider.controllers.isNotEmpty && provider.controllers.length > index
+  //                                                   ? TextFormField(
+  //                                                 controller:  _controllers![index],
+  //                                                 // controller:  provider.controllers[index],
+  //
+  //                                                 textAlign: TextAlign.right,
+  //                                                 style: TextStyle(
+  //                                                   color: Color(0xFF282828),
+  //                                                   fontSize: 16,
+  //                                                   fontFamily: 'Mulish',
+  //                                                   fontWeight: FontWeight.w500,
+  //                                                   height: 0,
+  //                                                 ),
+  //                                                 onChanged: (newText) {
+  //                                                   int newQuantity = int.tryParse(newText) ?? 0;
+  //                                                   provider.controllers[index].text = newQuantity.toString();
+  //                                                   provider.updateQuantity(index, newQuantity);
+  //                                                 },
+  //                                               )
+  //                                                   : Container(),                                               ),
+  //                                           ),
+  //                                         ),
+  //                                       ),
+  //                                     ),
+  //                                   ),
+  //                                   GestureDetector(
+  //                                     onTap: () {
+  //                                       // Handle the click event for '+'
+  //                                       increaseQuantity(
+  //                                           provider.addedItems[index],
+  //                                           index);
+  //                                       int updatedQuantity =
+  //                                           provider.addedItems[index].quantity;
+  //                                       provider.controllers[index].text =
+  //                                           updatedQuantity.toString();
+  //                                       print(provider
+  //                                           .addedItems[index].quantity);
+  //                                     },
+  //                                     child: Container(
+  //                                       width: 31,
+  //                                       height: 42,
+  //                                       decoration: ShapeDecoration(
+  //                                         color: Color(0xFF3868CE),
+  //                                         shape: RoundedRectangleBorder(
+  //                                           side: BorderSide(
+  //                                               width: 1,
+  //                                               color: Color(0xFF3868CE)),
+  //                                           borderRadius:
+  //                                           BorderRadius.circular(10),
+  //                                         ),
+  //                                       ),
+  //                                       child: Center(
+  //                                         child: Text(
+  //                                           '+',
+  //                                           style: TextStyle(
+  //                                             color: Colors.white,
+  //                                             fontSize: 16,
+  //                                             fontFamily: 'Mulish',
+  //                                             fontWeight: FontWeight.w700,
+  //                                             height: 0,
+  //                                           ),
+  //                                         ),
+  //                                       ),
+  //                                     ),
+  //                                   ),
+  //                                 ],
+  //                               ),
+  //                             ),
+  //                             SizedBox(
+  //                               width: 3,
+  //                             ),
+  //                             Padding(
+  //                               padding: const EdgeInsets.only(right: 8.0),
+  //                               child: Container(
+  //                                 width: 50,
+  //                                 child: Text(
+  //                                   '৳${(provider.addedItems[index].quantity * provider.addedItems[index].unitprice).toString()}',
+  //                                   textAlign: TextAlign.right,
+  //                                   style: TextStyle(
+  //                                     color: Color(0xFF282828),
+  //                                     fontSize: 16,
+  //                                     fontFamily: 'Mulish',
+  //                                     fontWeight: FontWeight.w500,
+  //                                     height: 0,
+  //                                   ),
+  //                                 ),
+  //                               ),
+  //                             )
+  //                           ],
+  //                         ),
+  //                         SizedBox(
+  //                           height: 15,
+  //                         ),
+  //                         if (provider.addedItems.length > 1) horizontalLine()
+  //                       ],
+  //                     ),
+  //                   ),
+  //                 );
+  //               },
+  //             ),
+  //           ),
+  //         ),
+  //         SizedBox(
+  //           height: 20,
+  //         ),
+  //         Container(
+  //           // color: Colors.transparent.withOpacity(0.3),
+  //           child: Column(
+  //             children: [
+  //               InkWell(
+  //                 onTap: () async {
+  //                   setState(() {
+  //                     saveListToPrefs(productProvider.addedItems);
+  //                     _navigateToDetailsScreen2(
+  //                       context,
+  //                     );
+  //                   });
+  //                 },
+  //                 child: Padding(
+  //                   padding: const EdgeInsets.only(left: 18.0, right: 18),
+  //                   child: Container(
+  //                     width: 388,
+  //                     height: 56,
+  //                     decoration: ShapeDecoration(
+  //                       color: Color(0xFF3868CE),
+  //                       shape: RoundedRectangleBorder(
+  //                         borderRadius: BorderRadius.circular(999),
+  //                       ),
+  //                       shadows: [
+  //                         BoxShadow(
+  //                           color: Color(0x59293072),
+  //                           blurRadius: 22,
+  //                           offset: Offset(2, 7),
+  //                           spreadRadius: -2,
+  //                         )
+  //                       ],
+  //                     ),
+  //                     child: Center(
+  //                       child: Text(
+  //                         'Payment',
+  //                         textAlign: TextAlign.center,
+  //                         style: TextStyle(
+  //                           color: Colors.white,
+  //                           fontSize: 16,
+  //                           fontFamily: 'Mulish',
+  //                           fontWeight: FontWeight.w700,
+  //                           height: 0,
+  //                         ),
+  //                       ),
+  //                     ),
+  //                   ),
+  //                 ),
+  //               ),
+  //               SizedBox(
+  //                 height: 10,
+  //               ),
+  //               Padding(
+  //                 padding: const EdgeInsets.only(left: 18.0, right: 18.0),
+  //                 child: InkWell(
+  //                   onTap: () {
+  //                     // setState(() {
+  //                     //   // for (var item in productProvider.items) {
+  //                     //   //   item.quantity = 1;
+  //                     //   // }
+  //                     //
+  //                     // });
+  //                     productProvider.addedItems.length = 0;
+  //                     print(productProvider.addedItems.length);
+  //                   },
+  //                   child: DottedBorder(
+  //                     color: Color(0xFFEE6161),
+  //                     // Border color
+  //                     strokeWidth: 2,
+  //                     // Border width
+  //                     borderType: BorderType.RRect,
+  //                     // Rounded rectangle border
+  //                     radius: Radius.circular(999),
+  //                     // Border radius
+  //                     // padding: EdgeInsets.all(5), // Padding around the border
+  //                     child: Container(
+  //                       width: 396, // Container width
+  //                       height: 50, // Container height
+  //                       decoration: BoxDecoration(
+  //                         color: Color(0xFFFDE3E5),
+  //                         borderRadius:
+  //                         BorderRadius.circular(999), // Border radius
+  //                       ), // Background color
+  //                       child: Center(
+  //                           child: Text(
+  //                             'Reset',
+  //                             textAlign: TextAlign.center,
+  //                             style: TextStyle(
+  //                               color: Color(0xFFEE6161),
+  //                               fontSize: 16,
+  //                               fontFamily: 'Mulish',
+  //                               fontWeight: FontWeight.w700,
+  //                               height: 0,
+  //                             ),
+  //                           )),
+  //                     ),
+  //                   ),
+  //                 ),
+  //               ),
+  //               SizedBox(
+  //                 height: 8,
+  //               ),
+  //             ],
+  //           ),
+  //         )
+  //       ],
+  //     ),
+  //   );
+  // }
+
+
   Widget listItem(NewSellProvider provider) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: provider.addedItems.length *
+      height: storedItems.length *
           (heightOfSingleItem + verticalSpacingBetweenItems) +
           230,
       // decoration: ShapeDecoration(
@@ -232,11 +628,11 @@ List<TextEditingController>? _controllers = [];
             padding: const EdgeInsets.only(left: 18.0, right: 18.0, top: 0),
             child: Container(
               color: Colors.white,
-              height: provider.addedItems.length *
+              height: storedItems.length *
                   (heightOfSingleItem + verticalSpacingBetweenItems),
               child: ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: provider.addedItems.length,
+                itemCount: storedItems.length,
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
                     // behavior: HitTestBehavior.translucent,
@@ -262,10 +658,10 @@ List<TextEditingController>? _controllers = [];
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    stkItm1(provider.addedItems[index].title,
+                                    stkItm1(storedItems[index].title,
                                         Color(0xFF282828), 16),
                                     stkItm1(
-                                        provider.addedItems[index].stknmbr
+                                        storedItems[index].stknmbr
                                             .toString(),
                                         Color(0xFF7A7A7A),
                                         14),
@@ -284,7 +680,7 @@ List<TextEditingController>? _controllers = [];
                                       onTap: () {
                                         // Handle the click event for '-'
                                         decreaseQuantity(
-                                            provider.addedItems[index], index);
+                                            storedItems[index], index);
                                         print(
                                             "++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                                         print(provider
@@ -379,9 +775,8 @@ List<TextEditingController>? _controllers = [];
                                                 // ),
 
 
-                                                child: provider.controllers.isNotEmpty && provider.controllers.length > index
-                                                    ? TextFormField(
-                                                  controller:  _controllers![index],
+                                                child:  TextFormField(
+                                                  controller: (index < _controllers!.length) ? _controllers![index] : null,
                                                   // controller:  provider.controllers[index],
 
                                                   textAlign: TextAlign.right,
@@ -397,8 +792,7 @@ List<TextEditingController>? _controllers = [];
                                                     provider.controllers[index].text = newQuantity.toString();
                                                     provider.updateQuantity(index, newQuantity);
                                                   },
-                                                )
-                                                    : Container(),                                               ),
+                                                ))
                                             ),
                                           ),
                                         ),
@@ -450,29 +844,12 @@ List<TextEditingController>? _controllers = [];
                               SizedBox(
                                 width: 3,
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: Container(
-                                  width: 50,
-                                  child: Text(
-                                    '৳${(provider.addedItems[index].quantity * provider.addedItems[index].unitprice).toString()}',
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                      color: Color(0xFF282828),
-                                      fontSize: 16,
-                                      fontFamily: 'Mulish',
-                                      fontWeight: FontWeight.w500,
-                                      height: 0,
-                                    ),
-                                  ),
-                                ),
-                              )
                             ],
                           ),
                           SizedBox(
                             height: 15,
                           ),
-                          if (provider.addedItems.length > 1) horizontalLine()
+                          // if (provider.addedItems.length > 1) horizontalLine()
                         ],
                       ),
                     ),
@@ -592,6 +969,7 @@ List<TextEditingController>? _controllers = [];
       ),
     );
   }
+
   @override
   void dispose() {
     productProvider.searchController!.dispose();
@@ -758,8 +1136,21 @@ List<TextEditingController>? _controllers = [];
                                     .filteredItems[index].is_Added ==
                                     false)
                                   GestureDetector(
-                                    onTap: () {
-                                      productProvider.selectAndStoreItem(filteredItems.filteredItems[index]);
+                                    onTap: () async{
+
+                                      await  productProvider.selectAndStoreItem(filteredItems.filteredItems[index]);
+                                      // someFunction();
+                                      setState(() {
+
+                                      });
+
+                                      storedItems = await productProvider.getStoredItems();
+                                      print("Stored item");
+                                      print(storedItems.length);
+                                      if(storedItems.isNotEmpty)
+                                      print(storedItems[0].title);
+                                      print(storedItems[storedItems.length - 1].title);
+
 
                                       print(productProvider.addedItems.length);
                                       filteredItems.updateIsAdded(index);

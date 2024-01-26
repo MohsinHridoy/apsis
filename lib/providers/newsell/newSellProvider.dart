@@ -216,7 +216,7 @@ class NewSellProvider extends ChangeNotifier {
 
 
 
-  void selectAndStoreItem(ProductList selectedItem) async {
+  Future selectAndStoreItem(ProductList selectedItem) async {
     // Get the existing list from shared preferences
     List<ProductList>? storedItems = await getStoredItems();
 
