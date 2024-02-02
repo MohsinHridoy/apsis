@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<NewSellProvider>(
           create: (_) => NewSellProvider(),
-          child: NewSale(),
+          child: NewSale2(),
         ),
       ],
       child: MaterialApp(
@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: NewSale2(),
+        home: Dashboard(),
       ),
     );
   }

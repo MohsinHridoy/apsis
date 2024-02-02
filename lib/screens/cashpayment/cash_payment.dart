@@ -9,6 +9,7 @@ import 'package:untitled/model/stck_detls_lst.dart';
 import 'package:untitled/screens/customerlist/customer_list.dart';
 import 'package:untitled/screens/customerlist/customer_list3.dart';
 import 'package:untitled/screens/new_sale/new_sale.dart';
+import 'package:untitled/screens/new_sale/new_sale2.dart';
 import 'package:untitled/widgets/widgets.dart';
 
 class CashPayment extends StatefulWidget {
@@ -127,228 +128,255 @@ class _CashPaymentState extends State<CashPayment> {
             colors: [Color(0xFF2F73FE), Color(0x00D0DFEB)],
           ),
         ),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 35,
+        child: Column(
+          children: [
+            SizedBox(
+              height: 35,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(19.0),
+              child: Container(
+                // width: MediaQuery.of(context).size.width,
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  // Center the children horizontally
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        // Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => NewSale2(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: 24,
+                        height: 24,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image:
+                            AssetImage('assets/icons/left_arrow.png'),
+                            // Replace 'your_image.png' with the actual path to your asset image
+                            fit: BoxFit.cover, // Adjust the fit as needed
+                          ),
+                          // You can also add other decoration properties here, such as borderRadius, border, color, etc.
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 118),
+                    // Add a SizedBox for some space between icon and text
+                    Text(
+                      'Payment',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xFFFEFEFE),
+                        fontSize: 20,
+                        fontFamily: 'Mulish',
+                        fontWeight: FontWeight.w700,
+                        height: 0,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(19.0),
-                child: Container(
-                  // width: MediaQuery.of(context).size.width,
-                  child: Row(
-                      // mainAxisAlignment: MainAxisAlignment.center,
-                      // Center the children horizontally
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Container(
-                            width: 24,
-                            height: 24,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image:
-                                    AssetImage('assets/icons/left_arrow.png'),
-                                // Replace 'your_image.png' with the actual path to your asset image
-                                fit: BoxFit.cover, // Adjust the fit as needed
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+              
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 20.0, right: 20.0, top: 8.0, bottom: 8.0),
+                      child: Container(
+                        width: 396,
+                        height: 304,
+                        decoration: ShapeDecoration(
+                          color: Color(0xFFFEFEFE),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 20.0, right: 20),
+                              child: SizedBox(
+                                width: 354,
+                                child: Text(
+                                  'Memo ID: 415SADC',
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                    color: Color(0xFF282828),
+                                    fontSize: 16,
+                                    fontFamily: 'Mulish',
+                                    fontWeight: FontWeight.w700,
+                                    height: 0,
+                                  ),
+                                ),
                               ),
-                              // You can also add other decoration properties here, such as borderRadius, border, color, etc.
                             ),
-                          ),
-                        ),
-                        SizedBox(width: 118),
-                        // Add a SizedBox for some space between icon and text
-                        Text(
-                          'Payment',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Color(0xFFFEFEFE),
-                            fontSize: 20,
-                            fontFamily: 'Mulish',
-                            fontWeight: FontWeight.w700,
-                            height: 0,
-                          ),
-                        ),
-                      ],
-                    ),
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 20.0, right: 20.0, top: 8.0, bottom: 8.0),
-                child: Container(
-                  width: 396,
-                  height: 304,
-                  decoration: ShapeDecoration(
-                    color: Color(0xFFFEFEFE),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20.0, right: 20),
-                        child: SizedBox(
-                          width: 354,
-                          child: Text(
-                            'Memo ID: 415SADC',
-                            textAlign: TextAlign.right,
-                            style: TextStyle(
-                              color: Color(0xFF282828),
-                              fontSize: 16,
-                              fontFamily: 'Mulish',
-                              fontWeight: FontWeight.w700,
-                              height: 0,
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 8.0, right: 8.0, top: 15.0),
+                              child: cashContainer1(context,"*", widget.customerDetails?.name ??"Customer Name", true),
                             ),
-                          ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                              child: cashContainer1(context,"*", widget.customerDetails?.phoneNumber ??"Phone no", false),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                              child: cashContainer1(context,"*", widget.customerDetails?.address??"Address", false),
+                            ),
+                          ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 8.0, right: 8.0, top: 15.0),
-                        child: cashContainer1(context,"*", widget.customerDetails?.name ??"Customer Name", true),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                        child: cashContainer1(context,"*", "Phone no", false),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                        child: cashContainer1(context,"*", widget.customerDetails?.name??"Address", false),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 20.0, right: 20.0, top: 8.0, bottom: 8.0),
-                // child: ContainerWithScreenSize(
-                //     items: productList1!,
-                //     sum: sum,
-                //     creditAmount: creditAmount,
-                //     creditAmount2: creditAmount2),
-                child: Container(
-
-                  // width: 388,
-                    decoration: ShapeDecoration(
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                     ),
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 50,
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 20.0, right: 20.0, top: 8.0, bottom: 8.0),
+                      // child: ContainerWithScreenSize(
+                      //     items: productList1!,
+                      //     sum: sum,
+                      //     creditAmount: creditAmount,
+                      //     creditAmount2: creditAmount2),
+                      child: Container(
+              
+                        // width: 388,
                           decoration: ShapeDecoration(
-                            color: Color(0xFF3868CE),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(5),
-                                topRight: Radius.circular(5),
-                              ),
-                            ),
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          child: Column(
                             children: [
-                              Text(
-                                'Product',
-                                style: TextStyle(
-                                  color: Color(0xFFFEFEFE),
-                                  fontSize: 16,
-                                  fontFamily: 'Mulish',
-                                  fontWeight: FontWeight.w700,
-                                  height: 0,
+                              Container(
+                                height: 50,
+                                decoration: ShapeDecoration(
+                                  color: Color(0xFF3868CE),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(5),
+                                      topRight: Radius.circular(5),
+                                    ),
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      'Product',
+                                      style: TextStyle(
+                                        color: Color(0xFFFEFEFE),
+                                        fontSize: 16,
+                                        fontFamily: 'Mulish',
+                                        fontWeight: FontWeight.w700,
+                                        height: 0,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Amount',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Color(0xFFFEFEFE),
+                                        fontSize: 16,
+                                        fontFamily: 'Mulish',
+                                        fontWeight: FontWeight.w700,
+                                        height: 0,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Price',
+                                      textAlign: TextAlign.right,
+                                      style: TextStyle(
+                                        color: Color(0xFFFEFEFE),
+                                        fontSize: 16,
+                                        fontFamily: 'Mulish',
+                                        fontWeight: FontWeight.w700,
+                                        height: 0,
+                                      ),
+                                    )
+                                  ],
                                 ),
                               ),
-                              Text(
-                                'Amount',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xFFFEFEFE),
-                                  fontSize: 16,
-                                  fontFamily: 'Mulish',
-                                  fontWeight: FontWeight.w700,
-                                  height: 0,
-                                ),
-                              ),
-                              Text(
-                                'Price',
-                                textAlign: TextAlign.right,
-                                style: TextStyle(
-                                  color: Color(0xFFFEFEFE),
-                                  fontSize: 16,
-                                  fontFamily: 'Mulish',
-                                  fontWeight: FontWeight.w700,
-                                  height: 0,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Container(
-                          height: productList1.length *
-                              (heightOfSingleItem + verticalSpacingBetweenItems),
-                          // height: 200,
-                          // color: Colors.white,
-                          child:
-                              ListView.builder(
-                                  // physics: NeverScrollableScrollPhysics(),
-                                  itemCount: productList1.length,
-                                  itemBuilder: (BuildContext context, int index) {
-                                    return Container(
-                                      padding: EdgeInsets.only(
-                                          left: 22.0, right: 22.0, bottom: 8.0, top: 5),
-                                      // decoration: BoxDecoration(
-                                      //   border: Border.all(color: Colors.grey),
-                                      //   borderRadius: BorderRadius.circular(8.0),
-                                      // ),
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            // crossAxisAlignment: CrossAxisAlignment.center,
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Container(
-                                                width: 97,
-                                                child: Column(
+                              Container(
+                                height: productList1.length *
+                                    (heightOfSingleItem + verticalSpacingBetweenItems* 2.9),
+                                // height: 200,
+                                // color: Colors.white,
+                                child:
+                                    ListView.builder(
+                                        physics: NeverScrollableScrollPhysics(),
+                                        itemCount: productList1.length,
+                                        itemBuilder: (BuildContext context, int index) {
+                                          return Container(
+                                            padding: EdgeInsets.only(
+                                                left: 22.0, right: 22.0, bottom: 8.0, top: 5),
+                                            // decoration: BoxDecoration(
+                                            //   border: Border.all(color: Colors.grey),
+                                            //   borderRadius: BorderRadius.circular(8.0),
+                                            // ),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  // crossAxisAlignment: CrossAxisAlignment.center,
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                   children: [
-                                                    // Text(
-                                                    //   " ${items[index].title}",
-                                                    //   style: TextStyle(fontSize: 18),
-                                                    // ),
-                                                    // Text(
-                                                    //   "${items[index].subtitle}",
-                                                    //   style: TextStyle(fontSize: 14),
-                                                    // ),
-                                                    stkItm1(productList1[index].title,
-                                                        Color(0xFF282828), 16),
-                                                    stkItm1(
-                                                        productList1[index].stknmbr.toString(),
-                                                        Color(0xFF7A7A7A),
-                                                        14),
-                                                    // stkItm1(
-                                                    //     '(In Stk: 100)', Color(0xFF2E7229), 12),
-                                                  ],
-                                                ),
-                                              ),
-                                              Container(
-                                                width: 31,
-                                                child: Row(
-                                                  children: [
-                                                    Padding(
-                                                      padding: const EdgeInsets.all(1.0),
+                                                    Container(
+                                                      width: 97,
+                                                      child: Column(
+                                                        children: [
+                                                          // Text(
+                                                          //   " ${items[index].title}",
+                                                          //   style: TextStyle(fontSize: 18),
+                                                          // ),
+                                                          // Text(
+                                                          //   "${items[index].subtitle}",
+                                                          //   style: TextStyle(fontSize: 14),
+                                                          // ),
+                                                          stkItm1(productList1[index].title,
+                                                              Color(0xFF282828), 16),
+                                                          stkItm1(
+                                                              productList1[index].stknmbr.toString(),
+                                                              Color(0xFF7A7A7A),
+                                                              14),
+                                                          // stkItm1(
+                                                          //     '(In Stk: 100)', Color(0xFF2E7229), 12),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      width: 31,
+                                                      child: Row(
+                                                        children: [
+                                                          Padding(
+                                                            padding: const EdgeInsets.all(1.0),
+                                                            child: Text(
+                                                              productList1[index].quantity.toString(),
+                                                              textAlign: TextAlign.center,
+                                                              style: TextStyle(
+                                                                color: Color(0xFF282828),
+                                                                fontSize: 16,
+                                                                fontFamily: 'Mulish',
+                                                                fontWeight: FontWeight.w500,
+                                                                height: 0,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      width: 60,
                                                       child: Text(
-                                                        productList1[index].quantity.toString(),
-                                                        textAlign: TextAlign.center,
+                                                        '৳${(productList1[index].quantity * productList1[index].unitprice).toString()}',
+                                                        textAlign: TextAlign.right,
                                                         style: TextStyle(
                                                           color: Color(0xFF282828),
                                                           fontSize: 16,
@@ -357,118 +385,200 @@ class _CashPaymentState extends State<CashPayment> {
                                                           height: 0,
                                                         ),
                                                       ),
-                                                    ),
+                                                    )
                                                   ],
                                                 ),
-                                              ),
-                                              Container(
-                                                width: 60,
-                                                child: Text(
-                                                  '৳${(productList1[index].quantity * productList1[index].unitprice).toString()}',
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                                Divider(
+                                                  height: 1,
+                                                )
+                                                // horizontalLine()
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      ),
+              
+              
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20.0,right:20),
+                                child: Container(
+                                  width: 369,
+                                  height: 37,
+                                  decoration: ShapeDecoration(
+                                    color: Color(0xFF3868CE),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5)),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Total',
+                                          style: TextStyle(
+                                            color: Color(0xFFFEFEFE),
+                                            fontSize: 16,
+                                            fontFamily: 'Mulish',
+                                            fontWeight: FontWeight.w700,
+                                            height: 0,
+                                          ),
+                                        ),
+                                        Text(
+                                          "${sum}",
+                                          textAlign: TextAlign.right,
+                                          style: TextStyle(
+                                            color: Color(0xFFFEFEFE),
+                                            fontSize: 16,
+                                            fontFamily: 'Mulish',
+                                            fontWeight: FontWeight.w700,
+                                            height: 0,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20.0,right: 14.0,top:8),
+                                child: Container(
+                                  width: 369,
+                                  height: 67,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Cash',
+                                          style: TextStyle(
+                                            color: Color(0xFF282828),
+                                            fontSize: 16,
+                                            fontFamily: 'Mulish',
+                                            fontWeight: FontWeight.w700,
+                                            height: 0,
+                                          ),
+                                        ),
+                                        Container(
+                                          width: 152,
+                                          height: 60,
+                                          decoration: ShapeDecoration(
+                                            color: Colors.white,
+                                            shape: RoundedRectangleBorder(
+                                              side: BorderSide(width: 1, color: Color(0xFF88CADA)),
+                                              borderRadius: BorderRadius.circular(5),
+                                            ),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(left: 14.0,right: 5,top: 5),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  '৳',
                                                   textAlign: TextAlign.right,
                                                   style: TextStyle(
                                                     color: Color(0xFF282828),
                                                     fontSize: 16,
                                                     fontFamily: 'Mulish',
-                                                    fontWeight: FontWeight.w500,
+                                                    fontWeight: FontWeight.w700,
                                                     height: 0,
                                                   ),
                                                 ),
-                                              )
-                                            ],
+                                                Expanded(
+                                                  child: Container(
+                                                    height: 67,
+                                                    child: Align(
+                                                      alignment: Alignment.centerRight,
+                                                      child: TextFormField(
+                                                          keyboardType: TextInputType.number,
+                                                          textAlign: TextAlign.right,
+                                                          // Align the text to the right
+                                                          decoration: InputDecoration(
+                                                            border: InputBorder
+                                                                .none, // Remove the underline
+                                                          ),
+              
+                                                          style: TextStyle(
+                                                            color: Color(0xFF282828),
+                                                            fontSize: 16,
+                                                            fontFamily: 'Mulish',
+                                                            fontWeight: FontWeight.w700,
+                                                            height: 0,
+                                                          ),
+                                                          onChanged: (value) {
+                                                            double enteredValue =
+                                                                double.tryParse(value) ?? 0.0;
+              
+                                                            // setState(() {
+                                                            //   creditAmount4 = creditAmount3 =
+                                                            //       sum - enteredValue;
+                                                            //   print(sum);
+                                                            //   print(creditAmount3);
+                                                            //   double enteredValue = double.tryParse(value) ?? 0.0;
+                                                            //
+                                                            //   setState(() {
+                                                            //     // Update the quantity or any other changes to the productList1
+                                                            //   });
+                                                            //   updateSum();
+                                                            //
+                                                            // });
+              
+                                                            setState(() {
+                                                              creditAmount2 = sum - enteredValue;
+                                                              print(creditAmount2);
+                                                            });
+              
+                                                            // Assuming the entered value is the credit amount
+              
+                                                            // Perform any additional logic with the creditAmount if needed
+                                                          },
+                                                        ),
+              
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          Divider(
-                                            height: 1,
-                                          )
-                                          // horizontalLine()
-                                        ],
-                                      ),
-                                    );
-                                  },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
-
-
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20.0,right:20),
-                          child: Container(
-                            width: 369,
-                            height: 37,
-                            decoration: ShapeDecoration(
-                              color: Color(0xFF3868CE),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5)),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Total',
-                                    style: TextStyle(
-                                      color: Color(0xFFFEFEFE),
-                                      fontSize: 16,
-                                      fontFamily: 'Mulish',
-                                      fontWeight: FontWeight.w700,
-                                      height: 0,
-                                    ),
-                                  ),
-                                  Text(
-                                    "${sum}",
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                      color: Color(0xFFFEFEFE),
-                                      fontSize: 16,
-                                      fontFamily: 'Mulish',
-                                      fontWeight: FontWeight.w700,
-                                      height: 0,
-                                    ),
-                                  )
-                                ],
                               ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20.0,right: 14.0,top:8),
-                          child: Container(
-                            width: 369,
-                            height: 67,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Cash',
-                                    style: TextStyle(
-                                      color: Color(0xFF282828),
-                                      fontSize: 16,
-                                      fontFamily: 'Mulish',
-                                      fontWeight: FontWeight.w700,
-                                      height: 0,
-                                    ),
-                                  ),
-                                  Container(
-                                    width: 152,
-                                    height: 60,
-                                    decoration: ShapeDecoration(
-                                      color: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                        side: BorderSide(width: 1, color: Color(0xFF88CADA)),
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 14.0,right: 5,top: 5),
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            '৳',
+                              Padding(
+                                padding: const EdgeInsets.only(left: 27.0,right: 25.0,top:8,bottom: 20),
+                                child: Container(
+                                  width: 369,
+                                  height: 20,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(0.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Credit", // Display the calculated credit amount
+                                          style: TextStyle(
+                                            color: Color(0xFF282828),
+                                            fontSize: 16,
+                                            fontFamily: 'Mulish',
+                                            fontWeight: FontWeight.w700,
+                                            height: 0,
+                                          ),
+                                        ),
+                                        Container(
+                                          width: 152,
+                                          height: 67,
+                                          child: Text(
+                                            (creditAmount2 != null && creditAmount2! > 0)
+                                                ? creditAmount2.toString()
+                                                : '0',
+              
                                             textAlign: TextAlign.right,
                                             style: TextStyle(
                                               color: Color(0xFF282828),
@@ -478,99 +588,49 @@ class _CashPaymentState extends State<CashPayment> {
                                               height: 0,
                                             ),
                                           ),
-                                          Expanded(
-                                            child: Container(
-                                              height: 67,
-                                              child: Align(
-                                                alignment: Alignment.centerRight,
-                                                child: TextFormField(
-                                                    keyboardType: TextInputType.number,
-                                                    textAlign: TextAlign.right,
-                                                    // Align the text to the right
-                                                    decoration: InputDecoration(
-                                                      border: InputBorder
-                                                          .none, // Remove the underline
-                                                    ),
-
-                                                    style: TextStyle(
-                                                      color: Color(0xFF282828),
-                                                      fontSize: 16,
-                                                      fontFamily: 'Mulish',
-                                                      fontWeight: FontWeight.w700,
-                                                      height: 0,
-                                                    ),
-                                                    onChanged: (value) {
-                                                      double enteredValue =
-                                                          double.tryParse(value) ?? 0.0;
-
-                                                      // setState(() {
-                                                      //   creditAmount4 = creditAmount3 =
-                                                      //       sum - enteredValue;
-                                                      //   print(sum);
-                                                      //   print(creditAmount3);
-                                                      //   double enteredValue = double.tryParse(value) ?? 0.0;
-                                                      //
-                                                      //   setState(() {
-                                                      //     // Update the quantity or any other changes to the productList1
-                                                      //   });
-                                                      //   updateSum();
-                                                      //
-                                                      // });
-
-                                                      setState(() {
-                                                        creditAmount2 = sum - enteredValue;
-                                                        print(creditAmount2);
-                                                      });
-
-                                                      // Assuming the entered value is the credit amount
-
-                                                      // Perform any additional logic with the creditAmount if needed
-                                                    },
-                                                  ),
-
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ],
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 27.0,right: 25.0,top:8,bottom: 20),
-                          child: Container(
-                            width: 369,
-                            height: 20,
-                            child: Padding(
-                              padding: const EdgeInsets.all(0.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Credit", // Display the calculated credit amount
-                                    style: TextStyle(
-                                      color: Color(0xFF282828),
-                                      fontSize: 16,
-                                      fontFamily: 'Mulish',
-                                      fontWeight: FontWeight.w700,
-                                      height: 0,
+                            ],
+                          )),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 12.0,right: 12,top:8,bottom: 8),
+                      child: Container(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  print("click");
+                                },
+                                child: Container(
+                                  width: 396,
+                                  height: 56,
+                                  decoration: ShapeDecoration(
+                                    color: Color(0xFF3868CE),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(999),
                                     ),
+                                    shadows: [
+                                      BoxShadow(
+                                        color: Color(0x59293072),
+                                        blurRadius: 22,
+                                        offset: Offset(2, 7),
+                                        spreadRadius: -2,
+                                      )
+                                    ],
                                   ),
-                                  Container(
-                                    width: 152,
-                                    height: 67,
+                                  child: Center(
                                     child: Text(
-                                      (creditAmount2 != null && creditAmount2! > 0)
-                                          ? creditAmount2.toString()
-                                          : '0',
-
-                                      textAlign: TextAlign.right,
+                                      'Take payment & Print',
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
-                                        color: Color(0xFF282828),
+                                        color: Colors.white,
                                         fontSize: 16,
                                         fontFamily: 'Mulish',
                                         fontWeight: FontWeight.w700,
@@ -578,109 +638,65 @@ class _CashPaymentState extends State<CashPayment> {
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    )),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 12.0,right: 12,top:8,bottom: 8),
-                child: Container(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            print("click");
-                          },
-                          child: Container(
-                            width: 396,
-                            height: 56,
-                            decoration: ShapeDecoration(
-                              color: Color(0xFF3868CE),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(999),
-                              ),
-                              shadows: [
-                                BoxShadow(
-                                  color: Color(0x59293072),
-                                  blurRadius: 22,
-                                  offset: Offset(2, 7),
-                                  spreadRadius: -2,
-                                )
-                              ],
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Take payment & Print',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontFamily: 'Mulish',
-                                  fontWeight: FontWeight.w700,
-                                  height: 0,
                                 ),
                               ),
                             ),
-                          ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: GestureDetector(
+                                onTap: (){
+                                  Navigator.pop(context);
+
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) => NewSale2(),
+                                  //   ),
+                                  // );
+                                },
+                                child: DottedBorder(
+                                  color: Color(0xFF3868CE),
+                                  // Border color
+                                  strokeWidth: 1,
+                                  // Border width
+                                  borderType: BorderType.RRect,
+                                  // Rounded rectangle border
+                                  radius: Radius.circular(999),
+                                  // Border radius
+                                  // padding: EdgeInsets.all(5), // Padding around the border
+                                  child: Container(
+                                    width: 396, // Container width
+                                    height: 56, // Container height
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFF6F6F6),
+                                      borderRadius:
+                                          BorderRadius.circular(999), // Border radius
+                                    ), // Background color
+                                    child: Center(
+                                        child: Text(
+                                      'Edit',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Color(0xFF3868CE),
+                                        fontSize: 16,
+                                        fontFamily: 'Mulish',
+                                        fontWeight: FontWeight.w700,
+                                        height: 0,
+                                      ),
+                                    )),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: (){
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => NewSale(),
-                              ),
-                            );
-                          },
-                          child: DottedBorder(
-                            color: Color(0xFF3868CE),
-                            // Border color
-                            strokeWidth: 1,
-                            // Border width
-                            borderType: BorderType.RRect,
-                            // Rounded rectangle border
-                            radius: Radius.circular(999),
-                            // Border radius
-                            // padding: EdgeInsets.all(5), // Padding around the border
-                            child: Container(
-                              width: 396, // Container width
-                              height: 56, // Container height
-                              decoration: BoxDecoration(
-                                color: Color(0xFFF6F6F6),
-                                borderRadius:
-                                    BorderRadius.circular(999), // Border radius
-                              ), // Background color
-                              child: Center(
-                                  child: Text(
-                                'Edit',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xFF3868CE),
-                                  fontSize: 16,
-                                  fontFamily: 'Mulish',
-                                  fontWeight: FontWeight.w700,
-                                  height: 0,
-                                ),
-                              )),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

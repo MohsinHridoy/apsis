@@ -7,28 +7,30 @@ import 'package:untitled/model/peoductList/productlist.dart';
 import 'package:async/async.dart';
 
 class NewSellProvider extends ChangeNotifier {
+  // List<ProductList> storedItems=[];
 
   String searchQuery = ""; // Add this line to declare the searchQuery variable
+  List<ProductList> storedItems = [];
 
   List<ProductList> _selectedItems = [];
   // final _updateDebouncer = Debouncer(milliseconds: 300); // Adjust the delay as needed
   TextEditingController? searchController;
   List<TextEditingController> controllers = [];
-  void initControllers() {
-    searchController = TextEditingController();
-    controllers = List.generate(
-      addedItems.length,
-          (index) => TextEditingController(
-        text: addedItems[index].quantity.toString(),
-      ),
-    );
-  }
+  // void initControllers() {
+  //   searchController = TextEditingController();
+  //   controllers = List.generate(
+  //     addedItems.length,
+  //         (index) => TextEditingController(
+  //       text: addedItems[index].quantity.toString(),
+  //     ),
+  //   );
+  // }
 
   List<ProductList> get selectedItems => _selectedItems;
 
   List<ProductList> _items = [
     ProductList(
-        title: 'Cola',
+        title: 'Coca cola',
         productId: '123456',
         quantity: 5,
         stknmbr: '150 ml',
@@ -46,7 +48,16 @@ class NewSellProvider extends ChangeNotifier {
         productAmount: 150.00,
         is_Added: false),
     ProductList(
-        title: 'Potato Chips',
+        title: 'Sprite1 ',
+        productId: '789012',
+        quantity: 10,
+        stknmbr: 'N/A',
+        unitprice: 15,
+        image: 'assets/images/product2.png',
+        productAmount: 150.00,
+        is_Added: false),
+    ProductList(
+        title: 'Fired Chips',
         productId: '789012',
         quantity: 7,
         stknmbr: '250 ml',
@@ -73,7 +84,7 @@ class NewSellProvider extends ChangeNotifier {
         productAmount: 150.00,
         is_Added: false),
     ProductList(
-        title: 'Potato Chips',
+        title: 'Mango Chips',
         productId: '789012',
         quantity: 10,
         stknmbr: '200 ml',
@@ -109,7 +120,7 @@ class NewSellProvider extends ChangeNotifier {
         productAmount: 150.00,
         is_Added: false),
     ProductList(
-        title: 'Mango Chips',
+        title: 'Jackfruit Chips',
         productId: '789012',
         quantity: 10,
         stknmbr: '250 ml',
@@ -127,7 +138,7 @@ class NewSellProvider extends ChangeNotifier {
         productAmount: 150.00,
         is_Added: false),
     ProductList(
-        title: 'Potato Chips',
+        title: 'Potato Potato',
         productId: '789012',
         quantity: 10,
         stknmbr: '200 ml',
@@ -145,7 +156,7 @@ class NewSellProvider extends ChangeNotifier {
         productAmount: 150.00,
         is_Added: false),
     ProductList(
-        title: 'Potato Chips',
+        title: 'Dry cake',
         productId: '789012',
         quantity: 10,
         stknmbr: '200 ml',
@@ -157,68 +168,12 @@ class NewSellProvider extends ChangeNotifier {
   bool searchItemVisible = true;
 
   List<ProductList> get items => _items;
-  List<ProductList> _searchItems = [
-    ProductList(
-        title: 'Cola',
-        productId: '123456',
-        quantity: 5,
-        stknmbr: '150 ml',
-        unitprice: 25,
-        image: 'assets/images/product1.png',
-        productAmount: 125.00,
-        is_Added: false),
-    ProductList(
-        title: 'Sprite ',
-        productId: '789012',
-        quantity: 10,
-        stknmbr: 'N/A',
-        unitprice: 15,
-        image: 'assets/images/product2.png',
-        productAmount: 150.00,
-        is_Added: false),
-    ProductList(
-        title: 'Potato Chips',
-        productId: '789012',
-        quantity: 10,
-        stknmbr: '250 ml',
-        unitprice: 15,
-        image: 'assets/images/product2.png',
-        productAmount: 150.00,
-        is_Added: false),
-    ProductList(
-        title: 'Potato Cakes',
-        productId: '789012',
-        quantity: 10,
-        stknmbr: '250 ml',
-        unitprice: 15,
-        image: 'assets/images/product2.png',
-        productAmount: 150.00,
-        is_Added: false),
-    ProductList(
-        title: 'Fried Chips',
-        productId: '789012',
-        quantity: 10,
-        stknmbr: '250 ml',
-        unitprice: 15,
-        image: 'assets/images/product2.png',
-        productAmount: 150.00,
-        is_Added: false),
-    ProductList(
-        title: 'Potato Chips',
-        productId: '789012',
-        quantity: 10,
-        stknmbr: '200 ml',
-        unitprice: 15,
-        image: 'assets/images/product2.png',
-        productAmount: 150.00,
-        is_Added: false),
-  ];
 
 
 
   Future selectAndStoreItem(ProductList selectedItem) async {
     // Get the existing list from shared preferences
-    List<ProductList>? storedItems = await getStoredItems();
+    storedItems = await getStoredItems();
 
     // If there's no existing list, create a new one
     storedItems ??= [];
@@ -242,6 +197,34 @@ class NewSellProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
+
+//////////////
+//////////////storedItems///////////////////
+
+
+
+  Future<void> someFunction() async {
+    // Assuming you are inside an asynchronous function (marked with async keyword)
+
+    // Make changes to the stored items (add, remove, update)
+    // Example: storedItems = await fetchData();
+
+    // Get the updated list of stored items
+    storedItems = await getStoredItems();
+    controllers = List.generate(
+      storedItems.length,
+          (index) => TextEditingController(
+        text: storedItems[index].quantity.toString(),
+      ),
+    );
+    // storedItems = storedItems;
+    // controllers = controllers;
+    // Notify listeners about the changes
+    notifyListeners();
+  }
+
+
 // Retrieve the list of selected items from shared preferences
   Future<List<ProductList>> getStoredItems() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -262,13 +245,74 @@ class NewSellProvider extends ChangeNotifier {
 
     return selectedItems;
   }
+  // void removeStoredItem(int index) async {
+  //   storedItems = await getStoredItems();
+  //
+  //   if (storedItems != null && index >= 0 && index < storedItems.length) {
+  //     storedItems.removeAt(index);
+  //
+  //     List<String> encodedItems =
+  //     storedItems.map((item) => json.encode(item.toJson())).toList();
+  //
+  //     SharedPreferences prefs = await SharedPreferences.getInstance();
+  //     prefs.setStringList('selectedItems', encodedItems);
+  //
+  //     // Update controllers list after removing an item
+  //     controllers = List.generate(
+  //       storedItems.length,
+  //           (index) => TextEditingController(
+  //         text: storedItems[index].quantity.toString(),
+  //       ),
+  //     );
+  //
+  //     // Ensure that the controllers list is cleared if there are no stored items
+  //     if (storedItems.isEmpty) {
+  //       controllers.clear();
+  //     }
+  //     print("Stored Item size after remove");
+  //
+  //     print(storedItems.length);
+  //     notifyListeners();
+  //   }
+  // }
+
+
+  // void removeStoredItem(ProductList item) async {
+  //   storedItems = await getStoredItems();
+  //
+  //   if (storedItems != null) {
+  //     storedItems.remove(item);
+  //
+  //     List<String> encodedItems =
+  //     storedItems.map((item) => json.encode(item.toJson())).toList();
+  //
+  //     SharedPreferences prefs = await SharedPreferences.getInstance();
+  //     prefs.setStringList('selectedItems', encodedItems);
+  //
+  //     controllers = List.generate(
+  //       storedItems.length,
+  //           (index) => TextEditingController(
+  //         text: storedItems[index].quantity.toString(),
+  //       ),
+  //     );
+  //
+  //     if (storedItems.isEmpty) {
+  //       controllers.clear();
+  //     }
+  //
+  //     print(storedItems.length);
+  //     notifyListeners();
+  //   }
+  // }
+
+
 
 
 
   void removeStoredItem(int index) async {
-    List<ProductList>? storedItems = await getStoredItems();
+    storedItems = await getStoredItems();
 
-    if (storedItems != null && index >= 0 && index < storedItems.length) {
+    if (storedItems != null && index >= 0 && index < storedItems.length-1) {
       storedItems.removeAt(index);
 
       List<String> encodedItems =
@@ -282,20 +326,98 @@ class NewSellProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+  void removeStoredItemByTitle(String title) async {
+    storedItems = await getStoredItems();
+
+    storedItems?.removeWhere((item) => item.title == title);
+
+    // Update SharedPreferences with the modified list
+    List<String> encodedItems =
+        storedItems?.map((item) => json.encode(item.toJson()))?.toList() ?? [];
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setStringList('selectedItems', encodedItems);
+
+    controllers = List.generate(
+      storedItems?.length ?? 0,
+          (index) => TextEditingController(
+        text: storedItems![index].quantity.toString(),
+      ),
+    );
+
+    notifyListeners();
+  }
+
+
+  // void removeStoredItem(int index) async {
+  //   storedItems = await getStoredItems();
+  //
+  //   if (storedItems != null && index >= 0 && index < storedItems.length) {
+  //     storedItems.removeAt(index);
+  //
+  //     List<String> encodedItems =
+  //     storedItems.map((item) => json.encode(item.toJson())).toList();
+  //
+  //     SharedPreferences prefs = await SharedPreferences.getInstance();
+  //     prefs.setStringList('selectedItems', encodedItems);
+  //     print(storedItems.length);
+  //
+  //     // Update controllers list after removing an item
+  //     controllers = List.generate(
+  //       storedItems.length,
+  //           (index) => TextEditingController(
+  //         text: storedItems[index].quantity.toString(),
+  //       ),
+  //     );
+  //
+  //     notifyListeners();
+  //   }
+  // }
+
+
+
+
+
+
+
+
+
 
   void removeAllStoredItems() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('selectedItems');
+    storedItems.clear();
+
+    notifyListeners();
+  }
+
+
+  void removeAllFilterItems()  {
+    print("Before Clear");
+    print(_filteredItems.length);
+    print("After Clear");
+
+    _filteredItems.clear();
 
     notifyListeners();
   }
 
 
 
+  int? totalAmount;
+
+  String calculateTotalAmount(int index) {
+    if (index >= 0 && index < storedItems.length) {
+       totalAmount =
+          (storedItems[index].quantity * storedItems[index].unitprice) ;
+      return '৳${totalAmount.toString()}';
+    }
+    return '৳0.00';
+  }
 
 
 
-  List<ProductList> get searchItems => _searchItems;
+
   List<ProductList> _filteredItems = [];
 
   List<ProductList> get filteredItems => _filteredItems;
@@ -320,7 +442,7 @@ class NewSellProvider extends ChangeNotifier {
     searchItemVisible = !searchItemVisible;
     notifyListeners();
   }
-  void filterSearchResults(String query) {
+    void filterSearchResults(String query) {
     if (query.isEmpty) {
       _filteredItems = []; // Set it to an empty list when the query is empty
     } else {
@@ -331,6 +453,8 @@ class NewSellProvider extends ChangeNotifier {
               (item) => item.title.toLowerCase().contains(query.toLowerCase()))
           .toList();
     }
+    print("-----------------filter items length-----------");
+    print(_filteredItems.length);
     searchItemVisibility(); // Update visibility status
 
     // Notify listeners to rebuild widgets that depend on filteredItems
@@ -344,15 +468,17 @@ class NewSellProvider extends ChangeNotifier {
 
 
   void decreaseQuantity(int index) {
-    if (addedItems[index].quantity > 1) {
-      addedItems[index].quantity--;
+    if (storedItems[index].quantity > 1) {
+      storedItems[index].quantity--;
+
+      print(storedItems[index].quantity);
       notifyListeners();
     }
   }
 
   void increaseQuantity(int index) {
-    addedItems[index].quantity++;
-    print(addedItems[index].quantity);
+    storedItems[index].quantity++;
+    print(storedItems[index].quantity);
     notifyListeners();
   }
   void updateIsAdded(int index) {
@@ -371,8 +497,8 @@ class NewSellProvider extends ChangeNotifier {
 
   void updateTotalPrice(int index) {
     double totalPrice =
-        (addedItems[index].quantity * addedItems[index].unitprice).toDouble();
-    addedItems[index].productAmount = totalPrice;
+        (storedItems[index].quantity * storedItems[index].unitprice).toDouble();
+    storedItems[index].productAmount = totalPrice;
     notifyListeners();
   }
 
@@ -383,6 +509,5 @@ class NewSellProvider extends ChangeNotifier {
     }
   }
 
-// Add other methods as needed, for example, to add/remove items or update product details.
 }
 

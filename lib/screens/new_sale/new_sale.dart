@@ -63,74 +63,15 @@ class _NewSaleState extends State<NewSale> {
   void initState() {
     super.initState();
     productProvider = context.read<NewSellProvider>();
-    // _serachControllers= TextEditingController();
-    // productProvider.filteredItems.clear();
-    // productProvider.selectedItems.clear();
-    // print(productProvider.addedItems.length);
-    // if (productProvider.addedItems.isNotEmpty) {
-    //   _controllers1 = List.generate(
-    //     productProvider.addedItems.length,
-    //     (index) => TextEditingController(
-    //       text: productProvider.addedItems[index].quantity.toString(),
-    //     ),
-    //   );
-    // }
-    productProvider.initControllers();
+
 
   }
 
-  // void updateTotalPrice(ProductList selectedItem, int index) {
-  //
-  //   setState(() {
-  //     double totalPrice = (selectedItem.quantity * selectedItem.unitprice).toDouble();
-  //     controllers[index].text = '৳${totalPrice.toString()}';
-  //     selectedItem.quantity = int.parse(controllers[index].text);
-  //
-  //     // Update the quantity using the provider
-  //     productProvider.updateQuantity(index, selectedItem.quantity);
-  //   });
-  // }
-
-  // void filterSearchResults(String query) {
-  //   if (query.isEmpty) {
-  //     setState(() {
-  //       filteredItems = 0 as List<ProductList>;
-  //     });
-  //   } else {
-  //     List<ProductList> searchResults = productProvider.items
-  //         .where(
-  //             (item) => item.title.toLowerCase().contains(query.toLowerCase()))
-  //         .toList();
-  //
-  //     setState(() {
-  //       filteredItems = searchResults;
-  //       print(filteredItems.length);
-  //       print(''''''
-  //           ''''''
-  //           ''''''
-  //           ''''''
-  //           ''''''
-  //           ''''''
-  //           ''''''
-  //           ''''''
-  //           ''''''
-  //           ''''''
-  //           '');
-  //     });
-  //   }
-  // }
 
   void filterSearchResults(String query) {
     productProvider.filterSearchResults(query);
   }
 
-  // void filterIsAddedResults() {
-  //   List<ProductList> searchResults =
-  //       productProvider.items.where((item) => item.is_Added == false).toList();
-  //   // No need to use setState here, just update the provider's state
-  //   // and let listeners (widgets using this provider) rebuild accordingly.
-  //   productProvider.updateSelectedItems(searchResults);
-  // }
 
   Widget build(BuildContext context) {
     productProvider = Provider.of<NewSellProvider>(
@@ -218,6 +159,243 @@ class _NewSaleState extends State<NewSale> {
       ]),
     );
   }
+  Widget searchItem(NewSellProvider filteredItems) {
+    return GestureDetector(
+      onTap: () {
+        // setState(() {
+        //   searchItemVisible=false;
+        //
+        // });
+        filteredItems.toggleSearchItemVisibility();
+      },
+      child: Visibility(
+        visible: filteredItems.searchItemVisible,
+        child: Container(
+          width: 388,
+          height: filteredItems.filteredItems.length * 50.0,
+          // Set a fixed value based on your item's height
+          decoration: ShapeDecoration(
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
+            shadows: [
+              BoxShadow(
+                color: Color(0x59293072),
+                blurRadius: 22,
+                offset: Offset(2, 7),
+                spreadRadius: -2,
+              ),
+            ],
+          ),
+          child: ListView.builder(
+            itemCount: filteredItems.filteredItems.length,
+
+            // The number of items in your list
+            itemBuilder: (BuildContext context, int index) {
+              // This is a callback function that builds each item in the list
+              // You can use the 'index' to access the data for the current item
+              ProductList currentItem = filteredItems.filteredItems.length > 0
+                  ? filteredItems.filteredItems[index]
+                  : filteredItems.items[index];
+
+              // Check if the item's name contains the search query
+              // Check if the item's name contains the search query
+              String name = currentItem.title;
+              // String role = currentItem.role;
+
+              List<TextSpan> textSpans =
+              highlightText(name, filteredItems.searchQuery);
+              return Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              // Container(
+                              //   width: 43,
+                              //   height: 43,
+                              //   decoration: ShapeDecoration(
+                              //     image: DecorationImage(
+                              //       image: AssetImage(filteredItems[index]
+                              //           .image),
+                              //       fit: BoxFit.fill,
+                              //     ),
+                              //     shape: OvalBorder(),
+                              //   ),
+                              // ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    // Text(
+                                    //   filteredItems.filteredItems[index].title,
+                                    //   style: TextStyle(
+                                    //     color: Color(0xFF282828),
+                                    //     fontSize: 14,
+                                    //     fontFamily: 'Mulish',
+                                    //     fontWeight: FontWeight.w500,
+                                    //     height: 0,
+                                    //   ),
+                                    // ),
+                                    RichText(
+                                      text: TextSpan(
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: 'Mulish',
+                                          fontWeight: FontWeight.w500,
+                                          color: Color(0xFF282828),
+                                        ),
+                                        children: textSpans,
+                                      ),
+                                    ),
+                                    Text(
+                                      filteredItems
+                                          .filteredItems[index].stknmbr,
+                                      style: TextStyle(
+                                        color: Color(0xFF7A7A7A),
+                                        fontSize: 12,
+                                        fontFamily: 'Mulish',
+                                        fontWeight: FontWeight.w500,
+                                        height: 0,
+                                      ),
+                                    ),
+                                    stkItm1(
+                                        '(In Stk: ${filteredItems.filteredItems[index].stknmbr.toString()})',
+                                        Color(0xFF2E7229),
+                                        12),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Column(
+                                  children: [
+                                    // Text(
+                                    //   "$items[index].amount",
+                                    //   textAlign: TextAlign.right,
+                                    //   style: TextStyle(
+                                    //     color: Color(0xFFEE6161),
+                                    //     fontSize: 14,
+                                    //     fontFamily: 'Mulish',
+                                    //     fontWeight: FontWeight.w600,
+                                    //     height: 0,
+                                    //   ),
+                                    // ),
+                                    // Padding(
+                                    //   padding:
+                                    //   EdgeInsets.only(left: 35.0),
+                                    //   child: Text(
+                                    //     items[index].title,
+                                    //     style: TextStyle(
+                                    //       color: Color(0xFF7A7A7A),
+                                    //       fontSize: 12,
+                                    //       fontFamily: 'Mulish',
+                                    //       fontWeight: FontWeight.w500,
+                                    //       height: 0,
+                                    //     ),
+                                    //   ),
+                                    // )
+                                  ],
+                                ),
+                                if (filteredItems
+                                    .filteredItems[index].is_Added ==
+                                    false)
+                                  GestureDetector(
+                                    onTap: () {
+                                      print(productProvider.addedItems.length);
+                                      filteredItems.updateIsAdded(index);
+                                    },
+                                    child: Container(
+                                      width: 66,
+                                      height: 34,
+                                      decoration: ShapeDecoration(
+                                        color: Color(0xFF3868CE),
+                                        shape: RoundedRectangleBorder(
+                                          side: BorderSide(
+                                              width: 1,
+                                              color: Color(0xFF3868CE)),
+                                          borderRadius:
+                                          BorderRadius.circular(5),
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          'Add',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontFamily: 'Mulish',
+                                            fontWeight: FontWeight.w700,
+                                            height: 0,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                else
+                                  GestureDetector(
+                                    onTap: () {
+                                      // setState(() {
+                                      //   //productProvider.items[index].is_Added = false;
+                                      //   filterIsAddedResults();
+                                      // });
+                                      filteredItems.updateIsAdded(index);
+                                    },
+                                    child: Container(
+                                      width: 66,
+                                      height: 34,
+                                      decoration: ShapeDecoration(
+                                        color: Color(0xFF7A7A7A),
+                                        shape: RoundedRectangleBorder(
+                                          side: BorderSide(
+                                              width: 1,
+                                              color: Color(0xFF7A7A7A)),
+                                          borderRadius:
+                                          BorderRadius.circular(5),
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          'Added',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontFamily: 'Mulish',
+                                            fontWeight: FontWeight.w700,
+                                            height: 0,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      // customDivider()
+                      Divider()
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget serachItem1() {
     return Container(
       width: 388,
@@ -661,242 +839,6 @@ class _NewSaleState extends State<NewSale> {
   }
 
 
-  Widget searchItem(NewSellProvider filteredItems) {
-    return GestureDetector(
-      onTap: () {
-        // setState(() {
-        //   searchItemVisible=false;
-        //
-        // });
-        filteredItems.toggleSearchItemVisibility();
-      },
-      child: Visibility(
-        visible: filteredItems.searchItemVisible,
-        child: Container(
-          width: 388,
-          height: filteredItems.filteredItems.length * 50.0,
-          // Set a fixed value based on your item's height
-          decoration: ShapeDecoration(
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5),
-            ),
-            shadows: [
-              BoxShadow(
-                color: Color(0x59293072),
-                blurRadius: 22,
-                offset: Offset(2, 7),
-                spreadRadius: -2,
-              ),
-            ],
-          ),
-          child: ListView.builder(
-            itemCount: filteredItems.filteredItems.length,
-
-            // The number of items in your list
-            itemBuilder: (BuildContext context, int index) {
-              // This is a callback function that builds each item in the list
-              // You can use the 'index' to access the data for the current item
-              ProductList currentItem = filteredItems.filteredItems.length > 0
-                  ? filteredItems.filteredItems[index]
-                  : filteredItems.items[index];
-
-              // Check if the item's name contains the search query
-              // Check if the item's name contains the search query
-              String name = currentItem.title;
-              // String role = currentItem.role;
-
-              List<TextSpan> textSpans =
-                  highlightText(name, filteredItems.searchQuery);
-              return Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              // Container(
-                              //   width: 43,
-                              //   height: 43,
-                              //   decoration: ShapeDecoration(
-                              //     image: DecorationImage(
-                              //       image: AssetImage(filteredItems[index]
-                              //           .image),
-                              //       fit: BoxFit.fill,
-                              //     ),
-                              //     shape: OvalBorder(),
-                              //   ),
-                              // ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    // Text(
-                                    //   filteredItems.filteredItems[index].title,
-                                    //   style: TextStyle(
-                                    //     color: Color(0xFF282828),
-                                    //     fontSize: 14,
-                                    //     fontFamily: 'Mulish',
-                                    //     fontWeight: FontWeight.w500,
-                                    //     height: 0,
-                                    //   ),
-                                    // ),
-                                    RichText(
-                                      text: TextSpan(
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontFamily: 'Mulish',
-                                          fontWeight: FontWeight.w500,
-                                          color: Color(0xFF282828),
-                                        ),
-                                        children: textSpans,
-                                      ),
-                                    ),
-                                    Text(
-                                      filteredItems
-                                          .filteredItems[index].stknmbr,
-                                      style: TextStyle(
-                                        color: Color(0xFF7A7A7A),
-                                        fontSize: 12,
-                                        fontFamily: 'Mulish',
-                                        fontWeight: FontWeight.w500,
-                                        height: 0,
-                                      ),
-                                    ),
-                                    stkItm1(
-                                        '(In Stk: ${filteredItems.filteredItems[index].stknmbr.toString()})',
-                                        Color(0xFF2E7229),
-                                        12),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                Column(
-                                  children: [
-                                    // Text(
-                                    //   "$items[index].amount",
-                                    //   textAlign: TextAlign.right,
-                                    //   style: TextStyle(
-                                    //     color: Color(0xFFEE6161),
-                                    //     fontSize: 14,
-                                    //     fontFamily: 'Mulish',
-                                    //     fontWeight: FontWeight.w600,
-                                    //     height: 0,
-                                    //   ),
-                                    // ),
-                                    // Padding(
-                                    //   padding:
-                                    //   EdgeInsets.only(left: 35.0),
-                                    //   child: Text(
-                                    //     items[index].title,
-                                    //     style: TextStyle(
-                                    //       color: Color(0xFF7A7A7A),
-                                    //       fontSize: 12,
-                                    //       fontFamily: 'Mulish',
-                                    //       fontWeight: FontWeight.w500,
-                                    //       height: 0,
-                                    //     ),
-                                    //   ),
-                                    // )
-                                  ],
-                                ),
-                                if (filteredItems
-                                        .filteredItems[index].is_Added ==
-                                    false)
-                                  GestureDetector(
-                                    onTap: () {
-                                      print(productProvider.addedItems.length);
-                                      filteredItems.updateIsAdded(index);
-                                    },
-                                    child: Container(
-                                      width: 66,
-                                      height: 34,
-                                      decoration: ShapeDecoration(
-                                        color: Color(0xFF3868CE),
-                                        shape: RoundedRectangleBorder(
-                                          side: BorderSide(
-                                              width: 1,
-                                              color: Color(0xFF3868CE)),
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                        ),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          'Add',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontFamily: 'Mulish',
-                                            fontWeight: FontWeight.w700,
-                                            height: 0,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                else
-                                  GestureDetector(
-                                    onTap: () {
-                                      // setState(() {
-                                      //   //productProvider.items[index].is_Added = false;
-                                      //   filterIsAddedResults();
-                                      // });
-                                      filteredItems.updateIsAdded(index);
-                                    },
-                                    child: Container(
-                                      width: 66,
-                                      height: 34,
-                                      decoration: ShapeDecoration(
-                                        color: Color(0xFF7A7A7A),
-                                        shape: RoundedRectangleBorder(
-                                          side: BorderSide(
-                                              width: 1,
-                                              color: Color(0xFF7A7A7A)),
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                        ),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          'Added',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontFamily: 'Mulish',
-                                            fontWeight: FontWeight.w700,
-                                            height: 0,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      // customDivider()
-                      Divider()
-                    ],
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-      ),
-    );
-  }
 
 
   List<TextSpan> highlightText(String text, String query) {

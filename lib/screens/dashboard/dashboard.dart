@@ -10,6 +10,7 @@ import 'package:untitled/screens/customerlist/customer_list.dart';
 import 'package:untitled/screens/customersalehistory/customer_sale_history.dart';
 import 'package:untitled/screens/myStock/my_stock.dart';
 import 'package:untitled/screens/new_sale/new_sale.dart';
+import 'package:untitled/screens/new_sale/new_sale2.dart';
 import 'package:untitled/screens/qcstock/qc_stock.dart';
 import 'package:untitled/screens/qcstock/qc_stock2.dart';
 import 'package:untitled/screens/sale_history/SaleHistory.dart';
@@ -28,7 +29,7 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   List<Widget> destinationWidgets = [
-    NewSale(),
+    NewSale2(),
     AddNewStock(),
     MyStock(),
     CreditPayment(),

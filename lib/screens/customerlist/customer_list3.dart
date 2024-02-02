@@ -23,31 +23,41 @@ class _CustomerList3State extends State<CustomerList3> {
         role: 'Wholesaler',
         amount: 16547.00,
         creditStatus: 'Credit',
-        profileImage: 'assets/icons/man2.png'),
+        profileImage: 'assets/icons/man2.png',
+        phoneNumber:"01782595673",
+        address:"dhaka,Bangladesh"),
     CustomerListDetails(
         name: 'Mr. Rony',
         role: 'Wholesaler',
         amount: 13333.00,
         creditStatus: 'Credit',
-        profileImage: 'assets/icons/man3.png'),
+        profileImage: 'assets/icons/man3.png',
+        phoneNumber:"01782595673",
+        address:"dhaka,Bangladesh"),
     CustomerListDetails(
         name: 'Mr . Jony',
         role: 'Wholesaler',
         amount: 21547.00,
         creditStatus: 'Credit',
-        profileImage: 'assets/icons/man4.png'),
+        profileImage: 'assets/icons/man4.png',
+        phoneNumber:"01782595673",
+        address:"dhaka,Bangladesh"),
     CustomerListDetails(
         name: 'Karim Miah',
         role: 'Wholesaler',
         amount: 34547.00,
         creditStatus: 'Credit',
-        profileImage: 'assets/icons/man2.png'),
+        profileImage: 'assets/icons/man2.png',
+        phoneNumber:"01782595673",
+        address:"dhaka,Bangladesh"),
     CustomerListDetails(
         name: 'Rahim Miah',
         role: 'Wholesaler',
         amount: 16547.00,
         creditStatus: 'Credit',
-        profileImage: 'assets/images/ellipse.png'),
+        profileImage: 'assets/images/ellipse.png',
+        phoneNumber:"01782595673",
+        address:"dhaka,Bangladesh"),
     // Add more items as needed
   ];
 
@@ -153,18 +163,7 @@ class _CustomerList3State extends State<CustomerList3> {
               left: 0,
               right: 0,
               bottom: 0,
-              child: GestureDetector(
-                onTap: () {
-                  // filteredItems.clear();
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => CashPayment(),
-                  //   ),
-                  // );
-
-                },
-                child: Container(
+              child: Container(
 
                   child: Padding(
                     padding: const EdgeInsets.only(left: 18.0, right: 18.0),
@@ -180,7 +179,7 @@ class _CustomerList3State extends State<CustomerList3> {
                           // You can use the 'index' to access the data for the current item
                           return GestureDetector(
                             onTap: (){
-                              print(items[index]);
+                              // print(items[index]);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -309,170 +308,181 @@ class _CustomerList3State extends State<CustomerList3> {
                     ),
                   ),
                 ),
-              ),
             ),
             if (filteredItems.length > 0)
               Positioned(
                 top: 170,
                 left: 16,
                 right: 16,
-                child: Container(
-                  width: 388,
-                  height: filteredItems.length *80,
-                  decoration: ShapeDecoration(
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    shadows: [
-                      BoxShadow(
-                        color: Color(0x59293072),
-                        blurRadius: 22,
-                        offset: Offset(2, 7),
-                        spreadRadius: -2,
+                child: GestureDetector(
+                  child: Container(
+                    width: 388,
+                    height: filteredItems.length *80,
+                    decoration: ShapeDecoration(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
                       ),
-                    ],
-                  ),
-                  child: ListView.builder(
-                    itemCount: filteredItems.length,
-                    // The number of items in your list
-                    itemBuilder: (BuildContext context, int index) {
-                      // This is a callback function that builds each item in the list
-                      // You can use the 'index' to access the data for the current item
-                      CustomerListDetails currentItem = filteredItems.length > 0 ? filteredItems[index] : items[index];
+                      shadows: [
+                        BoxShadow(
+                          color: Color(0x59293072),
+                          blurRadius: 22,
+                          offset: Offset(2, 7),
+                          spreadRadius: -2,
+                        ),
+                      ],
+                    ),
+                    child: ListView.builder(
+                      itemCount: filteredItems.length,
+                      // The number of items in your list
+                      itemBuilder: (BuildContext context, int index) {
+                        // This is a callback function that builds each item in the list
+                        // You can use the 'index' to access the data for the current item
+                        CustomerListDetails currentItem = filteredItems.length > 0 ? filteredItems[index] : items[index];
 
-                      // Check if the item's name contains the search query
-                      String name = currentItem.name;
-                      String role = currentItem.role;
+                        // Check if the item's name contains the search query
+                        String name = currentItem.name;
+                        String role = currentItem.role;
 
-                      List<TextSpan> textSpans = highlightText(name, searchQuery);
+                        List<TextSpan> textSpans = highlightText(name, searchQuery);
 
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 8.0,right: 8.0),
-                        child: Container(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CashPayment(customerDetails:filteredItems[index]),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Column(
                                   children: [
                                     Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Container(
-                                          width: 43,
-                                          height: 43,
-                                          decoration: ShapeDecoration(
-                                            image: DecorationImage(
-                                              image: AssetImage(
-                                                  filteredItems[index]
-                                                      .profileImage),
-                                              fit: BoxFit.fill,
+                                        Row(
+                                          children: [
+                                            Container(
+                                              width: 43,
+                                              height: 43,
+                                              decoration: ShapeDecoration(
+                                                image: DecorationImage(
+                                                  image: AssetImage(
+                                                      filteredItems[index]
+                                                          .profileImage),
+                                                  fit: BoxFit.fill,
+                                                ),
+                                                shape: OvalBorder(),
+                                              ),
                                             ),
-                                            shape: OvalBorder(),
-                                          ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 8.0),
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  // Text(
+                                                  //   filteredItems[index].name,
+                                                  //   style: TextStyle(
+                                                  //     color: isMatch ? Colors.green : Color(0xFF282828),
+                                                  //     fontSize: 14,
+                                                  //     fontFamily: 'Mulish',
+                                                  //     fontWeight: FontWeight.w500,
+                                                  //     height: 0,
+                                                  //   ),
+                                                  // ),
+                                                  RichText(
+                                                    text: TextSpan(
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        fontFamily: 'Mulish',
+                                                        fontWeight: FontWeight.w500,
+                                                        color: Color(0xFF282828),
+                                                      ),
+                                                      children: textSpans,
+                                                    ),
+                                                  ),
+
+                                                  Text(
+                                                    filteredItems[index].role,
+                                                    style: TextStyle(
+                                                      color: Color(0xFF7A7A7A),
+                                                      fontSize: 12,
+                                                      fontFamily: 'Mulish',
+                                                      fontWeight: FontWeight.w500,
+                                                      height: 0,
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 8.0),
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                             children: [
-                                              // Text(
-                                              //   filteredItems[index].name,
-                                              //   style: TextStyle(
-                                              //     color: isMatch ? Colors.green : Color(0xFF282828),
-                                              //     fontSize: 14,
-                                              //     fontFamily: 'Mulish',
-                                              //     fontWeight: FontWeight.w500,
-                                              //     height: 0,
-                                              //   ),
-                                              // ),
-                                              RichText(
-                                                text: TextSpan(
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontFamily: 'Mulish',
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Color(0xFF282828),
-                                                  ),
-                                                  children: textSpans,
-                                                ),
-                                              ),
+                                              Column(
+                                                crossAxisAlignment: CrossAxisAlignment.end,
 
-                                              Text(
-                                                filteredItems[index].role,
-                                                style: TextStyle(
-                                                  color: Color(0xFF7A7A7A),
-                                                  fontSize: 12,
-                                                  fontFamily: 'Mulish',
-                                                  fontWeight: FontWeight.w500,
-                                                  height: 0,
-                                                ),
+                                                children: [
+
+                                                  Text(
+                                                    filteredItems[index].amount.toString(),
+                                                    textAlign: TextAlign.right,
+                                                    style: TextStyle(
+                                                      color: Color(0xFFEE6161),
+                                                      fontSize: 14,
+                                                      fontFamily: 'Mulish',
+                                                      fontWeight: FontWeight.w600,
+                                                      height: 0,
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                    EdgeInsets.only(left: 35.0),
+                                                    child: Text(
+                                                      items[index].creditStatus,
+                                                      style: TextStyle(
+                                                        color: Color(0xFF7A7A7A),
+                                                        fontSize: 12,
+                                                        fontFamily: 'Mulish',
+                                                        fontWeight: FontWeight.w500,
+                                                        height: 0,
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                width: 30,
+                                              ),
+                                              Icon(
+                                                Icons.arrow_forward_ios_outlined,
+                                                size: 15,
                                               )
+
+                                              // Image.asset("assets/icons/left_arrow2.png",width: 20,height: 20,)
                                             ],
                                           ),
                                         ),
                                       ],
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Column(
-                                            crossAxisAlignment: CrossAxisAlignment.end,
-
-                                            children: [
-
-                                              Text(
-                                                filteredItems[index].amount.toString(),
-                                                textAlign: TextAlign.right,
-                                                style: TextStyle(
-                                                  color: Color(0xFFEE6161),
-                                                  fontSize: 14,
-                                                  fontFamily: 'Mulish',
-                                                  fontWeight: FontWeight.w600,
-                                                  height: 0,
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                EdgeInsets.only(left: 35.0),
-                                                child: Text(
-                                                  items[index].creditStatus,
-                                                  style: TextStyle(
-                                                    color: Color(0xFF7A7A7A),
-                                                    fontSize: 12,
-                                                    fontFamily: 'Mulish',
-                                                    fontWeight: FontWeight.w500,
-                                                    height: 0,
-                                                  ),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            width: 30,
-                                          ),
-                                          // Icon(
-                                          //   Icons.arrow_forward_ios_outlined,
-                                          //   size: 15,
-                                          // )
-
-                                          Image.asset("assets/icons/left_arrow2.png",width: 20,height: 20,)
-                                        ],
-                                      ),
-                                    ),
+                                    customDivider()
                                   ],
                                 ),
-                                customDivider()
-                              ],
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
                 ),
               )

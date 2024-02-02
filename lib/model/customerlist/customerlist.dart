@@ -7,6 +7,9 @@ class CustomerListDetails {
   final double amount;
   final String creditStatus;
   final String profileImage;
+  final String? phoneNumber;
+  final String? address;
+
 
   CustomerListDetails({
     required this.name,
@@ -14,5 +17,7 @@ class CustomerListDetails {
     required this.amount,
     required this.creditStatus,
     required this.profileImage,
+     this.phoneNumber,
+     this.address,
   });
 }

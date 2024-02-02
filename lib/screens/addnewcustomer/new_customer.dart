@@ -48,12 +48,53 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
 
     super.dispose();
   }
-
+  //
+  // Future<void> _pickImage() async {
+  //   final ImagePicker _picker = ImagePicker();
+  //   final XFile? pickedImage =
+  //       await _picker.pickImage(source: ImageSource.gallery);
+  //
+  //   if (pickedImage != null) {
+  //     setState(() {
+  //       _image = File(pickedImage.path);
+  //     });
+  //   }
+  // }
   Future<void> _pickImage() async {
     final ImagePicker _picker = ImagePicker();
-    final XFile? pickedImage =
-        await _picker.pickImage(source: ImageSource.gallery);
 
+    // Show a bottom sheet with options for choosing an image
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: Icon(Icons.photo_library),
+              title: Text('Gallery'),
+              onTap: () async {
+                Navigator.pop(context); // Close the bottom sheet
+                final XFile? pickedImage = await _picker.pickImage(source: ImageSource.gallery);
+                _setImage(pickedImage);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.camera_alt),
+              title: Text('Camera'),
+              onTap: () async {
+                Navigator.pop(context); // Close the bottom sheet
+                final XFile? pickedImage = await _picker.pickImage(source: ImageSource.camera);
+                _setImage(pickedImage);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _setImage(XFile? pickedImage) {
     if (pickedImage != null) {
       setState(() {
         _image = File(pickedImage.path);
