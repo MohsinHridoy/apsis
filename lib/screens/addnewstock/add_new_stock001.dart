@@ -1,29 +1,28 @@
 import 'dart:convert';
-import 'dart:ui';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:untitled/model/customerlist/customerlist.dart';
 import 'package:untitled/model/peoductList/productlist.dart';
+import 'package:untitled/providers/newsell/newSellProvider.dart';
 import 'package:untitled/screens/cashpayment/cash_payment.dart';
 
-import 'package:untitled/widgets/widgets.dart';
-
-import '../../model/stck_detls_lst.dart';
-import '../../providers/newsell/newSellProvider.dart';
 import '../../widgets/colors.dart';
 
-class NewSale extends StatefulWidget {
-  const NewSale({Key? key}) : super(key: key);
+
+
+
+
+
+class AddNewStock001 extends StatefulWidget {
+  const AddNewStock001({Key? key}) : super(key: key);
 
   @override
-  State<NewSale> createState() => _NewSaleState();
+  State<AddNewStock001> createState() => _AddNewStock001State();
 }
 
-class _NewSaleState extends State<NewSale> {
+class _AddNewStock001State extends State<AddNewStock001> {
   // double heightOfSingleItem =
   //     65.0; // Change the value based on your item height
   // double verticalSpacingBetweenItems = 8.0;
@@ -135,7 +134,6 @@ class _NewSaleState extends State<NewSale> {
             ],
           ),
         ),
-
         if (productProvider.filteredItems.length > 0)
           Positioned(
             top: 172,
@@ -153,13 +151,10 @@ class _NewSaleState extends State<NewSale> {
             ),
           )
         else
-          // Widget to show when filteredItems.length is not greater than 0
+        // Widget to show when filteredItems.length is not greater than 0
           Container(
-              // Replace with your widget configuration
-              ),
-
-
-
+            // Replace with your widget configuration
+          ),
       ]),
     );
   }
@@ -970,7 +965,7 @@ class _NewSaleState extends State<NewSale> {
         SizedBox(width: 118),
         // Add a SizedBox for some space between icon and text
         Text(
-          'New Sell',
+          'Add new Stock',
           textAlign: TextAlign.center,
           style: TextStyle(
             color: Color(0xFFFEFEFE),

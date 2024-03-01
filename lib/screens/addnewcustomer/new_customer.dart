@@ -7,6 +7,7 @@ import 'dart:io';
 
 import 'package:untitled/screens/customersalehistory/customer_sale_history.dart';
 import 'package:untitled/widgets/widgets.dart';
+import 'package:untitled/widgets/widgets1.dart';
 
 class AddNewCustomer extends StatefulWidget {
   const AddNewCustomer({super.key});
@@ -48,18 +49,7 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
 
     super.dispose();
   }
-  //
-  // Future<void> _pickImage() async {
-  //   final ImagePicker _picker = ImagePicker();
-  //   final XFile? pickedImage =
-  //       await _picker.pickImage(source: ImageSource.gallery);
-  //
-  //   if (pickedImage != null) {
-  //     setState(() {
-  //       _image = File(pickedImage.path);
-  //     });
-  //   }
-  // }
+
   Future<void> _pickImage() async {
     final ImagePicker _picker = ImagePicker();
 
@@ -133,32 +123,34 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
                         onTap: () {
                           Navigator.pop(context);
                         },
-                        child: Container(
-                          width: 24,
-                          height: 24,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage('assets/icons/left_arrow.png'),
-                              // Replace 'your_image.png' with the actual path to your asset image
-                              fit: BoxFit.cover, // Adjust the fit as needed
-                            ),
-                            // You can also add other decoration properties here, such as borderRadius, border, color, etc.
-                          ),
-                        ),
+                        // child: Container(
+                        //   width: 24,
+                        //   height: 24,
+                        //   decoration: BoxDecoration(
+                        //     image: DecorationImage(
+                        //       image: AssetImage('assets/icons/left_arrow.png'),
+                        //       // Replace 'your_image.png' with the actual path to your asset image
+                        //       fit: BoxFit.cover, // Adjust the fit as needed
+                        //     ),
+                        //     // You can also add other decoration properties here, such as borderRadius, border, color, etc.
+                        //   ),
+                        // ),
+                        child: backArrow(),
                       ),
                       SizedBox(width: 65),
                       // Add a SizedBox for some space between icon and text
-                      Text(
-                        'Add New Customer',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color(0xFFFEFEFE),
-                          fontSize: 20,
-                          fontFamily: 'Mulish',
-                          fontWeight: FontWeight.w700,
-                          height: 0,
-                        ),
-                      ),
+                      // Text(
+                      //   'Add New Customer',
+                      //   textAlign: TextAlign.center,
+                      //   style: TextStyle(
+                      //     color: Color(0xFFFEFEFE),
+                      //     fontSize: 20,
+                      //     fontFamily: 'Mulish',
+                      //     fontWeight: FontWeight.w700,
+                      //     height: 0,
+                      //   ),
+                      // ),
+                      appBarTitle("Add New Customer")
                     ],
                   ),
                 ),
@@ -195,37 +187,7 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
                     print(_customerDetails!.name);
                   }
                 },
-                child: Container(
-                  width: 388,
-                  height: 56,
-                  decoration: ShapeDecoration(
-                    color: Color(0xFF3868CE),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(999),
-                    ),
-                    shadows: [
-                      BoxShadow(
-                        color: Color(0x59293072),
-                        blurRadius: 22,
-                        offset: Offset(2, 7),
-                        spreadRadius: -2,
-                      )
-                    ],
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Add new customer',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontFamily: 'Mulish',
-                        fontWeight: FontWeight.w700,
-                        height: 0,
-                      ),
-                    ),
-                  ),
-                ),
+                child: addButton('Add new customer'),
               ),
             ),
             Positioned(

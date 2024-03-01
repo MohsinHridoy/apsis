@@ -5,6 +5,7 @@ import 'package:untitled/providers/registrationprovider.dart';
 
 import 'package:untitled/screens/addnewcustomer/new_customer.dart';
 import 'package:untitled/screens/addnewstock/add_new_stock.dart';
+import 'package:untitled/screens/addnewstock/add_new_stock001.dart';
 import 'package:untitled/screens/alert/alert.dart';
 import 'package:untitled/screens/calculator/calculator.dart';
 import 'package:untitled/screens/calculator/calculator2.dart';
@@ -51,6 +52,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<NewSellProvider>(
           create: (_) => NewSellProvider(),
           child: NewSale2(),
+        ),
+        ChangeNotifierProvider<NewSellProvider>(
+          create: (_) => NewSellProvider(),
+          child: AddNewStock001(),
         ),
       ],
       child: MaterialApp(

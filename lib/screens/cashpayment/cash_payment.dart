@@ -10,7 +10,9 @@ import 'package:untitled/screens/customerlist/customer_list.dart';
 import 'package:untitled/screens/customerlist/customer_list3.dart';
 import 'package:untitled/screens/new_sale/new_sale.dart';
 import 'package:untitled/screens/new_sale/new_sale2.dart';
+import 'package:untitled/widgets/colors.dart';
 import 'package:untitled/widgets/widgets.dart';
+import 'package:untitled/widgets/widgets1.dart';
 
 class CashPayment extends StatefulWidget {
   final CustomerListDetails? customerDetails;
@@ -122,11 +124,7 @@ class _CashPaymentState extends State<CashPayment> {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment(0.00, -1.00),
-            end: Alignment(0, 1),
-            colors: [Color(0xFF2F73FE), Color(0x00D0DFEB)],
-          ),
+          gradient:myGradient,
         ),
         child: Column(
           children: [
@@ -151,33 +149,37 @@ class _CashPaymentState extends State<CashPayment> {
                           ),
                         );
                       },
-                      child: Container(
-                        width: 24,
-                        height: 24,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image:
-                            AssetImage('assets/icons/left_arrow.png'),
-                            // Replace 'your_image.png' with the actual path to your asset image
-                            fit: BoxFit.cover, // Adjust the fit as needed
-                          ),
-                          // You can also add other decoration properties here, such as borderRadius, border, color, etc.
-                        ),
-                      ),
+                      // child: Container(
+                      //   width: 24,
+                      //   height: 24,
+                      //   decoration: BoxDecoration(
+                      //     image: DecorationImage(
+                      //       image:
+                      //       AssetImage('assets/icons/left_arrow.png'),
+                      //       // Replace 'your_image.png' with the actual path to your asset image
+                      //       fit: BoxFit.cover, // Adjust the fit as needed
+                      //     ),
+                      //     // You can also add other decoration properties here, such as borderRadius, border, color, etc.
+                      //   ),
+                      // ),
+
+                      child: backArrow(),
                     ),
                     SizedBox(width: 118),
                     // Add a SizedBox for some space between icon and text
-                    Text(
-                      'Payment',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Color(0xFFFEFEFE),
-                        fontSize: 20,
-                        fontFamily: 'Mulish',
-                        fontWeight: FontWeight.w700,
-                        height: 0,
-                      ),
-                    ),
+                    // Text(
+                    //   'Payment',
+                    //   textAlign: TextAlign.center,
+                    //   style: TextStyle(
+                    //     color: Color(0xFFFEFEFE),
+                    //     fontSize: 20,
+                    //     fontFamily: 'Mulish',
+                    //     fontWeight: FontWeight.w700,
+                    //     height: 0,
+                    //   ),
+                    // ),
+
+                    appBarTitle('Payment'),
                   ],
                 ),
               ),
